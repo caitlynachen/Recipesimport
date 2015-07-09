@@ -8,40 +8,50 @@
 
 import UIKit
 import Parse
+import Bond
 
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate {
+    
 
+    var photoTakingHelper: PhotoTakingHelper?
+    @IBAction func postButtonTapped(sender: AnyObject) {
+        createPost()
+        
+    }
     @IBOutlet weak var titleTextField: UITextField!
     
-    @IBOutlet weak var imageView: UIImageView!
-    var imagePicker = UIImagePickerController()
-    @IBOutlet weak var ingredientsButton: UIButton!
 
-   
+    @IBOutlet weak var imageView: UIImageView?
+    
+    @IBOutlet weak var ingredientsButton: UIButton!
     @IBAction func ingredientsButtonTapped(sender: AnyObject) {
     }
     @IBOutlet weak var instructionsButton: UIButton!
     @IBAction func instructionsButtonTapped(sender: AnyObject) {
     }
     
+    let post = Post()
+
     
     @IBOutlet weak var cameraButton: UIButton!
     
     @IBAction func cameraButtonTapped(sender: AnyObject) {
-        //println("hi")
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .PhotoLibrary
-        
-        presentViewController(imagePicker, animated: true, completion: nil)
+        //println("hi")        
+        photoTakingHelper =
+            PhotoTakingHelper(viewController: self) { (image: UIImage?) in
+                // 1
+                self.post.image.value = image!
+                self.imageView?.image = image!
+                
+        }
       
     }
     
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagePicker.delegate = self
-
 
         // Do any additional setup after loading the view.
     }
@@ -52,19 +62,28 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     }
     
 
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageView.contentMode = .ScaleAspectFit
-            imageView.image = pickedImage
-        }
+    func createPost(){
         
-        dismissViewControllerAnimated(true, completion: nil)
+        var ingredientsViewController = IngredientsViewController()
+        var instructionsViewController = InstructionsViewController()
+        
+        if (self.titleTextField == nil){
+            println("add title")
+        }
+        if(self.imageView?.image == nil){
+            println("add image")
+        }
+        if (ingredientsViewController.ingredientsArray == nil){
+            println("add ingredients")
+        }
+        if (instructionsViewController.instructionsArray == nil){
+            println("add instructions")
+        } else {
+            post.uploadPost()
+        }
     }
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-
+   
 
        /*
     // MARK: - Navigation
@@ -77,5 +96,4 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     */
 
 }
-
 

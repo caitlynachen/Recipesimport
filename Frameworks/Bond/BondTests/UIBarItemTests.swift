@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-import Bond
+//import Bond
 
 class UIBarItemTests: XCTestCase {
 

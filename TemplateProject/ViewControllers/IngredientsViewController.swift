@@ -7,24 +7,42 @@
 //
 
 import UIKit
+import Bond
 
 class IngredientsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var ingredientsTableView: UITableView!
+//    var ingredientscell = IngredientsTableViewCell()
+    var ingredientsArray: [String]?
+    var ingredientBond:Bond<String>!
     
-    internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 200 // Create 1 row as an example
     }
     
-    internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientsInputCell") as! IngredientsTableViewCell
+       
+
+        cell.ingredient.map { $0! } ->> ingredientBond
+//        println(ingredientscell.textField?.text)
+//        ingredientsArray?.append("test")
         
         cell.configure(text: "", placeholder: "")
         return cell
     }
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ingredientBond = Bond<String>(){ ingredient in
+            self.ingredientsArray?.append(ingredient)
+            
+        }
+        println(ingredientsArray)
 
         // Do any additional setup after loading the view.
     }

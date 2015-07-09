@@ -16,6 +16,9 @@
 		1C13E5881B4C486800FA5F39 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5841B4C486800FA5F39 /* InstructionsViewController.swift */; };
 		1C3DDE501B4AF265004E8014 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3DDE4F1B4AF265004E8014 /* MapViewController.swift */; };
 		1C3DDE521B4AF2EA004E8014 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C3DDE511B4AF2EA004E8014 /* Images.xcassets */; };
+		1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */; };
+		1CD9DFF31B4DC61600DF28E3 /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */; };
+		1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */; };
 		624262C01B4460CB00005CE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624262B21B4460CB00005CE3 /* AppDelegate.swift */; };
 		624262C11B4460CB00005CE3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 624262B31B4460CB00005CE3 /* LaunchScreen.xib */; };
 		624262C31B4460CB00005CE3 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624262B81B4460CB00005CE3 /* ErrorHandling.swift */; };
@@ -140,6 +143,9 @@
 		1C13E5841B4C486800FA5F39 /* InstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
 		1C3DDE4F1B4AF265004E8014 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1C3DDE511B4AF2EA004E8014 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = "TemplateProject/untitled folder/Post.swift"; sourceTree = SOURCE_ROOT; };
+		1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
+		1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 		624262B21B4460CB00005CE3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		624262B41B4460CB00005CE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		624262B81B4460CB00005CE3 /* ErrorHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
@@ -218,9 +224,18 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		1CD9DF9C1B4D9D5000DF28E3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		624262B11B4460CB00005CE3 /* TemplateProject */ = {
 			isa = PBXGroup;
 			children = (
+				1CD9DF9C1B4D9D5000DF28E3 /* Models */,
 				1C13E57C1B4C484400FA5F39 /* View */,
 				1C13E57A1B4C46EC00FA5F39 /* Main.storyboard */,
 				1C3DDE511B4AF2EA004E8014 /* Images.xcassets */,
@@ -240,6 +255,8 @@
 			children = (
 				624262B81B4460CB00005CE3 /* ErrorHandling.swift */,
 				624262B91B4460CB00005CE3 /* ParseLoginHelper.swift */,
+				1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */,
+				1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -467,14 +484,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C13E5801B4C485900FA5F39 /* InstructionsTableViewCell.swift in Sources */,
+				1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */,
 				1C13E57F1B4C485900FA5F39 /* IngredientsTableViewCell.swift in Sources */,
 				1C13E5851B4C486800FA5F39 /* PostViewController.swift in Sources */,
 				624262C01B4460CB00005CE3 /* AppDelegate.swift in Sources */,
 				1C13E5881B4C486800FA5F39 /* InstructionsViewController.swift in Sources */,
+				1CD9DFF31B4DC61600DF28E3 /* PhotoTakingHelper.swift in Sources */,
 				624262C41B4460CB00005CE3 /* ParseLoginHelper.swift in Sources */,
 				1C13E5861B4C486800FA5F39 /* PostDisplayViewController.swift in Sources */,
 				1C13E5871B4C486800FA5F39 /* IngredientsViewController.swift in Sources */,
 				624262C31B4460CB00005CE3 /* ErrorHandling.swift in Sources */,
+				1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */,
 				1C3DDE501B4AF265004E8014 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -600,6 +620,7 @@
 					"$(PROJECT_DIR)/Frameworks/ConvenienceKit/ConvenienceKit/Frameworks",
 				);
 				INFOPLIST_FILE = TemplateProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = TemplateProject;
@@ -619,6 +640,7 @@
 					"$(PROJECT_DIR)/Frameworks/ConvenienceKit/ConvenienceKit/Frameworks",
 				);
 				INFOPLIST_FILE = TemplateProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = TemplateProject;

@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import Bond
 
-class IngredientsTableViewCell: UITableViewCell {
+class IngredientsTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @IBOutlet weak var textField: UITextField!
+    let ingredient: Dynamic<String?> = Dynamic(nil)
+    
+    optional func textFieldDidEndEditing(textField: UITextField){
+        
+    }
+   
     
     internal func configure(#text: String?, placeholder: String) {
         textField.text = text
@@ -20,6 +27,8 @@ class IngredientsTableViewCell: UITableViewCell {
         textField.accessibilityLabel = placeholder
     }
     
+    
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,4 +41,5 @@ class IngredientsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
 }

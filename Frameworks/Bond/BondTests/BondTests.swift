@@ -8,7 +8,7 @@
 
 import Foundation
 import XCTest
-import Bond
+//import Bond
 
 class BondTests: XCTestCase {
   

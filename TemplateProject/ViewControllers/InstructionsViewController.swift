@@ -11,6 +11,8 @@ import UIKit
 class InstructionsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var instructionsTableView: UITableView!
+    var instructionsCell = InstructionsTableViewCell()
+    var instructionsArray: [String]?
     
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 200 // Create 1 row as an example
@@ -19,6 +21,7 @@ class InstructionsViewController: UIViewController, UITableViewDataSource, UITab
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("InstructionsInputCell") as! InstructionsTableViewCell
 
+        instructionsArray?.append(instructionsCell.textField.text)
         cell.configure(text: "", placeholder: "")
         return cell
     }

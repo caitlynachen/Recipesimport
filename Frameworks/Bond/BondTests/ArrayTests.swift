@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Bond. All rights reserved.
 //
 
-import Bond
+//import Bond
 import XCTest
 
 func ==<T: Equatable>(dynamicArray: DynamicArray<T>, array: [T]) -> Bool {
