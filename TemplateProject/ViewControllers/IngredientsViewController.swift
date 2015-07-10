@@ -24,7 +24,9 @@ class IngredientsViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCellWithIdentifier("IngredientsInputCell") as! IngredientsTableViewCell
        
 
-        cell.ingredient.map { $0! } ->> ingredientBond
+        
+        cell.ingredient.map { $0 } ->> ingredientBond
+
 //        println(ingredientscell.textField?.text)
 //        ingredientsArray?.append("test")
         
@@ -38,11 +40,12 @@ class IngredientsViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         ingredientBond = Bond<String>(){ ingredient in
             self.ingredientsArray?.append(ingredient)
             
         }
-        println(ingredientsArray)
+        //println(ingredientsArray)
 
         // Do any additional setup after loading the view.
     }

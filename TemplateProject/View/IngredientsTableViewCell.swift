@@ -11,29 +11,37 @@ import Bond
 
 class IngredientsTableViewCell: UITableViewCell, UITextFieldDelegate {
 
-    @IBOutlet weak var textField: UITextField!
-    let ingredient: Dynamic<String?> = Dynamic(nil)
     
-    optional func textFieldDidEndEditing(textField: UITextField){
-        
+    @IBOutlet weak var textField: UITextField! {
+        didSet{
+            textField.delegate = self
+        }
+    }
+    
+    let ingredient: Dynamic<String> = Dynamic("")
+
+
+    func textFieldDidEndEditing(textfield: UITextField){
+      // println("hello")
+        println(textfield.text)
+        ingredient.value = textfield.text
+        println(ingredient.value)
     }
    
     
-    internal func configure(#text: String?, placeholder: String) {
+     func configure(#text: String?, placeholder: String) {
         textField.text = text
         textField.placeholder = placeholder
+        
+        textFieldDidEndEditing(textField)
         
         textField.accessibilityValue = text
         textField.accessibilityLabel = placeholder
     }
     
-    
 
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -53,10 +53,6 @@ class Post : PFObject, PFSubclassing {
         
         // any uploaded post should be associated with the current user
         user = PFUser.currentUser()
-        self.imageFile = imageFile
-        self.recipeTitle = postdisplay.titleTextField.text
-        self.ingredients = ingredientsViewController.ingredientsArray
-        self.instructions = instructionsViewController.instructionsArray
         saveInBackgroundWithBlock(nil)
     }
     

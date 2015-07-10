@@ -7,24 +7,36 @@
 //
 
 import UIKit
+import Bond
 
-class InstructionsTableViewCell: UITableViewCell {
+class InstructionsTableViewCell: UITableViewCell, UITextFieldDelegate {
 
-    @IBOutlet weak var textField: UITextField!
-    internal func configure(#text: String?, placeholder: String) {
+    @IBOutlet weak var textField: UITextField!{
+        didSet{
+            textField.delegate = self
+        }
+    }
+    
+    let instruction: Dynamic<String> = Dynamic("")
+
+    func textFieldDidEndEditing(textfield: UITextField){
+        // println("hello")
+        println(textfield.text)
+        instruction.value = textfield.text
+        println(instruction.value)
+    }
+    
+    func configure(#text: String?, placeholder: String) {
         textField.text = text
         textField.placeholder = placeholder
+        
+        textFieldDidEndEditing(textField)
+
         
         textField.accessibilityValue = text
         textField.accessibilityLabel = placeholder
     }
     
-
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

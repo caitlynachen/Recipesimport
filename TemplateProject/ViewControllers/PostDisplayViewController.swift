@@ -51,8 +51,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+    
         // Do any additional setup after loading the view.
     }
 
@@ -67,16 +66,22 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         var ingredientsViewController = IngredientsViewController()
         var instructionsViewController = InstructionsViewController()
         
+        post.imageFile = post.imageFile
+        post.recipeTitle = titleTextField.text
+        post.ingredients = ingredientsViewController.ingredientsArray
+        post.instructions = instructionsViewController.instructionsArray
+        
+        
         if (self.titleTextField == nil){
             println("add title")
         }
         if(self.imageView?.image == nil){
             println("add image")
         }
-        if (ingredientsViewController.ingredientsArray == nil){
+        if (ingredientsViewController.ingredientsArray?.count == 0){
             println("add ingredients")
         }
-        if (instructionsViewController.instructionsArray == nil){
+        if (instructionsViewController.instructionsArray?.count == 0){
             println("add instructions")
         } else {
             post.uploadPost()
