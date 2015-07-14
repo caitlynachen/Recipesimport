@@ -13,9 +13,13 @@ import Bond
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate {
     
 
+    @IBOutlet weak var ingredientsButton: UIButton!
+    @IBOutlet weak var instructionsButton: UIButton!
+    @IBOutlet weak var countryTextField: UITextField!
     var photoTakingHelper: PhotoTakingHelper?
     @IBAction func postButtonTapped(sender: AnyObject) {
         createPost()
+       
         
     }
     @IBOutlet weak var titleTextField: UITextField!
@@ -23,11 +27,14 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
 
     @IBOutlet weak var imageView: UIImageView?
     
-    @IBOutlet weak var ingredientsButton: UIButton!
     @IBAction func ingredientsButtonTapped(sender: AnyObject) {
+        var ingredientsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ingredientsViewController") as! IngredientsViewController
+        self.presentViewController(ingredientsViewController, animated: true, completion: nil)
+
     }
-    @IBOutlet weak var instructionsButton: UIButton!
     @IBAction func instructionsButtonTapped(sender: AnyObject) {
+        var instructionsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("instructionsViewController") as! InstructionsViewController
+        self.presentViewController(instructionsViewController, animated: true, completion: nil)
     }
     
     let post = Post()
@@ -63,29 +70,35 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
 
     func createPost(){
         
+        var map = MapViewController()
+        
         var ingredientsViewController = IngredientsViewController()
         var instructionsViewController = InstructionsViewController()
         
-        post.imageFile = post.imageFile
-        post.recipeTitle = titleTextField.text
-        post.ingredients = ingredientsViewController.ingredientsArray
-        post.instructions = instructionsViewController.instructionsArray
+        post.ImageFile = post.imageFileGet
+        post.RecipeTitle = titleTextField.text
+        post.country = countryTextField.text
+        post.Ingredients = ingredientsViewController.ingredientsArray
+        post.Instructions = instructionsViewController.instructionsArray
         
         
-        if (self.titleTextField == nil){
-            println("add title")
-        }
-        if(self.imageView?.image == nil){
-            println("add image")
-        }
-        if (ingredientsViewController.ingredientsArray?.count == 0){
-            println("add ingredients")
-        }
-        if (instructionsViewController.instructionsArray?.count == 0){
-            println("add instructions")
-        } else {
-            post.uploadPost()
-        }
+        
+        //map.locationManager(CLLocationManager, didUpdateLocations: )
+        
+//        if (self.titleTextField == nil){
+//            println("add title")
+//        }
+//        if(self.imageView?.image == nil){
+//            println("add image")
+//        }
+//        if (ingredientsViewController.ingredientsArray?.count == 0){
+//            println("add ingredients")
+//        }
+//        if (instructionsViewController.instructionsArray?.count == 0){
+//            println("add instructions")
+//        } else {
+//            post.uploadPost()
+//        }
     }
     
    

@@ -16,18 +16,19 @@ class Post : PFObject, PFSubclassing {
     
     // 2
     
-    @NSManaged var recipeTitle: String?
-    @NSManaged var ingredients: [String]?
-    @NSManaged var instructions: [String]?
+    @NSManaged var RecipeTitle: String?
+    @NSManaged var Ingredients: [String]?
+    @NSManaged var Instructions: [String]?
+    @NSManaged var country: String?
     
-    @NSManaged var imageFile: PFFile?
+    @NSManaged var ImageFile: PFFile?
     @NSManaged var user: PFUser?
     var likes =  Dynamic<[PFUser]?>(nil)
     var image: Dynamic<UIImage?> = Dynamic(nil)
     var photoUploadTask: UIBackgroundTaskIdentifier?
     static var imageCache: NSCacheSwift<String, UIImage>!
     
-    
+    var imageFileGet: PFFile?
     
     //MARK: PFSubclassing Protocol
     
@@ -35,7 +36,7 @@ class Post : PFObject, PFSubclassing {
         let imageData = UIImageJPEGRepresentation(image.value, 0.8)
         let imageFile = PFFile(data: imageData)
         
-        
+        imageFileGet = imageFile
         // 1
         photoUploadTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
             UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
@@ -58,21 +59,22 @@ class Post : PFObject, PFSubclassing {
     
     func downloadImage() {
         // 1
-        image.value = Post.imageCache[self.imageFile!.name]
+        image.value = Post.imageCache[self.ImageFile!.name]
         
         // if image is not downloaded yet, get it
         if (image.value == nil) {
             
-            imageFile?.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
+            ImageFile?.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
                 if let data = data {
                     let image = UIImage(data: data, scale:1.0)!
                     self.image.value = image
                     // 2
-                    Post.imageCache[self.imageFile!.name] = image
+                    Post.imageCache[self.ImageFile!.name] = image
                 }
             }
         }
     }
+    
     
     func fetchLikes() {
         // 1

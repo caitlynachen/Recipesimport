@@ -30,21 +30,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let startViewController: UIViewController;
     
-    if (user != nil) {
+    
         // 3
         // if we have a user, set the TabBarController to be the initial View Controller
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        startViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! UIViewController
-    } else {
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    startViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! UIViewController
+    
+
+    
         // 4
         // Otherwise set the LoginViewController to be the first
-        let loginViewController = PFLogInViewController()
-        loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
-        loginViewController.delegate = parseLoginHelper
-        loginViewController.signUpController?.delegate = parseLoginHelper
-        
-        startViewController = loginViewController
-    }
+    
     
     // 5
     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -54,26 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
   }
     
-    var parseLoginHelper: ParseLoginHelper!
-    
-    override init() {
-        super.init()
-        
-        parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
-            // Initialize the ParseLoginHelper with a callback
-            if let error = error {
-                // 1
-                ErrorHandling.defaultErrorHandler(error)
-            } else  if let user = user {
-                // if login was successful, display the TabBarController
-                // 2
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! UIViewController
-                // 3
-                self.window?.rootViewController!.presentViewController(mapViewController, animated:true, completion:nil)
-            }
-        }
-    }
 
   func applicationWillResignActive(application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
