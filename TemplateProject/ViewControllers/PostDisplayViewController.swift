@@ -56,7 +56,17 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                 self.post.image.value = image!
                 self.imageView?.image = image!
                 //self.imageView?.clipsToBounds = true
+                let imageData = UIImageJPEGRepresentation(image, 0.8)
+                let imageFile = PFFile(data: imageData)
+                //imageFile.save()
                 
+                //let post = PFObject(className: "Post")
+                self.post["imageFile"] = imageFile
+                self.post.save()
+                
+               
+              
+
         }
       
     }
@@ -133,7 +143,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         //var instructionsViewController = InstructionsViewController()
         
         post.Description = descriptionText.text
-       // post.ImageFile = post.imageFileGet
+        
         post.RecipeTitle = titleTextField.text
         post.country = countryTextField.text
         post.location = toLoc

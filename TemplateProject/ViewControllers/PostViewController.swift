@@ -11,6 +11,7 @@ import Bond
 import Parse
 
 
+
 class PostViewController: UIViewController {
 
     @IBOutlet weak var usernameLabel: UILabel!
@@ -30,16 +31,10 @@ class PostViewController: UIViewController {
     var country: String?
     var ingredients: [String]?
     var instructions: [String]?
-    
-//    var post: Post? {
-//        didSet {
-//            if let post = post {
-//                usernameLabel.text = post.user?.username
-//                // 1
-//                dateLabel.text = post.createdAt?.shortTimeAgoSinceDate(NSDate()) ?? ""
-//            }
-//        }
-//    }
+    var imageFile: PFFile?
+    var user: PFUser?
+    var date: NSDate?
+
     
     @IBAction func unwindToPostView(segue:UIStoryboardSegue) {
         if(segue.identifier == "unwindToPostView"){
@@ -62,16 +57,22 @@ class PostViewController: UIViewController {
     }
     
 
+    var image: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         titleLabel.text = RecipeTitle
         countryLabel.text = country
         DescriptionLabel.text = Description
+        var userfetch = user?.fetchIfNeeded()
+        usernameLabel.text = user?.username
+     
         
+        var data = imageFile?.getData()
+        image = UIImage(data: data!)
         
+        imageViewDisplay.image = image
         
-            
 
         // Do any additional setup after loading the view.
     }
@@ -105,6 +106,7 @@ class PostViewController: UIViewController {
             dest.countryrecipe = countryLabel.text
             dest.instructionsrecipe = instructions
             dest.ingredientsrecipe = ingredients
+            dest.image = image
             
         }
     }

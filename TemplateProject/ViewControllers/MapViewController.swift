@@ -40,10 +40,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     @IBAction func unwindToVC(segue:UIStoryboardSegue) {
         if(segue.identifier == "fromPostToMap"){
             
-//            var bike: PinAnnotation = PinAnnotation(title: <#String#>, coordinate: <#CLLocationCoordinate2D#>, Description: <#String#>, country: <#String#>, instructions: <#[String]#>, ingredients: <#[String]#>)
-//            
-//            self.mapView.addAnnotation(bike)
-            
         }
         
     }
@@ -174,17 +170,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if let pts = posts {
             for post in pts {
                 var location = post.objectForKey("location")! as! PFGeoPoint
-                //var image = post.objectForKey("ImageFile")! as! UIImage
+                var image = post.objectForKey("imageFile")! as! PFFile
                 var title = post.objectForKey("RecipeTitle") as! String
                 var description = post.objectForKey("description") as! String
                 var country = post.objectForKey("country") as! String
                 var instructions = post.objectForKey("Instructions") as! [String]
                 var ingredients = post.objectForKey("Ingredients") as! [String]
+                var user = post.objectForKey("user") as! PFUser
+                var date = post.objectForKey("createdAt") as! NSDate
                 
+               
                 var long1: CLLocationDegrees = location.longitude
                 var lat1: CLLocationDegrees = location.latitude
                 var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat1, longitude: long1)
-                var annotation = PinAnnotation(title: title, coordinate: coordinate, Description: description, country: country, instructions: instructions, ingredients: ingredients)
+                var annotation = PinAnnotation(title: title, coordinate: coordinate, Description: description, country: country, instructions: instructions, ingredients: ingredients, image: image, user: user, date: date)
                 
                 mapAnnoations.append(annotation)
                 self.mapView.addAnnotation(annotation)
@@ -223,7 +222,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 let button = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
                 button.frame.size.width = 44
                 button.frame.size.height = 44
-                button.backgroundColor = UIColor.redColor()
+                var data = annotation1.image.getData()
+                var imagebutton: UIImage = UIImage(data: data!)!
+                
+                button.setImage(imagebutton, forState: UIControlState.Normal)
+                
+                //button.backgroundColor = UIColor.redColor()
                 //button.setImage(UIImage(named: "trash"), forState: .Normal)
                 
                 view!.leftCalloutAccessoryView = button
@@ -290,7 +294,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             svc.ingredients = annotation.ingredients
             svc.instructions = annotation.instructions
             
+            svc.imageFile = annotation.image
             
+            svc.user = annotation.user
+            svc.date = annotation.date
         }
     }
     

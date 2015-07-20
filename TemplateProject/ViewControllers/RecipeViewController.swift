@@ -20,6 +20,7 @@ class RecipeViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var countryrecipe: String?
     var ingredientsrecipe: [String]?
     var instructionsrecipe: [String]?
+    var image: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,7 @@ class RecipeViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.ingredientsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.instructionsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "instruccell")
 
+        imageView.image = image
         
         // Do any additional setup after loading the view.
     }

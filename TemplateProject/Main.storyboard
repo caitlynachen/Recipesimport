@@ -136,9 +136,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZT-Qm-BX2" userLabel="usernameLabel">
-                                <rect key="frame" x="16" y="60" width="42" height="21"/>
+                                <rect key="frame" x="16" y="60" width="287" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="42" id="9b2-n0-sws"/>
+                                    <constraint firstAttribute="width" constant="287" id="9b2-n0-sws"/>
                                     <constraint firstAttribute="height" constant="21" id="iq3-un-gXo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -330,8 +330,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bIS-wU-CS9" id="3oo-Vm-zsH">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nha-gE-MNj">
-                                                    <rect key="frame" x="13" y="11.5" width="42" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nha-gE-MNj">
+                                                    <rect key="frame" x="13" y="-0.5" width="42" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -349,6 +349,10 @@
                                         <exclude reference="FVR-Yc-qgz"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="kXs-yn-icE" id="x0I-OS-e46"/>
+                                    <outlet property="delegate" destination="kXs-yn-icE" id="BmO-Ad-VFW"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="titleLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="llq-ae-OfS">
                                 <rect key="frame" x="76" y="50" width="70" height="20.5"/>

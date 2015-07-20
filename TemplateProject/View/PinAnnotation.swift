@@ -11,16 +11,20 @@ class PinAnnotation : NSObject, MKAnnotation {
     let country:String
     let instructions: [String]
     let ingredients: [String]
-    //let image: UIImage
+    let image: PFFile
+    let user: PFUser
+    let date: NSDate
     
-    init (title: String, coordinate: CLLocationCoordinate2D, Description: String, country: String, instructions: [String], ingredients: [String]) {
+    init (title: String, coordinate: CLLocationCoordinate2D, Description: String, country: String, instructions: [String], ingredients: [String], image:PFFile, user: PFUser, date: NSDate) {
         self.title = title
         self.coordinate = coordinate
         self.Description = Description
         self.country = country
         self.ingredients = ingredients
         self.instructions = instructions
-       // self.image = image
+        self.image = image
+        self.user = user
+        self.date = date
         
     }
     

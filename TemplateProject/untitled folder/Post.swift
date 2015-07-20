@@ -36,10 +36,19 @@ class Post : PFObject, PFSubclassing {
     func uploadPost() {
         let imageData = UIImageJPEGRepresentation(image.value, 0.8)
         let imageFile = PFFile(data: imageData)
+        imageFile.save()
+        
+//        let post = PFObject(className: "Post")
+//        post["imageFile"] = imageFile
+//        post.save()
         
         // 1
         photoUploadTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
             UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
+            
+           
+            
+         
         }
         
         // 2
