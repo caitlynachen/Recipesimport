@@ -30,7 +30,6 @@ class Post : PFObject, PFSubclassing {
     var photoUploadTask: UIBackgroundTaskIdentifier?
     static var imageCache: NSCacheSwift<String, UIImage>!
     
-    var imageFileGet: PFFile?
     
     //MARK: PFSubclassing Protocol
     
@@ -38,7 +37,6 @@ class Post : PFObject, PFSubclassing {
         let imageData = UIImageJPEGRepresentation(image.value, 0.8)
         let imageFile = PFFile(data: imageData)
         
-        imageFileGet = imageFile
         // 1
         photoUploadTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
             UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
@@ -50,13 +48,14 @@ class Post : PFObject, PFSubclassing {
             UIApplication.sharedApplication().endBackgroundTask(self.photoUploadTask!)
         }
         
-        var postdisplay = PostDisplayViewController()
+        //var postdisplay = PostDisplayViewController()
         //var ingredientsViewController = IngredientsViewController()
         //var instructionsViewController = InstructionsViewController()
         
         // any uploaded post should be associated with the current user
         user = PFUser.currentUser()
         saveInBackgroundWithBlock(nil)
+
     }
     
     func downloadImage() {

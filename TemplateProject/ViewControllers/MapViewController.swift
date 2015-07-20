@@ -38,7 +38,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     @IBOutlet weak var logoView: UIView!
     
     @IBAction func unwindToVC(segue:UIStoryboardSegue) {
-        if(segue.identifier == "unwind"){
+        if(segue.identifier == "fromPostToMap"){
             
 //            var bike: PinAnnotation = PinAnnotation(title: <#String#>, coordinate: <#CLLocationCoordinate2D#>, Description: <#String#>, country: <#String#>, instructions: <#[String]#>, ingredients: <#[String]#>)
 //            
@@ -204,7 +204,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         var view: MKPinAnnotationView?
         //let annotation1 = self.mapAnnoations[0]
-        
+        if annotation is MKUserLocation{
+            return nil
+        }
         for annotation1 in mapAnnoations{
             let identifier = "pin"
             

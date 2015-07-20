@@ -10,6 +10,7 @@ import UIKit
 import Bond
 import Parse
 
+
 class PostViewController: UIViewController {
 
     @IBOutlet weak var usernameLabel: UILabel!
@@ -21,11 +22,24 @@ class PostViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     
+    @IBAction func likeButtonTapped(sender: AnyObject) {
+        
+    }
     var RecipeTitle: String?
     var Description: String?
     var country: String?
     var ingredients: [String]?
     var instructions: [String]?
+    
+//    var post: Post? {
+//        didSet {
+//            if let post = post {
+//                usernameLabel.text = post.user?.username
+//                // 1
+//                dateLabel.text = post.createdAt?.shortTimeAgoSinceDate(NSDate()) ?? ""
+//            }
+//        }
+//    }
     
     @IBAction func unwindToPostView(segue:UIStoryboardSegue) {
         if(segue.identifier == "unwindToPostView"){
@@ -35,12 +49,19 @@ class PostViewController: UIViewController {
     }
     
 
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if let ident = identifier {
+            if ident == "toRecipeView" {
+                return true
+            }
+            
+        }
     
-    
-    @IBAction func buttonTapped(sender: AnyObject) {
-        self.presentViewController(RecipeViewController(), animated: true, completion: nil)
+        return false
 
     }
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,12 +71,17 @@ class PostViewController: UIViewController {
         
         
         
-        
             
 
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func backButtonTapped(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+        self.dismissViewControllerAnimated(false, completion: nil)
+        self.presentViewController(mapViewController, animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -72,17 +98,15 @@ class PostViewController: UIViewController {
     }
     */
     
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "toRecipeView") {
-            var svc = segue.destinationViewController as! RecipeViewController;
-            
-            //svc.titleh = titleLabel.text
-            //svc.country = countryLabel.text
-            
+            var dest = segue.destinationViewController as! RecipeViewController;
+            dest.titlerecipe = titleLabel.text
+            dest.countryrecipe = countryLabel.text
+            dest.instructionsrecipe = instructions
+            dest.ingredientsrecipe = ingredients
             
         }
-        
     }
 
 }

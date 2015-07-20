@@ -12,6 +12,12 @@ import Bond
 
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    @IBAction func backButton(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+        self.dismissViewControllerAnimated(false, completion: nil)
+        self.presentViewController(mapViewController, animated: true, completion: nil)
+    }
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var postButton: UIButton!
 
@@ -32,6 +38,16 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     @IBOutlet weak var cameraButton: UIButton!
     
+    @IBAction func postButtonTapped(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+        //RELOAD MAPVIEW
+        //mapViewController.reloadInputViews()
+        self.dismissViewControllerAnimated(false, completion: nil)
+        self.presentViewController(mapViewController, animated: true, completion: nil)
+        
+        createPost()
+    }
     @IBAction func cameraButtonTapped(sender: AnyObject) {
         //println("hi")        
         photoTakingHelper =
@@ -39,11 +55,13 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                 // 1
                 self.post.image.value = image!
                 self.imageView?.image = image!
+                //self.imageView?.clipsToBounds = true
                 
         }
       
     }
     
+    //var ingredientsDict: [String:String] = [:]
     var ingredientsArray: [String] = []
     var ingredientBond:Bond<String>!
     var instructionsArray: [String] = []
@@ -62,10 +80,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             let cell = tableView.dequeueReusableCellWithIdentifier("IngredientsInputCell") as! IngredientsTableViewCell
             
             
-            
             cell.ingredient.map { $0 } ->> ingredientBond
             
-            cell.configure(text: "", placeholder: "")
+            cell.configure(text: "", placeholder: "Ex. 1 cup of flour")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("InstructionsInputCell") as! InstructionsTableViewCell
@@ -74,7 +91,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             
             
             //instructionsArray?.append(cell.textField.text)
-            cell.configure(text: "", placeholder: "")
+            cell.configure(text: "", placeholder: "Ex. Preheat oven to 350 degrees.")
             return cell
         }
       
@@ -86,13 +103,18 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         super.viewDidLoad()
         
         ingredientBond = Bond<String>(){ ingredient in
-            self.ingredientsArray.append(ingredient)
-            
+
+            var contained = contains(self.ingredientsArray, ingredient)
+            if contained == false && ingredient != "" {
+                self.ingredientsArray.append(ingredient)
+            }
         }
         
         instructionBond = Bond<String>(){ instruction in
-            self.instructionsArray.append(instruction)
-            //println(self.instructionsArray?.count)
+            var contained = contains(self.instructionsArray, instruction)
+            if contained == false && instruction != "" {
+                self.instructionsArray.append(instruction)
+            }
         }
 
             
@@ -111,7 +133,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         //var instructionsViewController = InstructionsViewController()
         
         post.Description = descriptionText.text
-        post.ImageFile = post.imageFileGet
+       // post.ImageFile = post.imageFileGet
         post.RecipeTitle = titleTextField.text
         post.country = countryTextField.text
         post.location = toLoc
@@ -145,13 +167,13 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "unwind") {
-            
-            createPost()
-            // pass data to next view
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+//        if (segue.identifier == "unwind") {
+//            
+//            createPost()
+//            // pass data to next view
+//        }
+//    }
 
 
 }
