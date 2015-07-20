@@ -15,11 +15,43 @@ class PostViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var DescriptionLabel: UILabel!
+    @IBOutlet weak var imageViewDisplay: UIImageView!
+    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     
+    var RecipeTitle: String?
+    var Description: String?
+    var country: String?
+    var ingredients: [String]?
+    var instructions: [String]?
+    
+    @IBAction func unwindToPostView(segue:UIStoryboardSegue) {
+        if(segue.identifier == "unwindToPostView"){
+            
+            
+        }
+    }
+    
+
+    
+    
+    @IBAction func buttonTapped(sender: AnyObject) {
+        self.presentViewController(RecipeViewController(), animated: true, completion: nil)
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        titleLabel.text = RecipeTitle
+        countryLabel.text = country
+        DescriptionLabel.text = Description
+        
+        
+        
+        
+            
 
         // Do any additional setup after loading the view.
     }
@@ -27,9 +59,9 @@ class PostViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
     
-
+    
+    }
     /*
     // MARK: - Navigation
 
@@ -39,5 +71,18 @@ class PostViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "toRecipeView") {
+            var svc = segue.destinationViewController as! RecipeViewController;
+            
+            //svc.titleh = titleLabel.text
+            //svc.country = countryLabel.text
+            
+            
+        }
+        
+    }
 
 }

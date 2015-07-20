@@ -23,9 +23,9 @@ class IngredientsTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     func textFieldDidEndEditing(textfield: UITextField){
       // println("hello")
-        println(textfield.text)
+        //println(textfield.text)
         ingredient.value = textfield.text
-        println(ingredient.value)
+        //println(ingredient.value)
     }
    
     

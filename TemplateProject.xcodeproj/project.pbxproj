@@ -14,11 +14,16 @@
 		1C13E5861B4C486800FA5F39 /* PostDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5821B4C486800FA5F39 /* PostDisplayViewController.swift */; };
 		1C13E5871B4C486800FA5F39 /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5831B4C486800FA5F39 /* IngredientsViewController.swift */; };
 		1C13E5881B4C486800FA5F39 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5841B4C486800FA5F39 /* InstructionsViewController.swift */; };
-		1C3DDE501B4AF265004E8014 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3DDE4F1B4AF265004E8014 /* MapViewController.swift */; };
 		1C3DDE521B4AF2EA004E8014 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C3DDE511B4AF2EA004E8014 /* Images.xcassets */; };
+		1C52FFDB1B55C1BE00ADBE8B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */; };
+		1CA3FE8F1B55A135003D80E2 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3FE8E1B55A135003D80E2 /* RecipeViewController.swift */; };
+		1CADAED21B597E0700F341A6 /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CADAED11B597E0700F341A6 /* PinAnnotation.swift */; };
+		1CADAEDA1B599DB600F341A6 /* to delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CADAED91B599DB600F341A6 /* to delete.swift */; };
 		1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */; };
 		1CD9DFF31B4DC61600DF28E3 /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */; };
 		1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */; };
+		1CDF7A481B55EC4100609CE1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CDF7A471B55EC4100609CE1 /* MapKit.framework */; };
+		1CDF7A4F1B55EC5100609CE1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B991B06C31F000913E4 /* CoreLocation.framework */; };
 		624262C01B4460CB00005CE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624262B21B4460CB00005CE3 /* AppDelegate.swift */; };
 		624262C11B4460CB00005CE3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 624262B31B4460CB00005CE3 /* LaunchScreen.xib */; };
 		624262C31B4460CB00005CE3 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624262B81B4460CB00005CE3 /* ErrorHandling.swift */; };
@@ -34,7 +39,6 @@
 		62551B941B06C072000913E4 /* ConvenienceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B8E1B06BFD7000913E4 /* ConvenienceKit.framework */; };
 		62551B961B06C2F5000913E4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B951B06C2F5000913E4 /* Social.framework */; };
 		62551B981B06C2FD000913E4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B971B06C2FD000913E4 /* Accounts.framework */; };
-		62551B9A1B06C31F000913E4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B991B06C31F000913E4 /* CoreLocation.framework */; };
 		62551B9C1B06C327000913E4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B9B1B06C327000913E4 /* SystemConfiguration.framework */; };
 		62551B9E1B06C354000913E4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B9D1B06C354000913E4 /* MobileCoreServices.framework */; };
 		62551BA01B06C35B000913E4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B9F1B06C35B000913E4 /* AudioToolbox.framework */; };
@@ -141,11 +145,15 @@
 		1C13E5821B4C486800FA5F39 /* PostDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDisplayViewController.swift; sourceTree = "<group>"; };
 		1C13E5831B4C486800FA5F39 /* IngredientsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
 		1C13E5841B4C486800FA5F39 /* InstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
-		1C3DDE4F1B4AF265004E8014 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1C3DDE511B4AF2EA004E8014 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1CA3FE8E1B55A135003D80E2 /* RecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		1CADAED11B597E0700F341A6 /* PinAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
+		1CADAED91B599DB600F341A6 /* to delete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "to delete.swift"; sourceTree = "<group>"; };
 		1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = "TemplateProject/untitled folder/Post.swift"; sourceTree = SOURCE_ROOT; };
 		1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
 		1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
+		1CDF7A471B55EC4100609CE1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		624262B21B4460CB00005CE3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		624262B41B4460CB00005CE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		624262B81B4460CB00005CE3 /* ErrorHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
@@ -179,12 +187,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CDF7A4F1B55EC5100609CE1 /* CoreLocation.framework in Frameworks */,
+				1CDF7A481B55EC4100609CE1 /* MapKit.framework in Frameworks */,
 				62A07D661B1F79F2001F6916 /* libstdc++.6.dylib in Frameworks */,
 				62551BA21B06C373000913E4 /* libsqlite3.dylib in Frameworks */,
 				62551BA01B06C35B000913E4 /* AudioToolbox.framework in Frameworks */,
 				62551B9E1B06C354000913E4 /* MobileCoreServices.framework in Frameworks */,
 				62551B9C1B06C327000913E4 /* SystemConfiguration.framework in Frameworks */,
-				62551B9A1B06C31F000913E4 /* CoreLocation.framework in Frameworks */,
 				62551B981B06C2FD000913E4 /* Accounts.framework in Frameworks */,
 				62551B961B06C2F5000913E4 /* Social.framework in Frameworks */,
 				62551B941B06C072000913E4 /* ConvenienceKit.framework in Frameworks */,
@@ -208,6 +217,7 @@
 			children = (
 				1C13E57D1B4C485900FA5F39 /* IngredientsTableViewCell.swift */,
 				1C13E57E1B4C485900FA5F39 /* InstructionsTableViewCell.swift */,
+				1CADAED11B597E0700F341A6 /* PinAnnotation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -215,11 +225,12 @@
 		1C3DDE4E1B4AF24A004E8014 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1C3DDE4F1B4AF265004E8014 /* MapViewController.swift */,
+				1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */,
 				1C13E5811B4C486800FA5F39 /* PostViewController.swift */,
 				1C13E5821B4C486800FA5F39 /* PostDisplayViewController.swift */,
 				1C13E5831B4C486800FA5F39 /* IngredientsViewController.swift */,
 				1C13E5841B4C486800FA5F39 /* InstructionsViewController.swift */,
+				1CA3FE8E1B55A135003D80E2 /* RecipeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -279,6 +290,7 @@
 		62551B621B06BF33000913E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1CDF7A471B55EC4100609CE1 /* MapKit.framework */,
 				62A07D651B1F79F2001F6916 /* libstdc++.6.dylib */,
 				62551BA11B06C373000913E4 /* libsqlite3.dylib */,
 				62551B9F1B06C35B000913E4 /* AudioToolbox.framework */,
@@ -327,6 +339,7 @@
 		62C8C1D71B06BD6500DC3EA7 = {
 			isa = PBXGroup;
 			children = (
+				1CADAED91B599DB600F341A6 /* to delete.swift */,
 				624262B11B4460CB00005CE3 /* TemplateProject */,
 				62551B621B06BF33000913E4 /* Frameworks */,
 				62C8C1E11B06BD6500DC3EA7 /* Products */,
@@ -483,11 +496,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CADAEDA1B599DB600F341A6 /* to delete.swift in Sources */,
 				1C13E5801B4C485900FA5F39 /* InstructionsTableViewCell.swift in Sources */,
 				1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */,
+				1CA3FE8F1B55A135003D80E2 /* RecipeViewController.swift in Sources */,
 				1C13E57F1B4C485900FA5F39 /* IngredientsTableViewCell.swift in Sources */,
 				1C13E5851B4C486800FA5F39 /* PostViewController.swift in Sources */,
 				624262C01B4460CB00005CE3 /* AppDelegate.swift in Sources */,
+				1CADAED21B597E0700F341A6 /* PinAnnotation.swift in Sources */,
 				1C13E5881B4C486800FA5F39 /* InstructionsViewController.swift in Sources */,
 				1CD9DFF31B4DC61600DF28E3 /* PhotoTakingHelper.swift in Sources */,
 				624262C41B4460CB00005CE3 /* ParseLoginHelper.swift in Sources */,
@@ -495,7 +511,7 @@
 				1C13E5871B4C486800FA5F39 /* IngredientsViewController.swift in Sources */,
 				624262C31B4460CB00005CE3 /* ErrorHandling.swift in Sources */,
 				1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */,
-				1C3DDE501B4AF265004E8014 /* MapViewController.swift in Sources */,
+				1C52FFDB1B55C1BE00ADBE8B /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +634,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)/Frameworks/ConvenienceKit/ConvenienceKit/Frameworks",
+					/Users/caitlynachen/Desktop,
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TemplateProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -638,6 +656,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)/Frameworks/ConvenienceKit/ConvenienceKit/Frameworks",
+					/Users/caitlynachen/Desktop,
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TemplateProject/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

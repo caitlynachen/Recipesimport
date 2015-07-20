@@ -20,6 +20,8 @@ class Post : PFObject, PFSubclassing {
     @NSManaged var Ingredients: [String]?
     @NSManaged var Instructions: [String]?
     @NSManaged var country: String?
+    @NSManaged var Description: String?
+    @NSManaged var location: PFGeoPoint?
     
     @NSManaged var ImageFile: PFFile?
     @NSManaged var user: PFUser?
@@ -49,8 +51,8 @@ class Post : PFObject, PFSubclassing {
         }
         
         var postdisplay = PostDisplayViewController()
-        var ingredientsViewController = IngredientsViewController()
-        var instructionsViewController = InstructionsViewController()
+        //var ingredientsViewController = IngredientsViewController()
+        //var instructionsViewController = InstructionsViewController()
         
         // any uploaded post should be associated with the current user
         user = PFUser.currentUser()

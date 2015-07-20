@@ -21,9 +21,9 @@ class InstructionsTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     func textFieldDidEndEditing(textfield: UITextField){
         // println("hello")
-        println(textfield.text)
+        //println(textfield.text)
         instruction.value = textfield.text
-        println(instruction.value)
+        //println(instruction.value)
     }
     
     func configure(#text: String?, placeholder: String) {
