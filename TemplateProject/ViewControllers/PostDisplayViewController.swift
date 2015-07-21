@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import Bond
 
-class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     
     @IBAction func backButton(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -37,6 +37,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
 
     
     @IBOutlet weak var cameraButton: UIButton!
+    
     
     @IBAction func postButtonTapped(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -107,10 +108,57 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
       
     }
     
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        // Combine the textView text and the replacement text to
+        // create the updated text string
+        let currentText:NSString = textView.text
+        let updatedText = currentText.stringByReplacingCharactersInRange(range, withString:text)
+        
+        // If updated text view will be empty, add the placeholder
+        // and set the cursor to the beginning of the text view
+        if count(updatedText) == 0 {
+            
+            textView.text = "Placeholder"
+            textView.textColor = UIColor.lightGrayColor()
+            
+            textView.selectedTextRange = textView.textRangeFromPosition(textView.beginningOfDocument, toPosition: textView.beginningOfDocument)
+            
+            return false
+        }
+            
+            // Else if the text view's placeholder is showing and the
+            // length of the replacement string is greater than 0, clear
+            // the text view and set its color to black to prepare for
+            // the user's entry
+        else if descriptionText.textColor == UIColor.lightGrayColor() && count(text) > 0 {
+            textView.text = nil
+            textView.textColor = UIColor.blackColor()
+        }
+        
+        return true
+    }
     
+    func textViewDidChangeSelection(textView: UITextView) {
+        if self.view.window != nil {
+            if textView.textColor == UIColor.lightGrayColor() {
+                textView.selectedTextRange = textView.textRangeFromPosition(textView.beginningOfDocument, toPosition: textView.beginningOfDocument)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        descriptionText.delegate = self
+
+        
+        descriptionText.text = "Placeholder"
+        descriptionText.textColor = UIColor.lightGrayColor()
+        
+        descriptionText.becomeFirstResponder()
+        
+        descriptionText.selectedTextRange = descriptionText.textRangeFromPosition(descriptionText.beginningOfDocument, toPosition: descriptionText.beginningOfDocument)
         
         ingredientBond = Bond<String>(){ ingredient in
 
@@ -152,7 +200,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         post.date = post.createdAt!
         
         post.uploadPost()
-        
         
         //map.locationManager(CLLocationManager, didUpdateLocations: )
         
