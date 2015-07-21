@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C1105491B5EB10C0081D073 /* PostDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5821B4C486800FA5F39 /* PostDisplayViewController.swift */; };
 		1C13E57B1B4C46EC00FA5F39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C13E57A1B4C46EC00FA5F39 /* Main.storyboard */; };
 		1C13E57F1B4C485900FA5F39 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E57D1B4C485900FA5F39 /* IngredientsTableViewCell.swift */; };
 		1C13E5801B4C485900FA5F39 /* InstructionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E57E1B4C485900FA5F39 /* InstructionsTableViewCell.swift */; };
 		1C13E5851B4C486800FA5F39 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5811B4C486800FA5F39 /* PostViewController.swift */; };
-		1C13E5861B4C486800FA5F39 /* PostDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5821B4C486800FA5F39 /* PostDisplayViewController.swift */; };
 		1C13E5871B4C486800FA5F39 /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5831B4C486800FA5F39 /* IngredientsViewController.swift */; };
 		1C13E5881B4C486800FA5F39 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5841B4C486800FA5F39 /* InstructionsViewController.swift */; };
 		1C3DDE521B4AF2EA004E8014 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C3DDE511B4AF2EA004E8014 /* Images.xcassets */; };
@@ -547,6 +547,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C1105491B5EB10C0081D073 /* PostDisplayViewController.swift in Sources */,
 				1CADAEDA1B599DB600F341A6 /* to delete.swift in Sources */,
 				1C13E5801B4C485900FA5F39 /* InstructionsTableViewCell.swift in Sources */,
 				1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */,
@@ -558,7 +559,6 @@
 				1C13E5881B4C486800FA5F39 /* InstructionsViewController.swift in Sources */,
 				1CD9DFF31B4DC61600DF28E3 /* PhotoTakingHelper.swift in Sources */,
 				624262C41B4460CB00005CE3 /* ParseLoginHelper.swift in Sources */,
-				1C13E5861B4C486800FA5F39 /* PostDisplayViewController.swift in Sources */,
 				1C13E5871B4C486800FA5F39 /* IngredientsViewController.swift in Sources */,
 				624262C31B4460CB00005CE3 /* ErrorHandling.swift in Sources */,
 				1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */,

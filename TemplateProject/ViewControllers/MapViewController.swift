@@ -180,7 +180,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 //println(post.objectForKey("createdAt"))
                 var date = post.objectForKey("date") as! NSDate
                 
-                println(post.objectForKey("date"))
+                //println(post.objectForKey("date"))
                 
                
                 var long1: CLLocationDegrees = location.longitude
