@@ -119,7 +119,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         // and set the cursor to the beginning of the text view
         if count(updatedText) == 0 {
             
-            textView.text = "Placeholder"
+            textView.text = "Write a caption:"
             textView.textColor = UIColor.lightGrayColor()
             
             textView.selectedTextRange = textView.textRangeFromPosition(textView.beginningOfDocument, toPosition: textView.beginningOfDocument)
@@ -153,7 +153,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         descriptionText.delegate = self
 
         
-        descriptionText.text = "Placeholder"
+        descriptionText.text = "Write a caption:"
         descriptionText.textColor = UIColor.lightGrayColor()
         
         descriptionText.becomeFirstResponder()
