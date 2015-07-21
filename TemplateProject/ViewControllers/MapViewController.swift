@@ -18,6 +18,8 @@ import ParseUI
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate {
     
+    var annotationCurrent: PinAnnotation?
+    
     var searchController:UISearchController!
     var annotation:MKAnnotation!
     var localSearchRequest:MKLocalSearchRequest!
@@ -43,6 +45,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         }
         
     }
+    
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if let ident = identifier {
@@ -100,9 +103,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     @IBOutlet var mapView: MKMapView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         println("in MapViewController")
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -131,11 +135,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         println("error")
     }
     
+    
     //var point = PinAnnotation(title: "newPoint", coordinate: currentLocation!)
     var lat: CLLocationDegrees?
     var long: CLLocationDegrees?
     var currentLocation: CLLocationCoordinate2D?
-    
+    var regionCenter: CLLocationCoordinate2D?
+
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
         var userLocation : CLLocation = locations[0] as! CLLocation
@@ -152,6 +158,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         let span = MKCoordinateSpanMake(0.05, 0.05)
         
         let region = MKCoordinateRegion(center: location, span: span)
+
+        regionCenter = region.center
         
         mapView.setRegion(region, animated: true)
         
@@ -182,7 +190,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 
                 //println(post.objectForKey("date"))
                 
-               
                 var long1: CLLocationDegrees = location.longitude
                 var lat1: CLLocationDegrees = location.latitude
                 var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat1, longitude: long1)
@@ -199,7 +206,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
         
     }
-    
     
     
     
@@ -247,6 +253,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        if annotationCurrent != nil{
+            mapView.addAnnotation(annotationCurrent)
+        }
+    }
     
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar){

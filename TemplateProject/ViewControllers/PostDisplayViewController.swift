@@ -39,15 +39,32 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var cameraButton: UIButton!
     
     
-    @IBAction func postButtonTapped(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
-        //RELOAD MAPVIEW
-        //mapViewController.reloadInputViews()
-        self.dismissViewControllerAnimated(false, completion: nil)
-        self.presentViewController(mapViewController, animated: true, completion: nil)
+//    @IBAction func postButtonTapped(sender: AnyObject) {
+//        createPost()
+//
+//        
+//        
+//
+//    }
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if let ident = identifier {
+            if ident == "fromPostDiplayToMap" {
+                
+                return true
+                
+            }
+        }
         
-        createPost()
+        return false
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "fromPostDiplayToMap") {
+            createPost()
+            var svc = segue.destinationViewController as! MapViewController;
+            
+            svc.annotationCurrent = currentAnnotation
+        }
     }
     @IBAction func cameraButtonTapped(sender: AnyObject) {
         //println("hi")        
@@ -80,9 +97,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ingredientsTableView {
-            return 200 // Create 1 row as an example
+            return 1 // Create 1 row as an example
         } else {
-            return 200
+            return 1
         }
     }
     
@@ -184,14 +201,14 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         // Dispose of any resources that can be recreated.
     }
     
-    
+    var currentAnnotation: PinAnnotation?
 
     func createPost(){
 
         //var instructionsViewController = InstructionsViewController()
+    
         
         post.Description = descriptionText.text
-        
         post.RecipeTitle = titleTextField.text
         post.country = countryTextField.text
         post.location = toLoc
@@ -199,7 +216,38 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         post.Instructions = self.instructionsArray
         post.date = post.createdAt!
         
+        
         post.uploadPost()
+        
+        let lat = post.location?.latitude
+        let long = post.location?.longitude
+        var coordinateh = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+        //RELOAD MAPVIEW
+        //mapViewController.reloadInputViews()
+        var location = post.objectForKey("location")! as! PFGeoPoint
+        var image = post.objectForKey("imageFile")! as! PFFile
+        var title = post.objectForKey("RecipeTitle") as! String
+        var description = post.objectForKey("description") as! String
+        var country = post.objectForKey("country") as! String
+        var instructions = post.objectForKey("Instructions") as! [String]
+        var ingredients = post.objectForKey("Ingredients") as! [String]
+        var user = post.objectForKey("user") as! PFUser
+        //println(post.objectForKey("createdAt"))
+        var date = post.objectForKey("date") as! NSDate
+        
+        var long1: CLLocationDegrees = location.longitude
+        var lat1: CLLocationDegrees = location.latitude
+        var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat1, longitude: long1)
+        
+        var annotation = PinAnnotation(title: title, coordinate: coordinate, Description: description, country: country, instructions: instructions, ingredients: ingredients, image: image, user: user, date: date)
+       
+        currentAnnotation = annotation
+    //mapView.mapView.addAnnotation(annotation)
+        
+        mapViewController.viewWillAppear(true)
         
         //map.locationManager(CLLocationManager, didUpdateLocations: )
         
