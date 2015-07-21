@@ -24,6 +24,15 @@ class PostViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     
+    @IBOutlet weak var likeLabel: UILabel!
+    var numOfLikes: Int = 0
+    var numOfFlags: Int?
+    
+    @IBAction func likeButtonTapped(sender: AnyObject) {
+        numOfLikes = numOfLikes + 1
+        self.likeLabel.text = "\(numOfLikes)"
+    }
+    
     @IBAction func moreButtonTapped(sender: AnyObject) {
         if(PFUser.currentUser()?.username == usernameLabel.text){
             let actionSheetController: UIAlertController = UIAlertController()
@@ -81,6 +90,8 @@ class PostViewController: UIViewController {
                 deleteAlert.addAction(dontDeleteAction)
                 let deleteAction: UIAlertAction = UIAlertAction(title: "Flag", style: .Default) { action -> Void in
                     
+                    self.numOfFlags = self.numOfFlags! + 1
+                    
                     //flag row in parse
                 }
                 deleteAlert.addAction(deleteAction)
@@ -100,9 +111,7 @@ class PostViewController: UIViewController {
             self.presentViewController(actionSheetController, animated: true, completion: nil)
         }
     }
-    @IBAction func likeButtonTapped(sender: AnyObject) {
-        
-    }
+   
     var RecipeTitle: String?
     var Description: String?
     var country: String?

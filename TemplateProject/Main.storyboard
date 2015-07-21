@@ -156,7 +156,7 @@
                                 </state>
                                 <state key="selected" image="heart-selected"/>
                                 <connections>
-                                    <action selector="likeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WIJ-hI-Wlh"/>
+                                    <action selector="likeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zGu-wd-rOY"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edt-UD-eGW" userLabel="numOfLikes">
@@ -272,6 +272,7 @@
                         <outlet property="dateLabel" destination="qna-V2-cxI" id="knq-e4-vCI"/>
                         <outlet property="imageViewDisplay" destination="6NC-Bi-ZOE" id="Dct-dx-4Qo"/>
                         <outlet property="likeButton" destination="8f7-Vn-7MM" id="Miz-rg-hGT"/>
+                        <outlet property="likeLabel" destination="Edt-UD-eGW" id="rJc-qT-ESc"/>
                         <outlet property="titleLabel" destination="doA-2l-JqP" id="jTx-D9-bUX"/>
                         <outlet property="usernameLabel" destination="zZT-Qm-BX2" id="XsH-fc-KRa"/>
                     </connections>

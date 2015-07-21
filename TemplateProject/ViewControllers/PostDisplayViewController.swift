@@ -203,6 +203,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     var currentAnnotation: PinAnnotation?
 
+
     func createPost(){
 
         //var instructionsViewController = InstructionsViewController()
