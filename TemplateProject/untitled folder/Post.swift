@@ -15,7 +15,7 @@ import ConvenienceKit
 class Post : PFObject, PFSubclassing {
     
     // 2
-    
+    @NSManaged var date: NSDate?
     @NSManaged var RecipeTitle: String?
     @NSManaged var Ingredients: [String]?
     @NSManaged var Instructions: [String]?

@@ -9,6 +9,7 @@
 import UIKit
 import Bond
 import Parse
+//import DateTools
 
 
 
@@ -67,13 +68,15 @@ class PostViewController: UIViewController {
         var userfetch = user?.fetchIfNeeded()
         usernameLabel.text = user?.username
      
+       
+        dateLabel.text = date!.shortTimeAgoSinceDate(NSDate())
+        
         
         var data = imageFile?.getData()
         image = UIImage(data: data!)
         
         imageViewDisplay.image = image
         
-
         // Do any additional setup after loading the view.
     }
 

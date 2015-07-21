@@ -149,6 +149,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         post.location = toLoc
         post.Ingredients = self.ingredientsArray
         post.Instructions = self.instructionsArray
+        post.date = post.createdAt!
         
         post.uploadPost()
         

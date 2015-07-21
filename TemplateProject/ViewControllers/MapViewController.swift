@@ -177,7 +177,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 var instructions = post.objectForKey("Instructions") as! [String]
                 var ingredients = post.objectForKey("Ingredients") as! [String]
                 var user = post.objectForKey("user") as! PFUser
-                var date = post.objectForKey("createdAt") as! NSDate
+                //println(post.objectForKey("createdAt"))
+                var date = post.objectForKey("date") as! NSDate
+                
+                println(post.objectForKey("date"))
                 
                
                 var long1: CLLocationDegrees = location.longitude
