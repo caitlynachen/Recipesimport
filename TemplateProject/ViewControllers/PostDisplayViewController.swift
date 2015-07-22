@@ -12,46 +12,38 @@ import Bond
 
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     
+    
+   
+    var photoTakingHelper: PhotoTakingHelper?
+
+    @IBOutlet weak var countryTextField: UITextField!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var imageView: UIImageView?
+    @IBOutlet weak var instructionTableView: UITableView!
+    @IBOutlet weak var descriptionText: UITextView!
+    @IBOutlet weak var ingredientsTableView: UITableView!
+    @IBOutlet weak var postButton: UIButton!
+
+    var placeholderLabel: UILabel!
+    
+
+    let post = Post()
+    
+    var toLoc: PFGeoPoint?
+    var image: UIImage?
+    var annotation: PinAnnotation?
+    @IBOutlet weak var cameraButton: UIButton!
+    
+    var ing: [String]?
+    var ins: [String]?
+    
     @IBAction func backButton(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
         self.dismissViewControllerAnimated(false, completion: nil)
         self.presentViewController(mapViewController, animated: true, completion: nil)
     }
-    @IBOutlet weak var ingredientsTableView: UITableView!
-    @IBOutlet weak var postButton: UIButton!
 
-    var placeholderLabel: UILabel!
-    @IBOutlet weak var descriptionText: UITextView!
-   
-    @IBOutlet weak var countryTextField: UITextField!
-    var toLoc: PFGeoPoint?
-    var photoTakingHelper: PhotoTakingHelper?
-    
-    @IBOutlet weak var titleTextField: UITextField!
-    
-
-    @IBOutlet weak var imageView: UIImageView?
-    
-    @IBOutlet weak var instructionTableView: UITableView!
-    
-    let post = Post()
-    
-//    var postToEdit: PFObject?
-//    var titlerecipe: String?
-//    var countryrecipe: String?
-//    var ingredientsrecipe: [String]?
-//    var instructionsrecipe: [String]?
-    var image: UIImage?
-//    var Description: String?
-    
-
-    
-    var annotation: PinAnnotation?
-    @IBOutlet weak var cameraButton: UIButton!
-    
-    var ing: [String]?
-    var ins: [String]?
     override func viewWillAppear(animated: Bool) {
         if annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.country != nil {
         titleTextField.text = annotation?.title
@@ -222,6 +214,11 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
 
         //var instructionsViewController = InstructionsViewController()
     
+        if annotation?.post != nil{
+            
+            //change parse info
+            
+        } else{
         post.Description = descriptionText.text
         post.RecipeTitle = titleTextField.text
         post.country = countryTextField.text
@@ -233,7 +230,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         post.save()
         post.uploadPost()
-        
+        }
         
         
         let lat = post.location?.latitude
@@ -242,8 +239,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
-        //RELOAD MAPVIEW
-        //mapViewController.reloadInputViews()
+       
         var location = post.objectForKey("location")! as! PFGeoPoint
         var image = post.objectForKey("imageFile")! as! PFFile
         var title = post.objectForKey("RecipeTitle") as! String
@@ -260,44 +256,13 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         var lat1: CLLocationDegrees = location.latitude
         var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat1, longitude: long1)
         
-        var annotation = PinAnnotation(title: title, coordinate: coordinate, Description: description, country: country, instructions: instructions, ingredients: ingredients, image: image, user: user, date: date, post: postcurrent)
+        var annotationToAdd = PinAnnotation(title: title, coordinate: coordinate, Description: description, country: country, instructions: instructions, ingredients: ingredients, image: image, user: user, date: date, post: postcurrent)
        
-        currentAnnotation = annotation
+        currentAnnotation = annotationToAdd
     //mapView.mapView.addAnnotation(annotation)
         
         mapViewController.viewWillAppear(true)
         
-        //map.locationManager(CLLocationManager, didUpdateLocations: )
-        
-//        if (self.titleTextField == nil){
-//            println("add title")
-//        }
-//        if(self.imageView?.image == nil){
-//            println("add image")
-//        }
-//        if (ingredientsViewController.ingredientsArray?.count == 0){
-//            println("add ingredients")
-//        }
-//        if (instructionsViewController.instructionsArray?.count == 0){
-//            println("add instructions")
-//        } else {
-//            post.uploadPost()
-//        }
     }
-    
-   
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-//        if (segue.identifier == "unwind") {
-//            
-//            createPost()
-//            // pass data to next view
-//        }
-//    }
-
 
 }

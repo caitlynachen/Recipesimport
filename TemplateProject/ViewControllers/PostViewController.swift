@@ -20,7 +20,6 @@ class PostViewController: UIViewController {
     
     var anno: PinAnnotation?
 
-    //var post: PFObject?
     @IBOutlet weak var DescriptionLabel: UILabel!
     @IBOutlet weak var imageViewDisplay: UIImageView!
     @IBOutlet weak var countryLabel: UILabel!
@@ -54,9 +53,7 @@ class PostViewController: UIViewController {
                     self.anno?.post.delete()
                     
                     self.performSegueWithIdentifier("fromPostMap", sender: nil)
-                    
-                    
-                    //delete row from parse?
+        
                 }
                 deleteAlert.addAction(deleteAction)
                 
@@ -115,17 +112,6 @@ class PostViewController: UIViewController {
             self.presentViewController(actionSheetController, animated: true, completion: nil)
         }
     }
-   
-//    var RecipeTitle: String?
-//    var Description: String?
-//    var country: String?
-//    var ingredients: [String]?
-//    var instructions: [String]?
-//    var imageFile: PFFile?
-//    var user: PFUser?
-//    var date: NSDate?
-//    var coor: CLLocationCoordinate2D?
-
     
     @IBAction func unwindToPostView(segue:UIStoryboardSegue) {
         if(segue.identifier == "unwindToPostView"){
@@ -181,15 +167,6 @@ class PostViewController: UIViewController {
         
         
     }
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -197,23 +174,11 @@ class PostViewController: UIViewController {
             var dest = segue.destinationViewController as! RecipeViewController;
             
             dest.annotation = anno
-//            dest.titlerecipe = titleLabel.text
-//            dest.countryrecipe = countryLabel.text
-//            dest.instructionsrecipe = anno?.instructions
-//            dest.ingredientsrecipe = anno?.ingredients
-//            dest.image = image
             
         } else if(segue.identifier == "editPost"){
             var dest = segue.destinationViewController as! PostDisplayViewController;
             
             dest.annotation = anno
-//            dest.titlerecipe = titleLabel.text
-//            dest.countryrecipe = countryLabel.text
-//            dest.instructionsrecipe = anno?.instructions
-//            dest.ingredientsrecipe = anno?.ingredients
-//            dest.image = image
-//            dest.Description = DescriptionLabel.text
-//            dest.postToEdit = post
             
 
         } else if(segue.identifier == "fromPostMap"){

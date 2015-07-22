@@ -16,11 +16,6 @@ class RecipeViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var instructionsTableView: UITableView!
     @IBOutlet weak var ingredientsTableView: UITableView!
-//    var titlerecipe: String?
-//    var countryrecipe: String?
-//    var ingredientsrecipe: [String]?
-//    var instructionsrecipe: [String]?
-//    var image: UIImage?
     
     var annotation: PinAnnotation?
     

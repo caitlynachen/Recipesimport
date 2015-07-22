@@ -310,17 +310,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             
             var svc = segue.destinationViewController as! PostViewController;
             svc.anno = annotation
-//            svc.RecipeTitle = annotation.title
-//            svc.Description = annotation.Description
-//            svc.country = annotation.country
-//            svc.ingredients = annotation.ingredients
-//            svc.instructions = annotation.instructions
-//            svc.post = annotation.post
-//            svc.imageFile = annotation.image
-//            
-//            svc.coor = annotation.coordinate
-//            svc.user = annotation.user
-//            svc.date = annotation.date
         }
     }
     
