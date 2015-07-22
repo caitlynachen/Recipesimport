@@ -18,6 +18,7 @@ class PostViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    var post: PFObject?
     @IBOutlet weak var DescriptionLabel: UILabel!
     @IBOutlet weak var imageViewDisplay: UIImageView!
     @IBOutlet weak var countryLabel: UILabel!
@@ -47,10 +48,11 @@ class PostViewController: UIViewController {
                 }
                 deleteAlert.addAction(dontDeleteAction)
                 let deleteAction: UIAlertAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
-                    self.dismissViewControllerAnimated(false, completion: nil)
-                    self.presentViewController(mapViewController, animated: true, completion: nil)
+                    
+                    self.post?.delete()
+                    
+                    self.performSegueWithIdentifier("fromPostMap", sender: nil)
+                    
                     
                     //delete row from parse?
                 }
@@ -61,8 +63,8 @@ class PostViewController: UIViewController {
                 self.presentViewController(deleteAlert, animated: true, completion: nil)
             }
             actionSheetController.addAction(takePictureAction)
-            //Create and add a second option action
             let choosePictureAction: UIAlertAction = UIAlertAction(title: "Edit", style: .Default) { action -> Void in
+                self.performSegueWithIdentifier("editPost", sender: nil)
                 
             }
             actionSheetController.addAction(choosePictureAction)
@@ -120,7 +122,8 @@ class PostViewController: UIViewController {
     var imageFile: PFFile?
     var user: PFUser?
     var date: NSDate?
-    
+    var coor: CLLocationCoordinate2D?
+
     
     @IBAction func unwindToPostView(segue:UIStoryboardSegue) {
         if(segue.identifier == "unwindToPostView"){
@@ -142,7 +145,7 @@ class PostViewController: UIViewController {
         
     }
     
-    
+   
     var image: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,6 +158,7 @@ class PostViewController: UIViewController {
         
         
         dateLabel.text = date!.shortTimeAgoSinceDate(NSDate())
+        
         
         
         var data = imageFile?.getData()
@@ -187,6 +191,7 @@ class PostViewController: UIViewController {
     }
     */
     
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "toRecipeView") {
             var dest = segue.destinationViewController as! RecipeViewController;
@@ -196,6 +201,29 @@ class PostViewController: UIViewController {
             dest.ingredientsrecipe = ingredients
             dest.image = image
             
+        } else if(segue.identifier == "editPost"){
+            var dest = segue.destinationViewController as! PostDisplayViewController;
+            
+            dest.titlerecipe = titleLabel.text
+            dest.countryrecipe = countryLabel.text
+            dest.instructionsrecipe = instructions
+            dest.ingredientsrecipe = ingredients
+            dest.image = image
+            dest.Description = DescriptionLabel.text
+
+            
+
+        } else if(segue.identifier == "fromPostMap"){
+            var anno: PinAnnotation? = PinAnnotation(title: RecipeTitle!, coordinate: coor!, Description: Description!, country: country!, instructions:instructions!, ingredients: ingredients!, image: imageFile!, user: user!, date: date!, post: post!)
+            var dest = segue.destinationViewController as! MapViewController;
+            dest.ann = anno
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+    
+            
+            mapViewController.viewWillAppear(true)
+            
+    
         }
     }
     

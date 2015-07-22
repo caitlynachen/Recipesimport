@@ -41,6 +41,10 @@ class IngredientsTableViewCell: UITableViewCell, UITextFieldDelegate {
     
 
 
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
 
     override func setSelected(selected: Bool, animated: Bool) {

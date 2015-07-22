@@ -203,6 +203,15 @@
                                     <action selector="backButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PNL-8C-XO6"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYz-UQ-nfk" userLabel="moreButton">
+                                <rect key="frame" x="534" y="470" width="50" height="50"/>
+                                <state key="normal" image="Image">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="moreButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uNE-eF-bbP"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6NC-Bi-ZOE">
                                 <rect key="frame" x="16" y="150.5" width="568" height="568"/>
                                 <constraints>
@@ -221,15 +230,6 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYz-UQ-nfk" userLabel="moreButton">
-                                <rect key="frame" x="534" y="470" width="50" height="50"/>
-                                <state key="normal" image="Image">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="moreButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uNE-eF-bbP"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -275,6 +275,8 @@
                         <outlet property="likeLabel" destination="Edt-UD-eGW" id="rJc-qT-ESc"/>
                         <outlet property="titleLabel" destination="doA-2l-JqP" id="jTx-D9-bUX"/>
                         <outlet property="usernameLabel" destination="zZT-Qm-BX2" id="XsH-fc-KRa"/>
+                        <segue destination="3f3-Rz-RUo" kind="presentation" identifier="editPost" id="Ggi-1l-080"/>
+                        <segue destination="oFf-i6-dje" kind="presentation" identifier="fromPostMap" id="hEg-yg-0bF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -483,7 +485,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description:" translatesAutoresizingMaskIntoConstraints="NO" id="vqA-kN-uUU">
+                            <textView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Description:" translatesAutoresizingMaskIntoConstraints="NO" id="vqA-kN-uUU">
                                 <rect key="frame" x="16" y="140" width="388" height="170"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="170" id="gTC-uV-Gzs"/>
@@ -596,6 +598,15 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description:" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a1X-SW-GuN">
+                                <rect key="frame" x="16" y="140" width="170" height="170"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="170" id="5wz-6i-azg"/>
+                                    <constraint firstAttribute="width" constant="170" id="hDB-yL-Q1i"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -607,6 +618,7 @@
                             <constraint firstItem="g5o-eJ-qnk" firstAttribute="leading" secondItem="vqA-kN-uUU" secondAttribute="trailing" constant="10" id="7tY-6Q-raf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TdA-Pw-x9Y" secondAttribute="trailing" constant="-30" id="8rz-CY-bKZ"/>
                             <constraint firstItem="g5o-eJ-qnk" firstAttribute="top" secondItem="Vj5-TJ-kwS" secondAttribute="bottom" constant="50" id="BZM-vM-Vg8"/>
+                            <constraint firstItem="a1X-SW-GuN" firstAttribute="leading" secondItem="Qtd-Z3-WVZ" secondAttribute="leadingMargin" id="FpH-xo-ase"/>
                             <constraint firstItem="ePa-gf-3Hz" firstAttribute="leading" secondItem="Qtd-Z3-WVZ" secondAttribute="leadingMargin" id="GhX-J1-tly"/>
                             <constraint firstItem="1yc-Yo-Uan" firstAttribute="leading" secondItem="Qtd-Z3-WVZ" secondAttribute="leading" id="Hd2-Xp-eRo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Vj5-TJ-kwS" secondAttribute="trailing" id="I2X-iv-7pn"/>
@@ -635,6 +647,7 @@
                             <constraint firstItem="TdA-Pw-x9Y" firstAttribute="top" secondItem="Vj5-TJ-kwS" secondAttribute="bottom" id="ksB-3H-tBN"/>
                             <constraint firstItem="2sh-7J-wds" firstAttribute="top" secondItem="1yc-Yo-Uan" secondAttribute="bottom" id="lim-KR-OF9"/>
                             <constraint firstItem="TdA-Pw-x9Y" firstAttribute="top" secondItem="Vj5-TJ-kwS" secondAttribute="bottom" constant="89" id="mQp-Hj-VAk"/>
+                            <constraint firstItem="a1X-SW-GuN" firstAttribute="top" secondItem="ptf-4b-gIM" secondAttribute="bottom" constant="10" id="mVP-Wv-x0L"/>
                             <constraint firstItem="ePa-gf-3Hz" firstAttribute="top" secondItem="Qtd-Z3-WVZ" secondAttribute="topMargin" constant="25" id="q5g-AS-wVl"/>
                             <constraint firstItem="253-sS-i9T" firstAttribute="top" secondItem="vqA-kN-uUU" secondAttribute="bottom" id="r2n-cx-mYL"/>
                             <constraint firstItem="LJ5-eH-TKv" firstAttribute="top" secondItem="JM8-fY-Vhr" secondAttribute="bottom" constant="13" id="tAb-85-y2b"/>
@@ -668,7 +681,7 @@
                     <connections>
                         <outlet property="cameraButton" destination="TdA-Pw-x9Y" id="Ufc-CV-OqO"/>
                         <outlet property="countryTextField" destination="ptf-4b-gIM" id="Fsh-3t-RsY"/>
-                        <outlet property="descriptionText" destination="vqA-kN-uUU" id="PHH-y9-Ru9"/>
+                        <outlet property="descriptionText" destination="vqA-kN-uUU" id="Jpc-6c-Mg1"/>
                         <outlet property="imageView" destination="g5o-eJ-qnk" id="6bU-iC-BmO"/>
                         <outlet property="ingredientsTableView" destination="TOw-3h-zj4" id="0dq-ln-6Ix"/>
                         <outlet property="instructionTableView" destination="LJ5-eH-TKv" id="g9g-m1-CQs"/>
@@ -689,4 +702,8 @@
         <image name="heart-selected" width="72" height="68"/>
         <image name="logo" width="434" height="274"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="u37-Uz-Na6"/>
+        <segue reference="Ggi-1l-080"/>
+    </inferredMetricsTieBreakers>
 </document>

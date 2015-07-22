@@ -29,6 +29,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     var pointAnnotation:MKPointAnnotation!
     var pinAnnotationView:MKPinAnnotationView!
     
+    var ann: PinAnnotation?
+    
     var points: [PFGeoPoint] = []
     
     var locationManager = CLLocationManager()
@@ -187,13 +189,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 var user = post.objectForKey("user") as! PFUser
                 //println(post.objectForKey("createdAt"))
                 var date = post.objectForKey("date") as! NSDate
+                //*******
+                var postcurrent = post as! PFObject
+                //var postid = post.objectForKey("objectId") as! String
                 
                 //println(post.objectForKey("date"))
                 
                 var long1: CLLocationDegrees = location.longitude
                 var lat1: CLLocationDegrees = location.latitude
                 var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat1, longitude: long1)
-                var annotation = PinAnnotation(title: title, coordinate: coordinate, Description: description, country: country, instructions: instructions, ingredients: ingredients, image: image, user: user, date: date)
+                var annotation = PinAnnotation(title: title, coordinate: coordinate, Description: description, country: country, instructions: instructions, ingredients: ingredients, image: image, user: user, date: date, post: postcurrent)
                 
                 mapAnnoations.append(annotation)
                 self.mapView.addAnnotation(annotation)
@@ -256,6 +261,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     override func viewWillAppear(animated: Bool) {
         if annotationCurrent != nil{
             mapView.addAnnotation(annotationCurrent)
+        } else if ann != nil {
+            mapView.removeAnnotation(ann)
         }
     }
     
@@ -298,7 +305,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             svc.toLoc = PFGeoPoint(latitude: lat!, longitude: long!)
         }
         
-        if (segue.identifier == "toPostView"){
+        if (segue.identifier == "toPostView"){ 
             var annotation = sender as! PinAnnotation
             
             var svc = segue.destinationViewController as! PostViewController;
@@ -307,9 +314,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             svc.country = annotation.country
             svc.ingredients = annotation.ingredients
             svc.instructions = annotation.instructions
-            
+            svc.post = annotation.post
             svc.imageFile = annotation.image
             
+            svc.coor = annotation.coordinate
             svc.user = annotation.user
             svc.date = annotation.date
         }

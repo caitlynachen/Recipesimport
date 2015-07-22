@@ -22,6 +22,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var postButton: UIButton!
 
     @IBOutlet weak var descriptionText: UITextView!
+
     @IBOutlet weak var countryTextField: UITextField!
     var toLoc: PFGeoPoint?
     var photoTakingHelper: PhotoTakingHelper?
@@ -35,17 +36,26 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     let post = Post()
 
+    var titlerecipe: String?
+    var countryrecipe: String?
+    var ingredientsrecipe: [String]?
+    var instructionsrecipe: [String]?
+    var image: UIImage?
+    var Description: String?
     
     @IBOutlet weak var cameraButton: UIButton!
     
     
-//    @IBAction func postButtonTapped(sender: AnyObject) {
-//        createPost()
-//
-//        
-//        
-//
-//    }
+    override func viewWillAppear(animated: Bool) {
+        if ingredientsrecipe != nil && instructionsrecipe != nil && titlerecipe != nil && Description != nil && image != nil && countryrecipe != nil {
+        titleTextField.text = titlerecipe
+        descriptionText.text = Description
+        imageView?.image = image
+        countryTextField.text = countryrecipe
+        ingredientsArray = ingredientsrecipe!
+        instructionsArray = instructionsrecipe!
+        }
+    }
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if let ident = identifier {
             if ident == "fromPostDiplayToMap" {
@@ -95,22 +105,32 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     var instructionsArray: [String] = []
     var instructionBond:Bond<String>!
     
+    var numOfRows: Int = 13
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ingredientsTableView {
-            return 1 // Create 1 row as an example
+            return numOfRows // Create 1 row as an example
         } else {
-            return 1
+            return numOfRows
         }
     }
     
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView == ingredientsTableView {
+           
             let cell = tableView.dequeueReusableCellWithIdentifier("IngredientsInputCell") as! IngredientsTableViewCell
-            
+                
+            if indexPath.row == 0 {
+                cell.configure(text: "", placeholder: "Ex. 1 cup of flour")
+                
+            } else{
+                cell.configure(text: "", placeholder: "")
+
+            }
             
             cell.ingredient.map { $0 } ->> ingredientBond
             
-            cell.configure(text: "", placeholder: "Ex. 1 cup of flour")
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("InstructionsInputCell") as! InstructionsTableViewCell
@@ -119,7 +139,13 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             
             
             //instructionsArray?.append(cell.textField.text)
-            cell.configure(text: "", placeholder: "Ex. Preheat oven to 350 degrees.")
+            if indexPath.row == 0 {
+                cell.configure(text: "", placeholder: "Ex. 1 cup of flour")
+                
+            } else{
+                cell.configure(text: "", placeholder: "")
+                
+            }
             return cell
         }
       
@@ -170,6 +196,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         descriptionText.delegate = self
 
         
+        
         descriptionText.text = "Write a caption:"
         descriptionText.textColor = UIColor.lightGrayColor()
         
@@ -217,8 +244,12 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         post.Instructions = self.instructionsArray
         post.date = post.createdAt!
         
-        
+        post.save()
         post.uploadPost()
+        
+        
+        
+        
         
         let lat = post.location?.latitude
         let long = post.location?.longitude
@@ -238,12 +269,13 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         var user = post.objectForKey("user") as! PFUser
         //println(post.objectForKey("createdAt"))
         var date = post.objectForKey("date") as! NSDate
+        var postcurrent = post
         
         var long1: CLLocationDegrees = location.longitude
         var lat1: CLLocationDegrees = location.latitude
         var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat1, longitude: long1)
         
-        var annotation = PinAnnotation(title: title, coordinate: coordinate, Description: description, country: country, instructions: instructions, ingredients: ingredients, image: image, user: user, date: date)
+        var annotation = PinAnnotation(title: title, coordinate: coordinate, Description: description, country: country, instructions: instructions, ingredients: ingredients, image: image, user: user, date: date, post: postcurrent)
        
         currentAnnotation = annotation
     //mapView.mapView.addAnnotation(annotation)

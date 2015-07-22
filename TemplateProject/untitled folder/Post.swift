@@ -38,9 +38,9 @@ class Post : PFObject, PFSubclassing {
         let imageFile = PFFile(data: imageData)
         imageFile.save()
         
-//        let post = PFObject(className: "Post")
+        //let post = Post()
 //        post["imageFile"] = imageFile
-//        post.save()
+        //post.save()
         
         // 1
         photoUploadTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in

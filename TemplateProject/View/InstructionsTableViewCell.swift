@@ -37,6 +37,11 @@ class InstructionsTableViewCell: UITableViewCell, UITextFieldDelegate {
         textField.accessibilityLabel = placeholder
     }
     
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
