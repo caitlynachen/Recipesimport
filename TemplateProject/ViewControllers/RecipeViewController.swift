@@ -16,31 +16,41 @@ class RecipeViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var instructionsTableView: UITableView!
     @IBOutlet weak var ingredientsTableView: UITableView!
-    var titlerecipe: String?
-    var countryrecipe: String?
-    var ingredientsrecipe: [String]?
-    var instructionsrecipe: [String]?
-    var image: UIImage?
+//    var titlerecipe: String?
+//    var countryrecipe: String?
+//    var ingredientsrecipe: [String]?
+//    var instructionsrecipe: [String]?
+//    var image: UIImage?
+    
+    var annotation: PinAnnotation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = titlerecipe
-        countryLabel.text = countryrecipe
+        titleLabel.text = annotation?.title
+        countryLabel.text = annotation?.country
+        
+        ing = annotation?.ingredients
+        ins = annotation?.instructions
         
         self.ingredientsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.instructionsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "instruccell")
 
+        var data = annotation!.image.getData()
+        var image = UIImage(data: data!)
+        
         imageView.image = image
         
         // Do any additional setup after loading the view.
     }
+    var ing: [String]?
+    var ins: [String]?
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ingredientsTableView {
-            return self.ingredientsrecipe!.count;
+            return ing!.count;
         } else {
-            return self.instructionsrecipe!.count;
+            return ins!.count;
         }
     }
     
@@ -51,14 +61,14 @@ class RecipeViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             
             cell.textLabel?.font = myFont
-            cell.textLabel?.text = self.ingredientsrecipe![indexPath.row]
+            cell.textLabel?.text = annotation?.ingredients[indexPath.row]
             return cell
             
         } else {
             var cell: UITableViewCell = self.instructionsTableView.dequeueReusableCellWithIdentifier("instruccell") as! UITableViewCell
             
             cell.textLabel?.font = myFont
-            cell.textLabel?.text = self.instructionsrecipe![indexPath.row]
+            cell.textLabel?.text = annotation?.instructions[indexPath.row]
             return cell
         }
 

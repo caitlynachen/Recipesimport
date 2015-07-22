@@ -18,7 +18,9 @@ class PostViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    var post: PFObject?
+    var anno: PinAnnotation?
+
+    //var post: PFObject?
     @IBOutlet weak var DescriptionLabel: UILabel!
     @IBOutlet weak var imageViewDisplay: UIImageView!
     @IBOutlet weak var countryLabel: UILabel!
@@ -49,7 +51,7 @@ class PostViewController: UIViewController {
                 deleteAlert.addAction(dontDeleteAction)
                 let deleteAction: UIAlertAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
                     
-                    self.post?.delete()
+                    self.anno?.post.delete()
                     
                     self.performSegueWithIdentifier("fromPostMap", sender: nil)
                     
@@ -114,15 +116,15 @@ class PostViewController: UIViewController {
         }
     }
    
-    var RecipeTitle: String?
-    var Description: String?
-    var country: String?
-    var ingredients: [String]?
-    var instructions: [String]?
-    var imageFile: PFFile?
-    var user: PFUser?
-    var date: NSDate?
-    var coor: CLLocationCoordinate2D?
+//    var RecipeTitle: String?
+//    var Description: String?
+//    var country: String?
+//    var ingredients: [String]?
+//    var instructions: [String]?
+//    var imageFile: PFFile?
+//    var user: PFUser?
+//    var date: NSDate?
+//    var coor: CLLocationCoordinate2D?
 
     
     @IBAction func unwindToPostView(segue:UIStoryboardSegue) {
@@ -150,18 +152,16 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabel.text = RecipeTitle
-        countryLabel.text = country
-        DescriptionLabel.text = Description
-        var userfetch = user?.fetchIfNeeded()
-        usernameLabel.text = user?.username
+        titleLabel.text = anno?.title
+        countryLabel.text = anno?.country
+        DescriptionLabel.text = anno?.Description
+        var userfetch = anno?.user.fetchIfNeeded()
+        usernameLabel.text = anno?.user.username
         
+        dateLabel.text = anno?.date.shortTimeAgoSinceDate(NSDate())
+
         
-        dateLabel.text = date!.shortTimeAgoSinceDate(NSDate())
-        
-        
-        
-        var data = imageFile?.getData()
+        var data = anno?.image.getData()
         image = UIImage(data: data!)
         
         imageViewDisplay.image = image
@@ -195,26 +195,29 @@ class PostViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "toRecipeView") {
             var dest = segue.destinationViewController as! RecipeViewController;
-            dest.titlerecipe = titleLabel.text
-            dest.countryrecipe = countryLabel.text
-            dest.instructionsrecipe = instructions
-            dest.ingredientsrecipe = ingredients
-            dest.image = image
+            
+            dest.annotation = anno
+//            dest.titlerecipe = titleLabel.text
+//            dest.countryrecipe = countryLabel.text
+//            dest.instructionsrecipe = anno?.instructions
+//            dest.ingredientsrecipe = anno?.ingredients
+//            dest.image = image
             
         } else if(segue.identifier == "editPost"){
             var dest = segue.destinationViewController as! PostDisplayViewController;
             
-            dest.titlerecipe = titleLabel.text
-            dest.countryrecipe = countryLabel.text
-            dest.instructionsrecipe = instructions
-            dest.ingredientsrecipe = ingredients
-            dest.image = image
-            dest.Description = DescriptionLabel.text
-            dest.postToEdit = post
+            dest.annotation = anno
+//            dest.titlerecipe = titleLabel.text
+//            dest.countryrecipe = countryLabel.text
+//            dest.instructionsrecipe = anno?.instructions
+//            dest.ingredientsrecipe = anno?.ingredients
+//            dest.image = image
+//            dest.Description = DescriptionLabel.text
+//            dest.postToEdit = post
             
 
         } else if(segue.identifier == "fromPostMap"){
-            var anno: PinAnnotation? = PinAnnotation(title: RecipeTitle!, coordinate: coor!, Description: Description!, country: country!, instructions:instructions!, ingredients: ingredients!, image: imageFile!, user: user!, date: date!, post: post!)
+        
             var dest = segue.destinationViewController as! MapViewController;
             dest.ann = anno
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

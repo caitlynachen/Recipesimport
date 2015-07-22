@@ -37,29 +37,38 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     let post = Post()
     
-    var postToEdit: PFObject?
-    var titlerecipe: String?
-    var countryrecipe: String?
-    var ingredientsrecipe: [String]?
-    var instructionsrecipe: [String]?
+//    var postToEdit: PFObject?
+//    var titlerecipe: String?
+//    var countryrecipe: String?
+//    var ingredientsrecipe: [String]?
+//    var instructionsrecipe: [String]?
     var image: UIImage?
-    var Description: String?
+//    var Description: String?
     
+
+    
+    var annotation: PinAnnotation?
     @IBOutlet weak var cameraButton: UIButton!
     
+    var ing: [String]?
+    var ins: [String]?
     override func viewWillAppear(animated: Bool) {
-        if ingredientsrecipe != nil && instructionsrecipe != nil && titlerecipe != nil && Description != nil && image != nil && countryrecipe != nil {
-        titleTextField.text = titlerecipe
-        descriptionText.text = Description
+        if annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.country != nil {
+        titleTextField.text = annotation?.title
+        descriptionText.text = annotation?.Description
+        var data = annotation?.image.getData()
+        image = UIImage(data: data!)
         imageView?.image = image
-        countryTextField.text = countryrecipe
-        ingredientsArray = ingredientsrecipe!
-        instructionsArray = instructionsrecipe!
+        countryTextField.text = annotation?.country
+        ingredientsArray = ing!
+        instructionsArray = ins!
         placeholderLabel.hidden = count(descriptionText.text) != 0
 
             
         }
     }
+    
+    
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if let ident = identifier {
             if ident == "fromPostDiplayToMap" {
@@ -168,13 +177,15 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         placeholderLabel.text = "Write a caption..."
         placeholderLabel.sizeToFit()
         descriptionText.addSubview(placeholderLabel)
+        ing = annotation?.ingredients
+        ins = annotation?.instructions
 
         placeholderLabel.frame.origin = CGPointMake(5, descriptionText.font.pointSize / 2)
         placeholderLabel.textColor = UIColor(white: 0, alpha: 0.3)
         placeholderLabel.hidden = count(descriptionText.text) != 0
         
 
-        if postToEdit != nil{
+        if annotation?.post != nil{
             postButton.setTitle("DONE", forState: .Normal)
             
         }
@@ -222,8 +233,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         post.save()
         post.uploadPost()
-        
-        
         
         
         

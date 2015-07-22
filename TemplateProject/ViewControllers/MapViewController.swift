@@ -309,17 +309,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             var annotation = sender as! PinAnnotation
             
             var svc = segue.destinationViewController as! PostViewController;
-            svc.RecipeTitle = annotation.title
-            svc.Description = annotation.Description
-            svc.country = annotation.country
-            svc.ingredients = annotation.ingredients
-            svc.instructions = annotation.instructions
-            svc.post = annotation.post
-            svc.imageFile = annotation.image
-            
-            svc.coor = annotation.coordinate
-            svc.user = annotation.user
-            svc.date = annotation.date
+            svc.anno = annotation
+//            svc.RecipeTitle = annotation.title
+//            svc.Description = annotation.Description
+//            svc.country = annotation.country
+//            svc.ingredients = annotation.ingredients
+//            svc.instructions = annotation.instructions
+//            svc.post = annotation.post
+//            svc.imageFile = annotation.image
+//            
+//            svc.coor = annotation.coordinate
+//            svc.user = annotation.user
+//            svc.date = annotation.date
         }
     }
     
