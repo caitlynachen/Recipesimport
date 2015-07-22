@@ -21,8 +21,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var postButton: UIButton!
 
+    var placeholderLabel: UILabel!
     @IBOutlet weak var descriptionText: UITextView!
-
+   
     @IBOutlet weak var countryTextField: UITextField!
     var toLoc: PFGeoPoint?
     var photoTakingHelper: PhotoTakingHelper?
@@ -45,7 +46,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     @IBOutlet weak var cameraButton: UIButton!
     
-    
     override func viewWillAppear(animated: Bool) {
         if ingredientsrecipe != nil && instructionsrecipe != nil && titlerecipe != nil && Description != nil && image != nil && countryrecipe != nil {
         titleTextField.text = titlerecipe
@@ -54,6 +54,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         countryTextField.text = countryrecipe
         ingredientsArray = ingredientsrecipe!
         instructionsArray = instructionsrecipe!
+        placeholderLabel.hidden = count(descriptionText.text) != 0
+
+            
         }
     }
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
@@ -151,58 +154,27 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
       
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        
-        // Combine the textView text and the replacement text to
-        // create the updated text string
-        let currentText:NSString = textView.text
-        let updatedText = currentText.stringByReplacingCharactersInRange(range, withString:text)
-        
-        // If updated text view will be empty, add the placeholder
-        // and set the cursor to the beginning of the text view
-        if count(updatedText) == 0 {
-            
-            textView.text = "Write a caption:"
-            textView.textColor = UIColor.lightGrayColor()
-            
-            textView.selectedTextRange = textView.textRangeFromPosition(textView.beginningOfDocument, toPosition: textView.beginningOfDocument)
-            
-            return false
-        }
-            
-            // Else if the text view's placeholder is showing and the
-            // length of the replacement string is greater than 0, clear
-            // the text view and set its color to black to prepare for
-            // the user's entry
-        else if descriptionText.textColor == UIColor.lightGrayColor() && count(text) > 0 {
-            textView.text = nil
-            textView.textColor = UIColor.blackColor()
-        }
-        
-        return true
+    func textViewDidChange(textView: UITextView) {
+        placeholderLabel.hidden = count(textView.text) != 0
     }
     
-    func textViewDidChangeSelection(textView: UITextView) {
-        if self.view.window != nil {
-            if textView.textColor == UIColor.lightGrayColor() {
-                textView.selectedTextRange = textView.textRangeFromPosition(textView.beginningOfDocument, toPosition: textView.beginningOfDocument)
-            }
-        }
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         descriptionText.delegate = self
+        placeholderLabel = UILabel()
+        placeholderLabel.text = "Write a caption..."
+        placeholderLabel.sizeToFit()
+        descriptionText.addSubview(placeholderLabel)
+
+        placeholderLabel.frame.origin = CGPointMake(5, descriptionText.font.pointSize / 2)
+        placeholderLabel.textColor = UIColor(white: 0, alpha: 0.3)
+        placeholderLabel.hidden = count(descriptionText.text) != 0
+        
 
         
-        
-        descriptionText.text = "Write a caption:"
-        descriptionText.textColor = UIColor.lightGrayColor()
-        
-        descriptionText.becomeFirstResponder()
-        
-        descriptionText.selectedTextRange = descriptionText.textRangeFromPosition(descriptionText.beginningOfDocument, toPosition: descriptionText.beginningOfDocument)
         
         ingredientBond = Bond<String>(){ ingredient in
 
