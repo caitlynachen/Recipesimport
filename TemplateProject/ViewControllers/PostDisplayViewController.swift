@@ -36,7 +36,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var instructionTableView: UITableView!
     
     let post = Post()
-
+    
+    var postToEdit: PFObject?
     var titlerecipe: String?
     var countryrecipe: String?
     var ingredientsrecipe: [String]?
@@ -159,7 +160,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     }
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -174,6 +174,10 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         placeholderLabel.hidden = count(descriptionText.text) != 0
         
 
+        if postToEdit != nil{
+            postButton.setTitle("DONE", forState: .Normal)
+            
+        }
         
         
         ingredientBond = Bond<String>(){ ingredient in
@@ -207,7 +211,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
 
         //var instructionsViewController = InstructionsViewController()
     
-        
         post.Description = descriptionText.text
         post.RecipeTitle = titleTextField.text
         post.country = countryTextField.text
@@ -215,6 +218,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         post.Ingredients = self.ingredientsArray
         post.Instructions = self.instructionsArray
         post.date = post.createdAt!
+        
         
         post.save()
         post.uploadPost()

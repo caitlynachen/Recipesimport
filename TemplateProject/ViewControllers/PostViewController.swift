@@ -210,7 +210,7 @@ class PostViewController: UIViewController {
             dest.ingredientsrecipe = ingredients
             dest.image = image
             dest.Description = DescriptionLabel.text
-
+            dest.postToEdit = post
             
 
         } else if(segue.identifier == "fromPostMap"){
