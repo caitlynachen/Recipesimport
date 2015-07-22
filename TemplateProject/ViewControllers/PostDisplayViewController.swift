@@ -81,7 +81,14 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "fromPostDiplayToMap") {
-            createPost()
+            if annotation?.post == nil{
+                createPost()
+
+            } else {
+                updatePost()
+            }
+            
+            
             var svc = segue.destinationViewController as! MapViewController;
             
             svc.annotationCurrent = currentAnnotation
@@ -132,12 +139,17 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             
             let cell = tableView.dequeueReusableCellWithIdentifier("IngredientsInputCell") as! IngredientsTableViewCell
             
-            if indexPath.row == 0 {
-                cell.configure(text: "", placeholder: "Ex. 1 cup of flour")
-                
-            } else{
-                cell.configure(text: "", placeholder: "")
-                
+            if (indexPath.row < ingredientsArray.count){
+                cell.textField.text = ingredientsArray[indexPath.row]
+            }
+            else{
+                if indexPath.row == 0 {
+                    cell.configure(text: "", placeholder: "Ex. 1 cup of flour")
+                    
+                } else{
+                    cell.configure(text: "", placeholder: "")
+                    
+                }
             }
             
             cell.ingredient.map { $0 } ->> ingredientBond
@@ -146,17 +158,24 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("InstructionsInputCell") as! InstructionsTableViewCell
             
-            cell.instruction.map { $0 } ->> instructionBond
             
-            
-            //instructionsArray?.append(cell.textField.text)
-            if indexPath.row == 0 {
-                cell.configure(text: "", placeholder: "Ex. 1 cup of flour")
-                
-            } else{
-                cell.configure(text: "", placeholder: "")
-                
+            if (indexPath.row < instructionsArray.count){
+                cell.textField.text = instructionsArray[indexPath.row]
             }
+                
+            else{
+                if indexPath.row == 0 {
+                    cell.configure(text: "", placeholder: "Ex. 1 cup of flour")
+                    
+                } else{
+                    cell.configure(text: "", placeholder: "")
+                    
+                }
+            }
+            appendIngredientsAndInstructions()
+            
+            cell.instruction.map { $0 } ->> instructionBond
+
             return cell
         }
         
@@ -166,6 +185,26 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         placeholderLabel.hidden = count(textView.text) != 0
     }
     
+    func appendIngredientsAndInstructions(){
+        ingredientBond = Bond<String>(){ ingredient in
+            
+            var contained = contains(self.ingredientsArray, ingredient)
+            if contained == false && ingredient != "" {
+
+                    self.ingredientsArray.append(ingredient)
+                    println(contained)
+            }
+            
+        }
+        
+        instructionBond = Bond<String>(){ instruction in
+            var contained = contains(self.instructionsArray, instruction)
+            if contained == false && instruction != "" {
+                self.instructionsArray.append(instruction)
+            }
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,6 +219,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         placeholderLabel.textColor = UIColor(white: 0, alpha: 0.3)
         placeholderLabel.hidden = count(descriptionText.text) != 0
         
+        appendIngredientsAndInstructions()
         
         if annotation?.post != nil{
             postButton.setTitle("DONE", forState: .Normal)
@@ -187,20 +227,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         }
         
         
-        ingredientBond = Bond<String>(){ ingredient in
-            
-            var contained = contains(self.ingredientsArray, ingredient)
-            if contained == false && ingredient != "" {
-                self.ingredientsArray.append(ingredient)
-            }
-        }
-        
-        instructionBond = Bond<String>(){ instruction in
-            var contained = contains(self.instructionsArray, instruction)
-            if contained == false && instruction != "" {
-                self.instructionsArray.append(instruction)
-            }
-        }
+       
         
         
         // Do any additional setup after loading the view.
@@ -214,35 +241,39 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     var currentAnnotation: PinAnnotation?
     
     
-    func createPost(){
-        
+    
         //var instructionsViewController = InstructionsViewController()
         
-        if annotation?.post != nil{
+    func updatePost() {
             
+            appendIngredientsAndInstructions()
             //change parse info
             annotation?.post.setObject(titleTextField.text, forKey: "RecipeTitle")
             annotation?.post.setObject(descriptionText.text, forKey: "description")
             annotation?.post.setObject(countryTextField.text, forKey: "country")
-            annotation?.post.setObject(self.ingredientsArray, forKey: "Ingredients")
+            annotation?.post.setObject(ingredientsArray, forKey: "Ingredients")
             annotation?.post.setObject(self.instructionsArray, forKey: "Instructions")
             
             let imageData = UIImageJPEGRepresentation(imageView?.image, 0.8)
             let imageFile = PFFile(data: imageData)
             
             annotation?.post.setObject(imageFile, forKey: "imageFile")
+        
+        
+        
             
-            annotation?.post.saveInBackgroundWithBlock(nil)
             
-            
-        } else{
+    }
+        
+    func createPost(){
+
             post.Description = descriptionText.text
             post.RecipeTitle = titleTextField.text
             post.country = countryTextField.text
             post.location = toLoc
             post.Ingredients = self.ingredientsArray
             post.Instructions = self.instructionsArray
-            post.date = post.createdAt!
+            post.date = NSDate()
             
             
             post.save()
@@ -279,7 +310,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             //mapView.mapView.addAnnotation(annotation)
             
             mapViewController.viewWillAppear(true)
-        }
+        
         
         
     }

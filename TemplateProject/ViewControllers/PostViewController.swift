@@ -9,6 +9,7 @@
 import UIKit
 import Bond
 import Parse
+import ParseUI
 //import DateTools
 
 
@@ -27,12 +28,15 @@ class PostViewController: UIViewController {
     @IBOutlet weak var likeButton: UIButton!
     
     @IBOutlet weak var likeLabel: UILabel!
-    var numOfLikes: Int = 0
     var numOfFlags: Int?
+    var login: PFLogInViewController?
     
     @IBAction func likeButtonTapped(sender: AnyObject) {
-        numOfLikes = numOfLikes + 1
-        self.likeLabel.text = "\(numOfLikes)"
+//        if PFUser.currentUser() == nil {
+//            let storyboard: UIStoryboard = UIStoryboard(name: "myTabBarName", bundle: nil)
+//            let vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("myVCID") as UIViewController
+//            self.presentViewController(vc, animated: true, completion: nil)
+//        }
     }
     
     @IBAction func moreButtonTapped(sender: AnyObject) {

@@ -310,6 +310,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             
             var svc = segue.destinationViewController as! PostViewController;
             svc.anno = annotation
+            svc.login = loginViewController
         }
     }
     
