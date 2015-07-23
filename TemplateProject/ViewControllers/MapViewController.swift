@@ -108,7 +108,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         println("in MapViewController")
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -143,7 +143,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     var long: CLLocationDegrees?
     var currentLocation: CLLocationCoordinate2D?
     var regionCenter: CLLocationCoordinate2D?
-
+    
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
         var userLocation : CLLocation = locations[0] as! CLLocation
@@ -160,7 +160,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         let span = MKCoordinateSpanMake(0.05, 0.05)
         
         let region = MKCoordinateRegion(center: location, span: span)
-
+        
         regionCenter = region.center
         
         mapView.setRegion(region, animated: true)
@@ -179,28 +179,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
         if let pts = posts {
             for post in pts {
-                var location = post.objectForKey("location")! as! PFGeoPoint
-                var image = post.objectForKey("imageFile")! as! PFFile
-                var title = post.objectForKey("RecipeTitle") as! String
-                var description = post.objectForKey("description") as! String
-                var country = post.objectForKey("country") as! String
-                var instructions = post.objectForKey("Instructions") as! [String]
-                var ingredients = post.objectForKey("Ingredients") as! [String]
-                var user = post.objectForKey("user") as! PFUser
-                //println(post.objectForKey("createdAt"))
-                var date = post.objectForKey("date") as! NSDate
+                
+                
                 //*******
-                var postcurrent = post as! PFObject
+                var postcurrent = post as! Post
                 //var postid = post.objectForKey("objectId") as! String
                 
                 //println(post.objectForKey("date"))
                 
-                var long1: CLLocationDegrees = location.longitude
-                var lat1: CLLocationDegrees = location.latitude
-                var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat1, longitude: long1)
-                var annotation = PinAnnotation(title: title, coordinate: coordinate, Description: description, country: country, instructions: instructions, ingredients: ingredients, image: image, user: user, date: date, post: postcurrent)
+                let lati = postcurrent.location!.latitude
+                let longi = postcurrent.location!.longitude
+                let coor = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
                 
-                mapAnnoations.append(annotation)
+                var annotation = PinAnnotation?()
+                
+                
+                annotation = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, post: postcurrent)
+                
+                
+                mapAnnoations.append(annotation!)
                 self.mapView.addAnnotation(annotation)
                 
             }
@@ -305,7 +302,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             svc.toLoc = PFGeoPoint(latitude: lat!, longitude: long!)
         }
         
-        if (segue.identifier == "toPostView"){ 
+        if (segue.identifier == "toPostView"){
             var annotation = sender as! PinAnnotation
             
             var svc = segue.destinationViewController as! PostViewController;

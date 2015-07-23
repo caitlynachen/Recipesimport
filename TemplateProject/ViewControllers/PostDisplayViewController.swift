@@ -83,7 +83,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         if (segue.identifier == "fromPostDiplayToMap") {
             if annotation?.post == nil{
                 createPost()
-
+                
             } else {
                 updatePost()
             }
@@ -99,17 +99,25 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         photoTakingHelper =
             PhotoTakingHelper(viewController: self) { (image: UIImage?) in
                 // 1
+              
                 self.post.image.value = image!
+                 
                 self.imageView?.image = image!
+                
+                
                 //self.imageView?.clipsToBounds = true
                 let imageData = UIImageJPEGRepresentation(image, 0.8)
                 let imageFile = PFFile(data: imageData)
                 //imageFile.save()
                 
                 //let post = PFObject(className: "Post")
+                if self.annotation == nil{
                 self.post["imageFile"] = imageFile
                 self.post.save()
-                
+                } else {
+                    self.annotation?.post.imageFile = imageFile
+                    self.annotation?.post.save()
+                }
                 
                 
                 
@@ -172,10 +180,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                     
                 }
             }
-            appendIngredientsAndInstructions()
             
             cell.instruction.map { $0 } ->> instructionBond
-
+            
             return cell
         }
         
@@ -190,9 +197,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             
             var contained = contains(self.ingredientsArray, ingredient)
             if contained == false && ingredient != "" {
-
-                    self.ingredientsArray.append(ingredient)
-                    println(contained)
+                
+                self.ingredientsArray.append(ingredient)
+                println(contained)
             }
             
         }
@@ -227,7 +234,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         }
         
         
-       
+        
         
         
         // Do any additional setup after loading the view.
@@ -242,74 +249,64 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     
     
-        //var instructionsViewController = InstructionsViewController()
-        
+    //var instructionsViewController = InstructionsViewController()
+    
     func updatePost() {
-            
-            appendIngredientsAndInstructions()
-            //change parse info
-            annotation?.post.setObject(titleTextField.text, forKey: "RecipeTitle")
-            annotation?.post.setObject(descriptionText.text, forKey: "description")
-            annotation?.post.setObject(countryTextField.text, forKey: "country")
-            annotation?.post.setObject(ingredientsArray, forKey: "Ingredients")
-            annotation?.post.setObject(self.instructionsArray, forKey: "Instructions")
-            
-            let imageData = UIImageJPEGRepresentation(imageView?.image, 0.8)
-            let imageFile = PFFile(data: imageData)
-            
-            annotation?.post.setObject(imageFile, forKey: "imageFile")
+        
+//        appendIngredientsAndInstructions()
+        //change parse info
+        annotation?.post.RecipeTitle = titleTextField.text
+        annotation?.post.caption = descriptionText.text
+        annotation?.post.country = countryTextField.text
+        annotation?.post.Ingredients = ingredientsArray
+        annotation?.post.Instructions = instructionsArray
+        
+        let imageData = UIImageJPEGRepresentation(imageView?.image, 0.8)
+        let imageFile = PFFile(data: imageData)
+        
+        annotation?.post.imageFile = imageFile
         
         
+        annotation?.post.save()
+        annotation?.post.saveInBackgroundWithBlock(nil)
         
-            
-            
+        
     }
-        
+    
     func createPost(){
-
-            post.Description = descriptionText.text
-            post.RecipeTitle = titleTextField.text
-            post.country = countryTextField.text
-            post.location = toLoc
-            post.Ingredients = self.ingredientsArray
-            post.Instructions = self.instructionsArray
-            post.date = NSDate()
-            
-            
-            post.save()
-            post.uploadPost()
-            
-            
-            
-            let lat = post.location?.latitude
-            let long = post.location?.longitude
-            var coordinateh = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
-            
-            var location = post.objectForKey("location")! as! PFGeoPoint
-            var image = post.objectForKey("imageFile")! as! PFFile
-            var title = post.objectForKey("RecipeTitle") as! String
-            var description = post.objectForKey("description") as! String
-            var country = post.objectForKey("country") as! String
-            var instructions = post.objectForKey("Instructions") as! [String]
-            var ingredients = post.objectForKey("Ingredients") as! [String]
-            var user = post.objectForKey("user") as! PFUser
-            //println(post.objectForKey("createdAt"))
-            var date = post.objectForKey("date") as! NSDate
-            var postcurrent = post
-            
-            var long1: CLLocationDegrees = location.longitude
-            var lat1: CLLocationDegrees = location.latitude
-            var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat1, longitude: long1)
-            
-            var annotationToAdd = PinAnnotation(title: title, coordinate: coordinate, Description: description, country: country, instructions: instructions, ingredients: ingredients, image: image, user: user, date: date, post: postcurrent)
-            
-            currentAnnotation = annotationToAdd
-            //mapView.mapView.addAnnotation(annotation)
-            
-            mapViewController.viewWillAppear(true)
+        
+        post.caption = descriptionText.text
+        post.RecipeTitle = titleTextField.text
+        post.country = countryTextField.text
+        post.location = toLoc
+        post.Ingredients = self.ingredientsArray
+        post.Instructions = self.instructionsArray
+        post.date = NSDate()
+        
+        
+        post.save()
+        post.uploadPost()
+        
+        
+        
+        let lat = post.location?.latitude
+        let long = post.location?.longitude
+        var coordinateh = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+        
+        
+        var coor: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+        
+        let test = post.Ingredients!
+        
+        var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, post: post)
+        
+        currentAnnotation = annotationToAdd
+        //mapView.mapView.addAnnotation(annotation)
+        
+        mapViewController.viewWillAppear(true)
         
         
         

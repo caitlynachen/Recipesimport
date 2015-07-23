@@ -14,10 +14,10 @@ class PinAnnotation : NSObject, MKAnnotation {
     let image: PFFile
     let user: PFUser
     let date: NSDate
-    let post: PFObject
+    let post: Post
     
     
-    init (title: String, coordinate: CLLocationCoordinate2D, Description: String, country: String, instructions: [String], ingredients: [String], image:PFFile, user: PFUser, date: NSDate, post: PFObject) {
+    init (title: String, coordinate: CLLocationCoordinate2D, Description: String, country: String, instructions: [String], ingredients: [String], image:PFFile, user: PFUser, date: NSDate, post: Post) {
         self.title = title
         self.coordinate = coordinate
         self.Description = Description

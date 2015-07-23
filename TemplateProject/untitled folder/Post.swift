@@ -20,10 +20,10 @@ class Post : PFObject, PFSubclassing {
     @NSManaged var Ingredients: [String]?
     @NSManaged var Instructions: [String]?
     @NSManaged var country: String?
-    @NSManaged var Description: String?
+    @NSManaged var caption: String?
     @NSManaged var location: PFGeoPoint?
     
-    @NSManaged var ImageFile: PFFile?
+    @NSManaged var imageFile: PFFile?
     @NSManaged var user: PFUser?
     var likes =  Dynamic<[PFUser]?>(nil)
     var image: Dynamic<UIImage?> = Dynamic(nil)
@@ -69,17 +69,17 @@ class Post : PFObject, PFSubclassing {
     
     func downloadImage() {
         // 1
-        image.value = Post.imageCache[self.ImageFile!.name]
+        image.value = Post.imageCache[self.imageFile!.name]
         
         // if image is not downloaded yet, get it
         if (image.value == nil) {
             
-            ImageFile?.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
+            imageFile?.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
                 if let data = data {
                     let image = UIImage(data: data, scale:1.0)!
                     self.image.value = image
                     // 2
-                    Post.imageCache[self.ImageFile!.name] = image
+                    Post.imageCache[self.imageFile!.name] = image
                 }
             }
         }

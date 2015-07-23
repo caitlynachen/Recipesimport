@@ -26,18 +26,71 @@ class PostViewController: UIViewController {
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    var likeBond: Bond<[PFUser]?>!
+
     
     @IBOutlet weak var likeLabel: UILabel!
     var numOfFlags: Int?
     var login: PFLogInViewController?
     
     @IBAction func likeButtonTapped(sender: AnyObject) {
-//        if PFUser.currentUser() == nil {
-//            let storyboard: UIStoryboard = UIStoryboard(name: "myTabBarName", bundle: nil)
-//            let vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("myVCID") as UIViewController
-//            self.presentViewController(vc, animated: true, completion: nil)
-//        }
+        anno?.post.toggleLikePost(PFUser.currentUser()!)
     }
+    
+    var post:Post? {
+        didSet {
+            // free memory of image stored with post that is no longer displayed
+            // 1
+            if let oldValue = oldValue where oldValue != post {
+                // 2
+                likeBond.unbindAll()
+                imageViewDisplay.designatedBond.unbindAll()
+                // 3
+                if (oldValue.image.bonds.count == 0) {
+                    oldValue.image.value = nil
+                }
+            }
+            
+            if let post = post {
+                // bind the image of the post to the 'postImage' view
+                post.image ->> imageViewDisplay
+                
+                // bind the likeBond that we defined earlier, to update like label and button when likes change
+                post.likes ->> likeBond
+            }
+        }
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        // 1
+        likeBond = Bond<[PFUser]?>() { [unowned self] likeList in
+            // 2
+            if let likeList = likeList {
+                // 3
+                self.likeLabel.text = self.stringFromUserList(likeList)
+                // 4
+                self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
+                // 5
+            } else {
+                // 6
+                // if there is no list of users that like this post, reset everything
+                self.likeLabel.text = ""
+                self.likeButton.selected = false
+            }
+        }
+    }
+    
+    func stringFromUserList(userList: [PFUser]) -> String {
+        // 1
+        let usernameList = userList.map { user in user.username! }
+        // 2
+        let commaSeparatedUserList = ", ".join(usernameList)
+        
+        return commaSeparatedUserList
+    }
+    
     
     @IBAction func moreButtonTapped(sender: AnyObject) {
         if(PFUser.currentUser()?.username == usernameLabel.text){
@@ -198,5 +251,8 @@ class PostViewController: UIViewController {
     
         }
     }
+
+    
+
     
 }
