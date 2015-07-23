@@ -20,24 +20,25 @@ class PostViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     
     var anno: PinAnnotation?
-
+    
     @IBOutlet weak var DescriptionLabel: UILabel!
     @IBOutlet weak var imageViewDisplay: UIImageView!
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     var likeBond: Bond<[PFUser]?>!
-
+    
     
     @IBOutlet weak var likeLabel: UILabel!
-    var numOfFlags: Int?
+    
     var login: PFLogInViewController?
     
     @IBAction func likeButtonTapped(sender: AnyObject) {
         anno?.post.toggleLikePost(PFUser.currentUser()!)
+        
     }
     
-    var post:Post? {
+    var post: Post? {
         didSet {
             // free memory of image stored with post that is no longer displayed
             // 1
@@ -51,15 +52,17 @@ class PostViewController: UIViewController {
                 }
             }
             
-            if let post = post {
+            if let post = post  {
+                if likeButton != nil {
                 // bind the image of the post to the 'postImage' view
-                post.image ->> imageViewDisplay
-                
                 // bind the likeBond that we defined earlier, to update like label and button when likes change
                 post.likes ->> likeBond
-           }
+                }
+            }
         }
     }
+
+    
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -74,6 +77,8 @@ class PostViewController: UIViewController {
                 self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
                 // 5
             } else {
+//                self.likeLabel = UILabel()
+//                self.likeButton = UIButton()
                 // 6
                 // if there is no list of users that like this post, reset everything
                 self.likeLabel.text = ""
@@ -110,7 +115,7 @@ class PostViewController: UIViewController {
                     self.anno?.post.delete()
                     
                     self.performSegueWithIdentifier("fromPostMap", sender: nil)
-        
+                    
                 }
                 deleteAlert.addAction(deleteAction)
                 
@@ -148,8 +153,8 @@ class PostViewController: UIViewController {
                 deleteAlert.addAction(dontDeleteAction)
                 let deleteAction: UIAlertAction = UIAlertAction(title: "Flag", style: .Default) { action -> Void in
                     
-                    self.numOfFlags = self.numOfFlags! + 1
                     
+                    anno?.post.flagPost(PFUser.currentUser()!)
                     //flag row in parse
                 }
                 deleteAlert.addAction(deleteAction)
@@ -190,11 +195,12 @@ class PostViewController: UIViewController {
         
     }
     
-   
+    
     var image: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //post = anno?.post
         titleLabel.text = anno?.title
         countryLabel.text = anno?.country
         DescriptionLabel.text = anno?.Description
@@ -202,7 +208,7 @@ class PostViewController: UIViewController {
         usernameLabel.text = anno?.user.username
         
         dateLabel.text = anno?.date.shortTimeAgoSinceDate(NSDate())
-
+        
         
         var data = anno?.image.getData()
         image = UIImage(data: data!)
@@ -210,6 +216,11 @@ class PostViewController: UIViewController {
         imageViewDisplay.image = image
         anno?.post.fetchLikes()
         
+        if let post = post {
+            // bind the image of the post to the 'postImage' view
+            // bind the likeBond that we defined earlier, to update like label and button when likes change
+            post.likes ->> likeBond
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -238,22 +249,22 @@ class PostViewController: UIViewController {
             
             dest.annotation = anno
             
-
+            
         } else if(segue.identifier == "fromPostMap"){
-        
+            
             var dest = segue.destinationViewController as! MapViewController;
             dest.ann = anno
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
-    
+            
             
             mapViewController.viewWillAppear(true)
             
-    
+            
         }
     }
-
     
-
+    
+    
     
 }

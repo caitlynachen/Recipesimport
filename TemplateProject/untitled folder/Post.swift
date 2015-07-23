@@ -26,6 +26,8 @@ class Post : PFObject, PFSubclassing {
     @NSManaged var imageFile: PFFile?
     @NSManaged var user: PFUser?
     var likes =  Dynamic<[PFUser]?>(nil)
+    var flags =  Dynamic<[PFUser]?>(nil)
+
     var image: Dynamic<UIImage?> = Dynamic(nil)
     var photoUploadTask: UIBackgroundTaskIdentifier?
     static var imageCache: NSCacheSwift<String, UIImage>!
@@ -107,6 +109,7 @@ class Post : PFObject, PFSubclassing {
         })
     }
     
+    
     func doesUserLikePost(user: PFUser) -> Bool {
         if let likes = likes.value {
             return contains(likes, user)
@@ -128,6 +131,14 @@ class Post : PFObject, PFSubclassing {
             ParseHelper.likePost(user, post: self)
         }
     }
+    
+    func flagPost(user: PFUser) {
+            // if this image is not liked yet, like it now
+            // 2
+            flags.value?.append(user)
+            ParseHelper.flagPost(user, post: self)
+    }
+    
     
     // 3
     static func parseClassName() -> String {

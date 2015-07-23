@@ -160,6 +160,13 @@ class ParseHelper {
         query.findObjectsInBackgroundWithBlock(completionBlock)
         
     }
+    static func flagPost(user: PFUser, post: Post) {
+        let flagObject = PFObject(className: ParseFlaggedContentClass)
+        flagObject[ParseFlaggedContentFromUser] = user
+        flagObject[ParseFlaggedContentToPost] = post
+        
+        flagObject.saveInBackgroundWithBlock(nil)
+    }
     
     static func likePost(user: PFUser, post: Post) {
         let likeObject = PFObject(className: ParseLikeClass)

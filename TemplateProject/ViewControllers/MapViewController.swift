@@ -106,6 +106,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     @IBOutlet var mapView: MKMapView!
     
     
+    
+    //    var flagged: [AnyObject]?
+    //    var flaggedPosts: [Post]?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -118,6 +121,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
+        //        let flagQuery = PFQuery(className: "FlaggedContent")
+        //
+        //        flagged = flagQuery.findObjects()!
+        //
+        //        if let pts = flagged {
+        //            for post in pts {
+        //                var posted = post.objectForKey("toPost") as! Post!
+        //                flaggedPosts?.append(posted)
+        //            }
+        //        }
         
     }
     
@@ -165,9 +178,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
         mapView.setRegion(region, animated: true)
         
-        let postsQuery = PFQuery(className: "Post")
-        
         var loc = PFGeoPoint(latitude: lat!, longitude: long!)
+        
+        
+        
+        let postsQuery = PFQuery(className: "Post")
         
         postsQuery.whereKey("location", nearGeoPoint: loc, withinMiles: 100.0)
         //finds all posts near current locations
@@ -180,26 +195,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if let pts = posts {
             for post in pts {
                 
-                
                 //*******
+                
                 var postcurrent = post as! Post
-                //var postid = post.objectForKey("objectId") as! String
                 
-                //println(post.objectForKey("date"))
-                
-                let lati = postcurrent.location!.latitude
-                let longi = postcurrent.location!.longitude
-                let coor = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-                
-                var annotation = PinAnnotation?()
-                
-                
-                annotation = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, post: postcurrent)
-                
-                
-                mapAnnoations.append(annotation!)
-                self.mapView.addAnnotation(annotation)
-                
+                if (postcurrent.flags.value?.isEmpty == false) {
+                    postcurrent.delete()
+                }
+                    
+                else{
+                    let lati = postcurrent.location!.latitude
+                    let longi = postcurrent.location!.longitude
+                    let coor = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                    
+                    var annotation = PinAnnotation?()
+                    
+                    
+                    annotation = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, post: postcurrent)
+                    
+                    
+                    mapAnnoations.append(annotation!)
+                    self.mapView.addAnnotation(annotation)
+                }
             }
             
         }
@@ -307,6 +324,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             
             var svc = segue.destinationViewController as! PostViewController;
             svc.anno = annotation
+            svc.post = annotation.post
             svc.login = loginViewController
         }
     }
