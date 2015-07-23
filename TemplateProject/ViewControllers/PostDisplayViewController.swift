@@ -111,14 +111,18 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                 //imageFile.save()
                 
                 //let post = PFObject(className: "Post")
-                if self.annotation == nil{
+                if self.annotation == nil {
                 self.post["imageFile"] = imageFile
                 self.post.save()
-                } else {
-                    self.annotation?.post.imageFile = imageFile
-                    self.annotation?.post.save()
-                }
                 
+                } else {
+                    let imageData = UIImageJPEGRepresentation(self.imageView?.image, 0.8)
+                    let imageFile = PFFile(data: imageData)
+                    
+                    self.annotation?.post.imageFile = imageFile
+                    self.annotation?.post.imageFile?.save()
+                    
+                }
                 
                 
         }
@@ -261,10 +265,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         annotation?.post.Ingredients = ingredientsArray
         annotation?.post.Instructions = instructionsArray
         
-        let imageData = UIImageJPEGRepresentation(imageView?.image, 0.8)
-        let imageFile = PFFile(data: imageData)
-        
-        annotation?.post.imageFile = imageFile
         
         
         annotation?.post.save()

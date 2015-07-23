@@ -57,7 +57,7 @@ class PostViewController: UIViewController {
                 
                 // bind the likeBond that we defined earlier, to update like label and button when likes change
                 post.likes ->> likeBond
-            }
+           }
         }
     }
     
@@ -208,6 +208,7 @@ class PostViewController: UIViewController {
         image = UIImage(data: data!)
         
         imageViewDisplay.image = image
+        anno?.post.fetchLikes()
         
         // Do any additional setup after loading the view.
     }
