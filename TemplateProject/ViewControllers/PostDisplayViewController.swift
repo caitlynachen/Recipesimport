@@ -13,8 +13,8 @@ import Bond
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
-    
     @IBOutlet weak var picker: UIPickerView!
+
     var photoTakingHelper: PhotoTakingHelper?
     
     @IBOutlet weak var countryTextField: UITextField!
@@ -241,6 +241,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+        
         
         //picker = UIPickerView()
         
