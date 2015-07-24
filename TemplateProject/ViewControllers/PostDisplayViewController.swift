@@ -37,6 +37,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     var ing: [String]?
     var ins: [String]?
     
+    @IBAction func logoutTapped(sender: AnyObject) {
+        PFUser.logOut()
+    }
     
     @IBAction func backButton(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -49,9 +52,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         if annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.country != nil {
             titleTextField.text = annotation?.title
             descriptionText.text = annotation?.Description
-            var data = annotation?.image.getData()
-            image = UIImage(data: data!)
-            imageView?.image = image
+//            var data = annotation?.image.getData()
+//            image = UIImage(data: data!)
+//            imageView?.image = image
             countryTextField.text = annotation?.country
             
             ing = annotation?.ingredients
@@ -101,9 +104,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                 // 1
               
                 self.post.image.value = image!
-                 
-                self.imageView?.image = image!
                 
+                self.imageView?.image = image!
+               
                 
                 //self.imageView?.clipsToBounds = true
                 let imageData = UIImageJPEGRepresentation(image, 0.8)
@@ -233,6 +236,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         appendIngredientsAndInstructions()
         
         if annotation?.post != nil{
+            var data = annotation?.image.getData()
+            image = UIImage(data: data!)
+            imageView?.image = image
             postButton.setTitle("DONE", forState: .Normal)
             
         }
