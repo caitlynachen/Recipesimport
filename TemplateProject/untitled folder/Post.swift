@@ -109,6 +109,27 @@ class Post : PFObject, PFSubclassing {
         })
     }
     
+    func fetchFlags() {
+        // 1
+        if (flags.value != nil) {
+            return
+        }
+        
+        // 2
+        ParseHelper.flagsForPost(self, completionBlock: { (var flag: [AnyObject]?, error: NSError?) -> Void in
+            // 3
+            flag = flag?.filter { like in like[ParseHelper.ParseFlaggedContentFromUser] != nil }
+            
+            // 4
+            self.flags.value = flag?.map { flag in
+                let flag = flag as! PFObject
+                let fromUser = flag[ParseHelper.ParseFlaggedContentFromUser] as! PFUser
+                
+                return fromUser
+            }
+        })
+    }
+
     
     func doesUserLikePost(user: PFUser) -> Bool {
         if let likes = likes.value {

@@ -34,8 +34,12 @@ class PostViewController: UIViewController {
     var login: PFLogInViewController?
     
     @IBAction func likeButtonTapped(sender: AnyObject) {
-        anno?.post.toggleLikePost(PFUser.currentUser()!)
-        
+        if PFUser.currentUser() != nil{
+            anno?.post.toggleLikePost(PFUser.currentUser()!)
+        } else{
+            //login parse viewcontroller
+            
+        }
     }
     
     var post: Post? {

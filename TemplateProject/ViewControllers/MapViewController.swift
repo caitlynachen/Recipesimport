@@ -14,6 +14,7 @@ import UIKit
 import CoreLocation
 import Parse
 import ParseUI
+import Bond
 
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate {
@@ -39,6 +40,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     var mapAnnoations: [PinAnnotation] = []
     
+    var flagBond: Bond<[PFUser]?>!
+    
+    
     @IBOutlet weak var logoView: UIView!
     
     @IBAction func unwindToVC(segue:UIStoryboardSegue) {
@@ -47,6 +51,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         }
         
     }
+    
     
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
@@ -121,16 +126,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        //        let flagQuery = PFQuery(className: "FlaggedContent")
-        //
-        //        flagged = flagQuery.findObjects()!
-        //
-        //        if let pts = flagged {
-        //            for post in pts {
-        //                var posted = post.objectForKey("toPost") as! Post!
-        //                flaggedPosts?.append(posted)
-        //            }
-        //        }
         
     }
     
@@ -184,7 +179,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
         let postsQuery = PFQuery(className: "Post")
         
-        postsQuery.whereKey("location", nearGeoPoint: loc, withinMiles: 100.0)
+        postsQuery.whereKey("location", nearGeoPoint: loc, withinMiles: 5.0)
         //finds all posts near current locations
         
         var posts = postsQuery.findObjects()
@@ -195,28 +190,39 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if let pts = posts {
             for post in pts {
                 
-                //*******
-                
                 var postcurrent = post as! Post
                 
-                if (postcurrent.flags.value?.isEmpty == false) {
-                    postcurrent.delete()
+                postcurrent.fetchFlags()
+                
+                
+                flagBond = Bond<[PFUser]?>() { [unowned self] flagList in
+                    
+                    if let flagList = flagList {
+                        if flagList.count > 3 {
+                            postcurrent.delete()
+                        } else{
+                            let lati = postcurrent.location!.latitude
+                            let longi = postcurrent.location!.longitude
+                            let coor = CLLocationCoordinate2D(latitude: self.lat!, longitude: self.long!)
+                            
+                            var annotation = PinAnnotation?()
+                            
+                            
+                            annotation = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, post: postcurrent)
+                            
+                            
+                            self.mapAnnoations.append(annotation!)
+                            self.mapView.addAnnotation(annotation)
+                        }
+                        
+                    }
+                    
                 }
-                    
-                else{
-                    let lati = postcurrent.location!.latitude
-                    let longi = postcurrent.location!.longitude
-                    let coor = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-                    
-                    var annotation = PinAnnotation?()
-                    
-                    
-                    annotation = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, post: postcurrent)
-                    
-                    
-                    mapAnnoations.append(annotation!)
-                    self.mapView.addAnnotation(annotation)
-                }
+                
+                postcurrent.flags ->> flagBond
+                
+                
+                
             }
             
         }

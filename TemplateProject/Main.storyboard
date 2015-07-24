@@ -605,6 +605,13 @@
                                     <action selector="logoutTapped:" destination="3f3-Rz-RUo" eventType="touchUpInside" id="F4r-mc-ENH"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eE2-qQ-e7G">
+                                <rect key="frame" x="0.0" y="125" width="600" height="162"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="3f3-Rz-RUo" id="Lit-k0-zPk"/>
+                                    <outlet property="delegate" destination="3f3-Rz-RUo" id="zHa-gR-fBu"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -691,6 +698,7 @@
                         <outlet property="imageView" destination="g5o-eJ-qnk" id="6bU-iC-BmO"/>
                         <outlet property="ingredientsTableView" destination="TOw-3h-zj4" id="0dq-ln-6Ix"/>
                         <outlet property="instructionTableView" destination="LJ5-eH-TKv" id="g9g-m1-CQs"/>
+                        <outlet property="picker" destination="eE2-qQ-e7G" id="zvq-la-gV6"/>
                         <outlet property="postButton" destination="1yc-Yo-Uan" id="Fia-x7-bqL"/>
                         <outlet property="titleTextField" destination="Vj5-TJ-kwS" id="8WL-v8-7cm"/>
                     </connections>

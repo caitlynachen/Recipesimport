@@ -201,6 +201,15 @@ class ParseHelper {
         
         query.findObjectsInBackgroundWithBlock(completionBlock)
     }
+    
+    static func flagsForPost(post: Post, completionBlock: PFArrayResultBlock) {
+        let query = PFQuery(className: ParseFlaggedContentClass)
+        query.whereKey(ParseFlaggedContentToPost, equalTo: post)
+        // 2
+        query.includeKey(ParseFlaggedContentFromUser)
+        
+        query.findObjectsInBackgroundWithBlock(completionBlock)
+    }
 }
 
 extension PFObject : Equatable {
