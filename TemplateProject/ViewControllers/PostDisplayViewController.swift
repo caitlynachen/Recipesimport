@@ -13,7 +13,6 @@ import Bond
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate {
     
     
-    
     var photoTakingHelper: PhotoTakingHelper?
     
     @IBOutlet weak var countryTextField: UITextField!
@@ -222,6 +221,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+        
         
         descriptionText.delegate = self
         placeholderLabel = UILabel()
