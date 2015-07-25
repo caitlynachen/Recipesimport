@@ -158,8 +158,8 @@
                                     <action selector="likeButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zGu-wd-rOY"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edt-UD-eGW" userLabel="numOfLikes">
-                                <rect key="frame" x="49" y="434" width="42" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edt-UD-eGW" userLabel="numOfLikes">
+                                <rect key="frame" x="49" y="440" width="30.5" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -471,7 +471,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Country of Origin" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ptf-4b-gIM">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Place of Origin" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ptf-4b-gIM" customClass="AutoCompleteTextField" customModule="TemplateProject" customModuleProvider="target">
                                 <rect key="frame" x="16" y="100" width="568" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="T8K-LR-3Mf"/>
@@ -605,13 +605,6 @@
                                     <action selector="logoutTapped:" destination="3f3-Rz-RUo" eventType="touchUpInside" id="F4r-mc-ENH"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eE2-qQ-e7G">
-                                <rect key="frame" x="0.0" y="125" width="600" height="162"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="3f3-Rz-RUo" id="Lit-k0-zPk"/>
-                                    <outlet property="delegate" destination="3f3-Rz-RUo" id="zHa-gR-fBu"/>
-                                </connections>
-                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -692,15 +685,13 @@
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="autocompleteTextfield" destination="ptf-4b-gIM" id="L67-0B-20h"/>
                         <outlet property="cameraButton" destination="TdA-Pw-x9Y" id="Ufc-CV-OqO"/>
-                        <outlet property="countryTextField" destination="ptf-4b-gIM" id="Fsh-3t-RsY"/>
                         <outlet property="descriptionText" destination="vqA-kN-uUU" id="vhS-Vu-j6f"/>
                         <outlet property="imageView" destination="g5o-eJ-qnk" id="6bU-iC-BmO"/>
                         <outlet property="ingredientsTableView" destination="TOw-3h-zj4" id="0dq-ln-6Ix"/>
                         <outlet property="instructionTableView" destination="LJ5-eH-TKv" id="g9g-m1-CQs"/>
-                        <outlet property="picker" destination="eE2-qQ-e7G" id="zvq-la-gV6"/>
                         <outlet property="postButton" destination="1yc-Yo-Uan" id="Fia-x7-bqL"/>
-                        <outlet property="scrollView" destination="Qtd-Z3-WVZ" id="D2A-lH-eKU"/>
                         <outlet property="titleTextField" destination="Vj5-TJ-kwS" id="8WL-v8-7cm"/>
                     </connections>
                 </viewController>

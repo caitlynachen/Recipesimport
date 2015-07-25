@@ -19,6 +19,8 @@
 		1CA3FE8F1B55A135003D80E2 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA3FE8E1B55A135003D80E2 /* RecipeViewController.swift */; };
 		1CADAED21B597E0700F341A6 /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CADAED11B597E0700F341A6 /* PinAnnotation.swift */; };
 		1CADAEDA1B599DB600F341A6 /* to delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CADAED91B599DB600F341A6 /* to delete.swift */; };
+		1CAE6F3D1B635A8200FC8E76 /* AutocompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAE6F3C1B635A8200FC8E76 /* AutocompleteTextField.swift */; };
+		1CAE6F3F1B635ACC00FC8E76 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAE6F3E1B635ACC00FC8E76 /* Location.swift */; };
 		1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */; };
 		1CD9DFF31B4DC61600DF28E3 /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */; };
 		1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */; };
@@ -151,6 +153,8 @@
 		1CA3FE8E1B55A135003D80E2 /* RecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		1CADAED11B597E0700F341A6 /* PinAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
 		1CADAED91B599DB600F341A6 /* to delete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "to delete.swift"; sourceTree = "<group>"; };
+		1CAE6F3C1B635A8200FC8E76 /* AutocompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutocompleteTextField.swift; path = "TemplateProject/untitled folder/AutocompleteTextField.swift"; sourceTree = SOURCE_ROOT; };
+		1CAE6F3E1B635ACC00FC8E76 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = "TemplateProject/untitled folder/Post.swift"; sourceTree = SOURCE_ROOT; };
 		1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
 		1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */,
+				1CAE6F3C1B635A8200FC8E76 /* AutocompleteTextField.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 				624262B91B4460CB00005CE3 /* ParseLoginHelper.swift */,
 				1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */,
 				1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */,
+				1CAE6F3E1B635ACC00FC8E76 /* Location.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -551,6 +557,7 @@
 				1CADAEDA1B599DB600F341A6 /* to delete.swift in Sources */,
 				1C13E5801B4C485900FA5F39 /* InstructionsTableViewCell.swift in Sources */,
 				1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */,
+				1CAE6F3F1B635ACC00FC8E76 /* Location.swift in Sources */,
 				1CA3FE8F1B55A135003D80E2 /* RecipeViewController.swift in Sources */,
 				1C13E57F1B4C485900FA5F39 /* IngredientsTableViewCell.swift in Sources */,
 				1C13E5851B4C486800FA5F39 /* PostViewController.swift in Sources */,
@@ -559,6 +566,7 @@
 				1C13E5881B4C486800FA5F39 /* InstructionsViewController.swift in Sources */,
 				1CD9DFF31B4DC61600DF28E3 /* PhotoTakingHelper.swift in Sources */,
 				624262C41B4460CB00005CE3 /* ParseLoginHelper.swift in Sources */,
+				1CAE6F3D1B635A8200FC8E76 /* AutocompleteTextField.swift in Sources */,
 				1C13E5871B4C486800FA5F39 /* IngredientsViewController.swift in Sources */,
 				624262C31B4460CB00005CE3 /* ErrorHandling.swift in Sources */,
 				1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */,
