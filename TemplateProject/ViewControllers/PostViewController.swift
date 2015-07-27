@@ -28,6 +28,10 @@ class PostViewController: UIViewController {
     @IBOutlet weak var likeButton: UIButton!
     var likeBond: Bond<[PFUser]?>!
     
+    let loginViewController = PFLogInViewController()
+    
+    var parseLoginHelper: ParseLoginHelper!
+    
     
     @IBOutlet weak var likeLabel: UILabel!
     
@@ -38,6 +42,36 @@ class PostViewController: UIViewController {
             anno?.post.toggleLikePost(PFUser.currentUser()!)
         } else{
             //login parse viewcontroller
+            loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
+            
+            loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
+            //            loginViewController.logInView?.logo = self.logoView
+            
+            
+            parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
+                // Initialize the ParseLoginHelper with a callback
+                println("before the error")
+                if let error = error {
+                    // 1
+                    ErrorHandling.defaultErrorHandler(error)
+                } else  if let user = user {
+                    // if login was successful, display the TabBarController
+                    // 2
+                    println("show post  view controller")
+                    //****
+                    self.anno?.post.toggleLikePost(PFUser.currentUser()!)
+                    
+                    
+                }
+            }
+            
+            loginViewController.delegate = parseLoginHelper
+            loginViewController.signUpController?.delegate = parseLoginHelper
+            
+            
+            
+            self.presentViewController(loginViewController, animated: true, completion: nil)
+            
             
         }
     }
@@ -58,31 +92,34 @@ class PostViewController: UIViewController {
             
             if let post = post  {
                 if likeButton != nil {
-                // bind the image of the post to the 'postImage' view
-                // bind the likeBond that we defined earlier, to update like label and button when likes change
-                post.likes ->> likeBond
+                    // bind the image of the post to the 'postImage' view
+                    // bind the likeBond that we defined earlier, to update like label and button when likes change
+                    post.likes ->> likeBond
                 }
             }
         }
     }
-
+    
     
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         // 1
+        
         likeBond = Bond<[PFUser]?>() { [unowned self] likeList in
             // 2
             if let likeList = likeList {
                 // 3
                 self.likeLabel.text = self.stringFromUserList(likeList)
                 // 4
-                self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
+                if PFUser.currentUser() != nil{
+                    self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
+                }
                 // 5
             } else {
-//                self.likeLabel = UILabel()
-//                self.likeButton = UIButton()
+                //                self.likeLabel = UILabel()
+                //                self.likeButton = UIButton()
                 // 6
                 // if there is no list of users that like this post, reset everything
                 self.likeLabel.text = ""
@@ -157,8 +194,41 @@ class PostViewController: UIViewController {
                 deleteAlert.addAction(dontDeleteAction)
                 let deleteAction: UIAlertAction = UIAlertAction(title: "Flag", style: .Default) { action -> Void in
                     
+                    if PFUser.currentUser() != nil{
+                        self.anno?.post.flagPost(PFUser.currentUser()!)
+                    } else{
+                        self.loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
+                        
+                        self.loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
+                        //            loginViewController.logInView?.logo = self.logoView
+                        
+                        
+                        self.parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
+                            // Initialize the ParseLoginHelper with a callback
+                            println("before the error")
+                            if let error = error {
+                                // 1
+                                ErrorHandling.defaultErrorHandler(error)
+                            } else  if let user = user {
+                                // if login was successful, display the TabBarController
+                                // 2
+                                println("show post  view controller")
+                                //****
+                                self.anno?.post.flagPost(PFUser.currentUser()!)
+                                
+                            }
+                        }
+                        
+                        self.loginViewController.delegate = self.parseLoginHelper
+                        self.loginViewController.signUpController?.delegate = self.parseLoginHelper
+                        
+                        
+                        
+                        self.presentViewController(self.loginViewController, animated: true, completion: nil)
+                        
+                    }
                     
-                    anno?.post.flagPost(PFUser.currentUser()!)
+                    
                     //flag row in parse
                 }
                 deleteAlert.addAction(deleteAction)

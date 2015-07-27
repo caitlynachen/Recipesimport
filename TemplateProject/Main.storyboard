@@ -120,7 +120,7 @@
         <!--Post View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PostViewController" customModule="TemplateProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="postViewController" id="BYZ-38-t0r" customClass="PostViewController" customModule="TemplateProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -709,7 +709,7 @@
         <image name="logo" width="434" height="274"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="u37-Uz-Na6"/>
+        <segue reference="hEg-yg-0bF"/>
         <segue reference="Ggi-1l-080"/>
     </inferredMetricsTieBreakers>
 </document>
