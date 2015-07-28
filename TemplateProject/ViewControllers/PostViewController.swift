@@ -204,7 +204,8 @@ class PostViewController: UIViewController {
                         self.loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
                         
                         self.loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
-                        //            loginViewController.logInView?.logo = self.logoView
+                        self.logoView.hidden = false
+                                    self.loginViewController.logInView?.logo = self.logoView
                         
                         
                         self.parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
