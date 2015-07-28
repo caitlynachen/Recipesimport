@@ -19,6 +19,7 @@ import Bond
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var cancel: UIButton!
     var annotationCurrent: PinAnnotation?
     
@@ -350,7 +351,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             } else{
                 toolbar.hidden = true
             }
-        }
+        } 
     }
     
     private func configureTextField(){

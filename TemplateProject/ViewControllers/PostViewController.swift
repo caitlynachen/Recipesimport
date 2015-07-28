@@ -61,7 +61,8 @@ class PostViewController: UIViewController {
                     // if login was successful, display the TabBarController
                     // 2
                     println("show post  view controller")
-                    self.loginViewController.performSegueWithIdentifier("fromLoginToPostView", sender: self)
+                    
+                    self.loginViewController.dismissViewControllerAnimated(true, completion: nil)
                     //****
                     self.anno?.post.toggleLikePost(PFUser.currentUser()!)
                     
@@ -217,7 +218,9 @@ class PostViewController: UIViewController {
                             } else  if let user = user {
                                 // if login was successful, display the TabBarController
                                 // 2
-                                println("show post  view controller")
+                                println("show post hi view controller")
+                                self.loginViewController.dismissViewControllerAnimated(true, completion: nil)
+
                                 //****
                                 self.anno?.post.flagPost(PFUser.currentUser()!)
                                 
@@ -226,7 +229,6 @@ class PostViewController: UIViewController {
                         
                         self.loginViewController.delegate = self.parseLoginHelper
                         self.loginViewController.signUpController?.delegate = self.parseLoginHelper
-                        
                         
                         
                         self.presentViewController(self.loginViewController, animated: true, completion: nil)

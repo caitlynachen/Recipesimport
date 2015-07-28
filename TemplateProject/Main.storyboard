@@ -19,9 +19,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZQK-MF-ZxV" customClass="AutoCompleteTextField" customModule="TemplateProject" customModuleProvider="target">
-                                <rect key="frame" x="150" y="20" width="300" height="30"/>
+                                <rect key="frame" x="137.5" y="20" width="325" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="uVm-zg-RpW"/>
+                                    <constraint firstAttribute="width" constant="325" id="uVm-zg-RpW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -157,6 +157,7 @@
                         <outlet property="autocompleteTextfield" destination="ZQK-MF-ZxV" id="yeF-Nv-OdG"/>
                         <outlet property="cancel" destination="xLH-E5-yhj" id="U5X-8A-4Ka"/>
                         <outlet property="logoView" destination="qgx-yY-jIO" id="vXW-aZ-CQj"/>
+                        <outlet property="logoutButton" destination="AWl-jo-wJP" id="6JY-JI-5YZ"/>
                         <outlet property="mapView" destination="7Aq-kW-gOL" id="zXQ-Gf-B3V"/>
                         <outlet property="navbar" destination="RUS-Sb-42L" id="lLz-cd-XBE"/>
                         <outlet property="toolbar" destination="PFc-9V-Jwo" id="ke0-oV-LHs"/>
@@ -282,8 +283,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Wq-eM-1bV">
                                 <rect key="frame" x="579" y="81" width="300" height="489"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="prJ-nd-BB5">
-                                        <rect key="frame" x="80" y="81.5" width="200" height="326"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="prJ-nd-BB5">
+                                        <rect key="frame" x="80" y="107.5" width="200" height="274"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="274" id="2K6-6d-3zR"/>
                                             <constraint firstAttribute="width" constant="200" id="ID6-my-nRE"/>
@@ -771,7 +772,7 @@
         <image name="logo" width="434" height="274"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="u37-Uz-Na6"/>
+        <segue reference="hEg-yg-0bF"/>
         <segue reference="Ggi-1l-080"/>
     </inferredMetricsTieBreakers>
 </document>
