@@ -15,6 +15,12 @@ import ConvenienceKit
 class Post : PFObject, PFSubclassing {
     
     // 2
+    
+    @NSManaged var prep: String?
+    @NSManaged var cook: String?
+
+    @NSManaged var servings: String?
+
     @NSManaged var date: NSDate?
     @NSManaged var RecipeTitle: String?
     @NSManaged var Ingredients: [String]?

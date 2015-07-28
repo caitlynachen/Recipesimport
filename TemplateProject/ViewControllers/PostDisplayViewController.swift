@@ -13,10 +13,14 @@ import Bond
 
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, NSURLConnectionDataDelegate{
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var autocompleteTextfield: AutoCompleteTextField!
     
+    @IBOutlet weak var cookTime: UITextField!
     private var responseData:NSMutableData?
 
+    @IBOutlet weak var numOfServings: UITextField!
+    @IBOutlet weak var prepTime: UITextField!
     private var connection:NSURLConnection?
     
     private let googleMapsKey = "AIzaSyD8-OfZ21X2QLS1xLzu1CLCfPVmGtch7lo"
@@ -53,9 +57,12 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     }
     
     override func viewWillAppear(animated: Bool) {
-        if annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.country != nil {
+        if (annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.country != nil && annotation?.servings != nil && annotation?.prep != nil && annotation?.cook != nil) {
             titleTextField.text = annotation?.title
             descriptionText.text = annotation?.Description
+            cookTime.text = annotation?.cook
+            prepTime.text = annotation?.prep
+            numOfServings.text = annotation?.servings
 //            var data = annotation?.image.getData()
 //            image = UIImage(data: data!)
 //            imageView?.image = image
@@ -234,6 +241,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         //picker = UIPickerView()
         
+        
     
         
         descriptionText.delegate = self
@@ -353,6 +361,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
 //        appendIngredientsAndInstructions()
         //change parse info
+        annotation?.post.prep = prepTime.text
+        annotation?.post.cook = cookTime.text
+        annotation?.post.servings = numOfServings.text
         annotation?.post.RecipeTitle = titleTextField.text
         annotation?.post.caption = descriptionText.text
         annotation?.post.country = autocompleteTextfield.text
@@ -369,6 +380,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     func createPost(){
         
+        post.prep = prepTime.text
+        post.cook = cookTime.text
+        post.servings = numOfServings.text
         post.caption = descriptionText.text
         post.RecipeTitle = titleTextField.text
         post.country = autocompleteTextfield.text
@@ -395,7 +409,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         let test = post.Ingredients!
         
-        var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, post: post)
+        var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
         
         currentAnnotation = annotationToAdd
         //mapView.mapView.addAnnotation(annotation)

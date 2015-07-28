@@ -16,6 +16,9 @@ import ParseUI
 
 class PostViewController: UIViewController {
     
+    @IBOutlet weak var servings: UILabel!
+    @IBOutlet weak var cook: UILabel!
+    @IBOutlet weak var prep: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -285,6 +288,9 @@ class PostViewController: UIViewController {
         
         logoView.hidden = true
         //post = anno?.post
+        cook.text = anno?.cook
+        prep.text = anno?.prep
+        servings.text = anno?.servings
         titleLabel.text = anno?.title
         countryLabel.text = anno?.country
         DescriptionLabel.text = anno?.Description
