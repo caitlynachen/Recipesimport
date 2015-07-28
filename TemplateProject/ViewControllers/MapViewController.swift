@@ -17,8 +17,9 @@ import ParseUI
 import Bond
 
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate, UITextFieldDelegate {
     
+    @IBOutlet weak var cancel: UIButton!
     var annotationCurrent: PinAnnotation?
     
     var searchController:UISearchController!
@@ -42,6 +43,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     var flagBond: Bond<[PFUser]?>!
     
+    @IBOutlet weak var autocompleteTextfield: AutoCompleteTextField!
+    
+    private var responseData:NSMutableData?
+    private var selectedPointAnnotation:MKPointAnnotation?
+    private var connection:NSURLConnection?
+    
+    private let googleMapsKey = "AIzaSyD8-OfZ21X2QLS1xLzu1CLCfPVmGtch7lo"
+     private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     
     @IBOutlet weak var logoView: UIView!
     
@@ -51,7 +60,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         }
         
     }
-    
     
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
@@ -110,13 +118,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     @IBOutlet var mapView: MKMapView!
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        cancel.hidden = false
+    }
     
     
     //    var flagged: [AnyObject]?
     //    var flaggedPosts: [Post]?
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        cancel.hidden = true
         
+        autocompleteTextfield.delegate = self
+        
+        
+        configureTextField()
+        handleTextFieldInterfaces()
         println("in MapViewController")
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -129,11 +147,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
     }
     
+    @IBAction func cancelTapped(sender: AnyObject) {
+        autocompleteTextfield.text = nil
+    }
+    @IBOutlet weak var navbar: UINavigationBar!
     @IBAction func showSearchBar(sender: AnyObject) {
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.searchBar.delegate = self
-        presentViewController(searchController, animated: true, completion: nil)
+        
+        navbar.hidden = true
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -286,36 +307,92 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         }
     }
     
+    private func configureTextField(){
+        autocompleteTextfield.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)
+        autocompleteTextfield.autoCompleteTextFont = UIFont(name: "HelveticaNeue-Light", size: 12.0)
+        autocompleteTextfield.autoCompleteCellHeight = 35.0
+        autocompleteTextfield.maximumAutoCompleteCount = 20
+        autocompleteTextfield.hidesWhenSelected = true
+        autocompleteTextfield.hidesWhenEmpty = true
+        autocompleteTextfield.enableAttributedText = true
+        var attributes = [String:AnyObject]()
+        attributes[NSForegroundColorAttributeName] = UIColor.blackColor()
+        attributes[NSFontAttributeName] = UIFont(name: "HelveticaNeue-Bold", size: 12.0)
+        autocompleteTextfield.autoCompleteAttributes = attributes
+    }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar){
-        //1
-        searchBar.resignFirstResponder()
-        dismissViewControllerAnimated(true, completion: nil)
-        if self.mapView.annotations.count != 0{
-            annotation = self.mapView.annotations[0] as! MKAnnotation
-            self.mapView.removeAnnotation(annotation)
-        }
-        //2
-        localSearchRequest = MKLocalSearchRequest()
-        localSearchRequest.naturalLanguageQuery = searchBar.text
-        localSearch = MKLocalSearch(request: localSearchRequest)
-        localSearch.startWithCompletionHandler { (localSearchResponse, error) -> Void in
-            
-            if localSearchResponse == nil{
-                var alert = UIAlertView(title: nil, message: "Place not found", delegate: self, cancelButtonTitle: "Try again")
-                alert.show()
-                return
+    private func handleTextFieldInterfaces(){
+        autocompleteTextfield.onTextChange = {[weak self] text in
+            if !text.isEmpty{
+                if self!.connection != nil{
+                    self!.connection!.cancel()
+                    self!.connection = nil
+                }
+                let urlString = "\(self!.baseURLString)?key=\(self!.googleMapsKey)&input=\(text)"
+                let url = NSURL(string: urlString.stringByAddingPercentEscapesUsingEncoding(NSASCIIStringEncoding)!)
+                if url != nil{
+                    let urlRequest = NSURLRequest(URL: url!)
+                    self!.connection = NSURLConnection(request: urlRequest, delegate: self)
+                }
             }
-            //3
-            self.pointAnnotation = MKPointAnnotation()
-            self.pointAnnotation.title = searchBar.text
-            self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse.boundingRegion.center.latitude, longitude:     localSearchResponse.boundingRegion.center.longitude)
-            
-            
-            self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
-            self.mapView.centerCoordinate = self.pointAnnotation.coordinate
-            self.mapView.addAnnotation(self.pinAnnotationView.annotation)
         }
+        
+        autocompleteTextfield.onSelect = {[weak self] text, indexpath in
+            Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
+                if placemark != nil{
+                    let coordinate = placemark!.location.coordinate
+                    self!.addAnnotation(coordinate, address: text)
+                    self?.mapView.setCenterCoordinate(coordinate, animated: true)
+                }
+            })
+        }
+    }
+    
+    
+    //MARK: NSURLConnectionDelegate
+    func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+        responseData = NSMutableData()
+    }
+    
+    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
+        responseData?.appendData(data)
+    }
+    
+    func connectionDidFinishLoading(connection: NSURLConnection) {
+        if responseData != nil{
+            var error:NSError?
+            if let result = NSJSONSerialization.JSONObjectWithData(responseData!, options: nil, error: &error) as? NSDictionary{
+                let status = result["status"] as? String
+                if status == "OK"{
+                    if let predictions = result["predictions"] as? NSArray{
+                        var locations = [String]()
+                        for dict in predictions as! [NSDictionary]{
+                            locations.append(dict["description"] as! String)
+                        }
+                        self.autocompleteTextfield.autoCompleteStrings = locations
+                    }
+                }
+                else{
+                    self.autocompleteTextfield.autoCompleteStrings = nil
+                }
+            }
+        }
+    }
+    
+    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+        println("Error: \(error.localizedDescription)")
+    }
+    
+    //MARK: Map Utilities
+    private func addAnnotation(coordinate:CLLocationCoordinate2D, address:String?){
+        if selectedPointAnnotation != nil{
+            mapView.removeAnnotation(selectedPointAnnotation)
+        }
+        
+        selectedPointAnnotation = MKPointAnnotation()
+        selectedPointAnnotation?.coordinate = coordinate
+        selectedPointAnnotation?.title = address
+        mapView.addAnnotation(selectedPointAnnotation)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -58,6 +58,7 @@ class PostViewController: UIViewController {
                     // if login was successful, display the TabBarController
                     // 2
                     println("show post  view controller")
+                    
                     //****
                     self.anno?.post.toggleLikePost(PFUser.currentUser()!)
                     
