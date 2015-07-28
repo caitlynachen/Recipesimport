@@ -31,6 +31,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     var pointAnnotation:MKPointAnnotation!
     var pinAnnotationView:MKPinAnnotationView!
     
+    @IBOutlet weak var toolbar: UIToolbar!
     var ann: PinAnnotation?
     
     var points: [PFGeoPoint] = []
@@ -62,6 +63,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     }
     
     
+    @IBAction func logoutTapped(sender: AnyObject) {
+        let actionSheetController: UIAlertController = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .Alert)
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "No", style: .Cancel) { action -> Void in
+            //Do some stuff
+            
+        }
+        actionSheetController.addAction(cancelAction)
+        //Create and an option action
+        let nextAction: UIAlertAction = UIAlertAction(title: "Yes", style: .Default) { action -> Void in
+            //Do some other stuff
+            PFUser.logOut()
+            let logoutNotification: UIAlertController = UIAlertController(title: "Logout", message: "Successfully Logged Out!", preferredStyle: .Alert)
+            
+            
+            self.presentViewController(logoutNotification, animated: true, completion: nil)
+            logoutNotification.dismissViewControllerAnimated(true, completion: nil)
+            self.toolbar.hidden = true
+            
+        }
+        actionSheetController.addAction(nextAction)
+        //Add a text field
+       
+        
+        //Present the AlertController
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
+
+    }
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if let ident = identifier {
             if ident == "segueToPostDisplay" {
@@ -127,6 +157,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     //    var flaggedPosts: [Post]?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if PFUser.currentUser() != nil{
+            toolbar.hidden = false
+        } else{
+            toolbar.hidden = true
+        }
                 
         cancel.hidden = true
         
@@ -302,8 +338,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     override func viewWillAppear(animated: Bool) {
         if annotationCurrent != nil{
             mapView.addAnnotation(annotationCurrent)
+            if PFUser.currentUser() != nil{
+                toolbar.hidden = false
+            } else{
+                toolbar.hidden = true
+            }
         } else if ann != nil {
             mapView.removeAnnotation(ann)
+            if PFUser.currentUser() != nil{
+                toolbar.hidden = false
+            } else{
+                toolbar.hidden = true
+            }
         }
     }
     

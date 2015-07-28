@@ -44,10 +44,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     var ing: [String]?
     var ins: [String]?
     
-    @IBAction func logoutTapped(sender: AnyObject) {
-        PFUser.logOut()
-    }
-    
+        
     @IBAction func backButton(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController

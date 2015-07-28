@@ -105,6 +105,16 @@
                                     <action selector="cancelTapped:" destination="oFf-i6-dje" eventType="touchUpInside" id="K6q-HW-5Ym"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFc-9V-Jwo">
+                                <rect key="frame" x="0.0" y="556" width="516" height="44"/>
+                                <items>
+                                    <barButtonItem title="Logout" id="AWl-jo-wJP">
+                                        <connections>
+                                            <action selector="logoutTapped:" destination="oFf-i6-dje" id="Rhx-LG-5ev"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -123,7 +133,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="7Aq-kW-gOL" secondAttribute="trailing" constant="-16" id="alI-i3-4B4"/>
                             <constraint firstItem="qgx-yY-jIO" firstAttribute="leading" secondItem="Z5M-Es-C9M" secondAttribute="leadingMargin" constant="124" id="cAx-8H-P4j"/>
                             <constraint firstItem="qgx-yY-jIO" firstAttribute="leading" secondItem="xLH-E5-yhj" secondAttribute="trailing" constant="71" id="e5A-R5-25F"/>
+                            <constraint firstItem="3Vj-nx-wmB" firstAttribute="top" secondItem="PFc-9V-Jwo" secondAttribute="bottom" id="hsS-LV-bB5"/>
+                            <constraint firstItem="PFc-9V-Jwo" firstAttribute="leading" secondItem="Z5M-Es-C9M" secondAttribute="leading" id="iDr-0L-Dv0"/>
                             <constraint firstItem="qgx-yY-jIO" firstAttribute="top" secondItem="Z5M-Es-C9M" secondAttribute="topMargin" id="iN1-Tm-fa2"/>
+                            <constraint firstItem="qgx-yY-jIO" firstAttribute="leading" secondItem="PFc-9V-Jwo" secondAttribute="trailing" id="jnB-Ve-CGf"/>
                             <constraint firstItem="RUS-Sb-42L" firstAttribute="leading" secondItem="Z5M-Es-C9M" secondAttribute="leading" id="n9O-cq-XTc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qgx-yY-jIO" secondAttribute="trailing" constant="144" id="plj-nr-yLp"/>
                             <constraint firstItem="qgx-yY-jIO" firstAttribute="leading" secondItem="Z5M-Es-C9M" secondAttribute="leadingMargin" constant="284" id="s9c-MV-w19"/>
@@ -146,6 +159,7 @@
                         <outlet property="logoView" destination="qgx-yY-jIO" id="vXW-aZ-CQj"/>
                         <outlet property="mapView" destination="7Aq-kW-gOL" id="zXQ-Gf-B3V"/>
                         <outlet property="navbar" destination="RUS-Sb-42L" id="lLz-cd-XBE"/>
+                        <outlet property="toolbar" destination="PFc-9V-Jwo" id="ke0-oV-LHs"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="toPostView" id="AoF-Pk-hU0"/>
                     </connections>
                 </viewController>
@@ -662,15 +676,6 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41r-KB-FZo">
-                                <rect key="frame" x="535" y="20" width="49" height="30"/>
-                                <state key="normal" title="Logout">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="logoutTapped:" destination="3f3-Rz-RUo" eventType="touchUpInside" id="F4r-mc-ENH"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -682,14 +687,11 @@
                             <constraint firstItem="g5o-eJ-qnk" firstAttribute="leading" secondItem="vqA-kN-uUU" secondAttribute="trailing" constant="10" id="7tY-6Q-raf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TdA-Pw-x9Y" secondAttribute="trailing" constant="-30" id="8rz-CY-bKZ"/>
                             <constraint firstItem="g5o-eJ-qnk" firstAttribute="top" secondItem="Vj5-TJ-kwS" secondAttribute="bottom" constant="55" id="BZM-vM-Vg8"/>
-                            <constraint firstItem="41r-KB-FZo" firstAttribute="top" secondItem="Qtd-Z3-WVZ" secondAttribute="topMargin" constant="20" id="CI7-Sw-Zh2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="41r-KB-FZo" secondAttribute="trailing" id="F4z-nL-n5p"/>
                             <constraint firstItem="ePa-gf-3Hz" firstAttribute="leading" secondItem="Qtd-Z3-WVZ" secondAttribute="leadingMargin" id="GhX-J1-tly"/>
                             <constraint firstItem="1yc-Yo-Uan" firstAttribute="leading" secondItem="Qtd-Z3-WVZ" secondAttribute="leading" id="Hd2-Xp-eRo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Vj5-TJ-kwS" secondAttribute="trailing" id="I2X-iv-7pn"/>
                             <constraint firstItem="Vj5-TJ-kwS" firstAttribute="top" secondItem="ULN-eq-JpG" secondAttribute="bottom" constant="40" id="IQ1-mc-5HE"/>
                             <constraint firstItem="ptf-4b-gIM" firstAttribute="top" secondItem="ULN-eq-JpG" secondAttribute="bottom" constant="80" id="Iox-au-iw7"/>
-                            <constraint firstItem="Vj5-TJ-kwS" firstAttribute="top" secondItem="41r-KB-FZo" secondAttribute="bottom" constant="12" id="J30-FB-yoL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ptf-4b-gIM" secondAttribute="trailing" id="JYE-fZ-3kn"/>
                             <constraint firstItem="TOw-3h-zj4" firstAttribute="top" secondItem="vqA-kN-uUU" secondAttribute="bottom" constant="43" id="JlJ-Hz-ePd"/>
                             <constraint firstItem="TOw-3h-zj4" firstAttribute="top" secondItem="vqA-kN-uUU" secondAttribute="bottom" constant="35" id="Kg4-nO-2fN"/>
@@ -702,10 +704,8 @@
                             <constraint firstItem="vqA-kN-uUU" firstAttribute="top" secondItem="ptf-4b-gIM" secondAttribute="bottom" constant="10" id="VEh-QX-gda"/>
                             <constraint firstItem="g5o-eJ-qnk" firstAttribute="leading" secondItem="vqA-kN-uUU" secondAttribute="trailing" constant="10" id="Whc-ss-lB6"/>
                             <constraint firstItem="ptf-4b-gIM" firstAttribute="leading" secondItem="Qtd-Z3-WVZ" secondAttribute="leadingMargin" id="XQr-2C-Xox"/>
-                            <constraint firstItem="41r-KB-FZo" firstAttribute="top" secondItem="Qtd-Z3-WVZ" secondAttribute="topMargin" constant="18" id="XnG-Rf-g5J"/>
                             <constraint firstItem="g5o-eJ-qnk" firstAttribute="leading" secondItem="TOw-3h-zj4" secondAttribute="trailing" constant="10" id="c7a-Gb-7Td"/>
                             <constraint firstItem="1yc-Yo-Uan" firstAttribute="top" secondItem="LJ5-eH-TKv" secondAttribute="bottom" constant="10" id="dud-He-Ot8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="41r-KB-FZo" secondAttribute="trailing" constant="-3" id="fK1-iv-0AT"/>
                             <constraint firstItem="LJ5-eH-TKv" firstAttribute="leading" secondItem="TOw-3h-zj4" secondAttribute="trailing" constant="10" id="fzG-Bo-KXN"/>
                             <constraint firstItem="JM8-fY-Vhr" firstAttribute="top" secondItem="vqA-kN-uUU" secondAttribute="bottom" constant="19" id="iDD-E1-uqw"/>
                             <constraint firstAttribute="centerY" secondItem="TdA-Pw-x9Y" secondAttribute="centerY" id="iof-w2-7lY"/>
@@ -715,7 +715,6 @@
                             <constraint firstItem="TdA-Pw-x9Y" firstAttribute="top" secondItem="Vj5-TJ-kwS" secondAttribute="bottom" id="ksB-3H-tBN"/>
                             <constraint firstItem="2sh-7J-wds" firstAttribute="top" secondItem="1yc-Yo-Uan" secondAttribute="bottom" id="lim-KR-OF9"/>
                             <constraint firstItem="TdA-Pw-x9Y" firstAttribute="top" secondItem="Vj5-TJ-kwS" secondAttribute="bottom" constant="89" id="mQp-Hj-VAk"/>
-                            <constraint firstItem="41r-KB-FZo" firstAttribute="leading" secondItem="ePa-gf-3Hz" secondAttribute="trailing" constant="499" id="muL-jI-3yl"/>
                             <constraint firstItem="ePa-gf-3Hz" firstAttribute="top" secondItem="Qtd-Z3-WVZ" secondAttribute="topMargin" constant="25" id="q5g-AS-wVl"/>
                             <constraint firstItem="253-sS-i9T" firstAttribute="top" secondItem="vqA-kN-uUU" secondAttribute="bottom" id="r2n-cx-mYL"/>
                             <constraint firstItem="LJ5-eH-TKv" firstAttribute="top" secondItem="JM8-fY-Vhr" secondAttribute="bottom" constant="13" id="tAb-85-y2b"/>
@@ -728,7 +727,6 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="J30-FB-yoL"/>
                                 <exclude reference="N4T-4s-ntR"/>
                                 <exclude reference="VEh-QX-gda"/>
                                 <exclude reference="M3f-94-Che"/>
@@ -743,9 +741,6 @@
                                 <exclude reference="P1j-bI-F8j"/>
                                 <exclude reference="Whc-ss-lB6"/>
                                 <exclude reference="c7a-Gb-7Td"/>
-                                <exclude reference="XnG-Rf-g5J"/>
-                                <exclude reference="fK1-iv-0AT"/>
-                                <exclude reference="muL-jI-3yl"/>
                             </mask>
                         </variation>
                     </view>
@@ -776,7 +771,7 @@
         <image name="logo" width="434" height="274"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hEg-yg-0bF"/>
+        <segue reference="u37-Uz-Na6"/>
         <segue reference="Ggi-1l-080"/>
     </inferredMetricsTieBreakers>
 </document>
