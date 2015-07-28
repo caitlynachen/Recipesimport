@@ -29,7 +29,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var instructionTableView: UITableView!
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var ingredientsTableView: UITableView!
-    @IBOutlet weak var postButton: UIButton!
+    @IBOutlet weak var postButton: UIBarButtonItem!
     
     var placeholderLabel: UILabel!
     
@@ -142,7 +142,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     var instructionsArray: [String] = []
     var instructionBond:Bond<String>!
     
-    var numOfRows: Int = 13
+    var numOfRows: Int = 10
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ingredientsTableView {
             return numOfRows // Create 1 row as an example
@@ -252,7 +252,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             var data = annotation?.image.getData()
             image = UIImage(data: data!)
             imageView?.image = image
-            postButton.setTitle("DONE", forState: .Normal)
+            
             
         }
         
