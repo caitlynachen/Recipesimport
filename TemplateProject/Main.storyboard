@@ -265,11 +265,37 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Wq-eM-1bV">
+                                <rect key="frame" x="579" y="81" width="300" height="489"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="prJ-nd-BB5">
+                                        <rect key="frame" x="80" y="81.5" width="200" height="326"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="274" id="2K6-6d-3zR"/>
+                                            <constraint firstAttribute="width" constant="200" id="ID6-my-nRE"/>
+                                            <constraint firstAttribute="width" secondItem="prJ-nd-BB5" secondAttribute="height" multiplier="100:163" id="fPU-CY-PlQ"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="fPU-CY-PlQ"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="prJ-nd-BB5" firstAttribute="leading" secondItem="7Wq-eM-1bV" secondAttribute="leading" constant="80" id="Cph-fm-Szc"/>
+                                    <constraint firstAttribute="centerY" secondItem="prJ-nd-BB5" secondAttribute="centerY" id="XUu-Ko-EUy"/>
+                                    <constraint firstAttribute="width" constant="300" id="bkp-q0-k3Z"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Edt-UD-eGW" firstAttribute="leading" secondItem="8f7-Vn-7MM" secondAttribute="trailing" constant="10" id="0bK-vE-t6X"/>
+                            <constraint firstItem="P56-hM-nEk" firstAttribute="top" secondItem="7Wq-eM-1bV" secondAttribute="bottom" id="5gH-kS-zsF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="P56-hM-nEk" secondAttribute="trailing" constant="-16" id="6Ty-lE-vyT"/>
+                            <constraint firstItem="7Wq-eM-1bV" firstAttribute="leading" secondItem="pKQ-va-UBW" secondAttribute="trailing" constant="500" id="75T-zH-yEH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="P56-hM-nEk" secondAttribute="bottom" id="90B-D9-Bcf"/>
                             <constraint firstItem="P56-hM-nEk" firstAttribute="top" secondItem="iYz-UQ-nfk" secondAttribute="bottom" constant="100" id="AVn-gT-Eps"/>
                             <constraint firstItem="AOF-BP-KZT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="B7X-Kw-05B"/>
@@ -290,6 +316,7 @@
                             <constraint firstItem="qna-V2-cxI" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="60" id="gPU-4h-tuT"/>
                             <constraint firstItem="doA-2l-JqP" firstAttribute="top" secondItem="zZT-Qm-BX2" secondAttribute="bottom" constant="10" id="kbz-m8-BEo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qna-V2-cxI" secondAttribute="trailing" id="m5Z-Rk-r4a"/>
+                            <constraint firstItem="7Wq-eM-1bV" firstAttribute="top" secondItem="zZT-Qm-BX2" secondAttribute="bottom" id="pNW-vU-kmP"/>
                             <constraint firstItem="doA-2l-JqP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="qTm-AQ-vPx"/>
                             <constraint firstItem="lpt-ky-Fhd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="sTx-ys-1Mr"/>
                             <constraint firstItem="8f7-Vn-7MM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="3" id="yc9-lA-E4N"/>
@@ -308,13 +335,16 @@
                         <outlet property="imageViewDisplay" destination="6NC-Bi-ZOE" id="Dct-dx-4Qo"/>
                         <outlet property="likeButton" destination="8f7-Vn-7MM" id="Miz-rg-hGT"/>
                         <outlet property="likeLabel" destination="Edt-UD-eGW" id="rJc-qT-ESc"/>
+                        <outlet property="logoView" destination="7Wq-eM-1bV" id="9SL-bP-myT"/>
                         <outlet property="titleLabel" destination="doA-2l-JqP" id="jTx-D9-bUX"/>
                         <outlet property="usernameLabel" destination="zZT-Qm-BX2" id="XsH-fc-KRa"/>
                         <segue destination="3f3-Rz-RUo" kind="presentation" identifier="editPost" id="Ggi-1l-080"/>
                         <segue destination="oFf-i6-dje" kind="presentation" identifier="fromPostMap" id="hEg-yg-0bF"/>
+                        <segue destination="XLn-4s-Zvi" kind="unwind" identifier="fromLoginToPostView" unwindAction="unwindToPostView:" id="EHW-MD-A45"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="XLn-4s-Zvi" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1270" y="651"/>
         </scene>

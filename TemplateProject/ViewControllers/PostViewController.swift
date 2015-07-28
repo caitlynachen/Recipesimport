@@ -19,6 +19,8 @@ class PostViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var logoView: UIView!
+    
     var anno: PinAnnotation?
     
     @IBOutlet weak var DescriptionLabel: UILabel!
@@ -45,7 +47,8 @@ class PostViewController: UIViewController {
             loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
             
             loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
-            //            loginViewController.logInView?.logo = self.logoView
+            logoView.hidden = false
+                        loginViewController.logInView?.logo = self.logoView
             
             
             parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
@@ -58,7 +61,7 @@ class PostViewController: UIViewController {
                     // if login was successful, display the TabBarController
                     // 2
                     println("show post  view controller")
-                    
+                    self.loginViewController.performSegueWithIdentifier("fromLoginToPostView", sender: self)
                     //****
                     self.anno?.post.toggleLikePost(PFUser.currentUser()!)
                     
@@ -254,6 +257,8 @@ class PostViewController: UIViewController {
         if(segue.identifier == "unwindToPostView"){
             
             
+        } else if (segue.identifier == "fromLoginToPostView"){
+            
         }
     }
     
@@ -275,6 +280,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        logoView.hidden = true
         //post = anno?.post
         titleLabel.text = anno?.title
         countryLabel.text = anno?.country
