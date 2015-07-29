@@ -14,7 +14,7 @@ import ParseUI
 
 
 
-class PostViewController: UIViewController {
+class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var servings: UILabel!
     @IBOutlet weak var cook: UILabel!
@@ -22,10 +22,13 @@ class PostViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    @IBOutlet weak var logoView: UIView!
+    
+    @IBOutlet weak var instructionsTableView: UITableView!
+    @IBOutlet weak var ingredientsTableView: UITableView!
     
     var anno: PinAnnotation?
     
+    @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var DescriptionLabel: UILabel!
     @IBOutlet weak var imageViewDisplay: UIImageView!
     @IBOutlet weak var countryLabel: UILabel!
@@ -281,10 +284,24 @@ class PostViewController: UIViewController {
         
     }
     
+    var ing: [String]?
+    var ins: [String]?
     
     var image: UIImage?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        
+        ing = anno?.ingredients
+        ins = anno?.instructions
+        
+        self.ingredientsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.instructionsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "instruccell")
         
         logoView.hidden = true
         //post = anno?.post
@@ -314,6 +331,7 @@ class PostViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
     @IBAction func backButtonTapped(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
@@ -327,14 +345,37 @@ class PostViewController: UIViewController {
         
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == ingredientsTableView {
+            return ing!.count;
+        } else {
+            return ins!.count;
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var myFont = UIFont(name: "Arial", size: 14.0)
+        if tableView == ingredientsTableView{
+            var cell: UITableViewCell = self.ingredientsTableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+            
+            
+            cell.textLabel?.font = myFont
+            cell.textLabel?.text = anno?.ingredients[indexPath.row]
+            return cell
+            
+        } else {
+            var cell: UITableViewCell = self.instructionsTableView.dequeueReusableCellWithIdentifier("instruccell") as! UITableViewCell
+            
+            cell.textLabel?.font = myFont
+            cell.textLabel?.text = anno?.instructions[indexPath.row]
+            return cell
+        }
+        
+    }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "toRecipeView") {
-            var dest = segue.destinationViewController as! RecipeViewController;
-            
-            dest.annotation = anno
-            
-        } else if(segue.identifier == "editPost"){
+        if(segue.identifier == "editPost"){
             var dest = segue.destinationViewController as! PostDisplayViewController;
             
             dest.annotation = anno

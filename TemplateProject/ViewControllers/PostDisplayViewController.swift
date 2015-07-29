@@ -243,6 +243,12 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         
     
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        scrollView.contentSize.width = screenWidth
         
         descriptionText.delegate = self
         placeholderLabel = UILabel()
