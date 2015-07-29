@@ -35,6 +35,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     @IBOutlet weak var toolbar: UIToolbar!
     var ann: PinAnnotation?
     
+    @IBOutlet weak var cancelSearchBar: UIButton!
     var points: [PFGeoPoint] = []
     
     var locationManager = CLLocationManager()
@@ -64,6 +65,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     }
     
     
+   
     @IBAction func logoutTapped(sender: AnyObject) {
         let actionSheetController: UIAlertController = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .Alert)
         
@@ -193,7 +195,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         navbar.hidden = true
         
     }
-    
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -459,6 +461,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         }
     }
     
+    
+    @IBAction func cancelSerachBar(sender: AnyObject) {
+        autocompleteTextfield.text = nil
+        navbar.hidden = false
+        
+    }
     
     
 }
