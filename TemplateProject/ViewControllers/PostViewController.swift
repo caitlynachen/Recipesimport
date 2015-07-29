@@ -291,11 +291,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
-        
         
         ing = anno?.ingredients
         ins = anno?.instructions
