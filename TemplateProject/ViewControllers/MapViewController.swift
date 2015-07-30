@@ -295,7 +295,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        var view: MKPinAnnotationView?
+        var view: MKAnnotationView?
         //let annotation1 = self.mapAnnoations[0]
         if annotation is MKUserLocation{
             return nil
@@ -303,32 +303,50 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         for annotation1 in mapAnnoations{
             let identifier = "pin"
             
-            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView{
+            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier){
                 dequeuedView.annotation = annotation1
                 view = dequeuedView
             } else {
-                view = MKPinAnnotationView(annotation: annotation1, reuseIdentifier:identifier)
+                var data = annotation1.image.getData()
+
+                view = MKAnnotationView(annotation: annotation1, reuseIdentifier:identifier)
                 view!.canShowCallout = true
                 view!.calloutOffset = CGPoint(x: -5, y: 5)
-                view!.pinColor = MKPinAnnotationColor.Purple
+                let size = CGSize(width: 30.0, height: 30.0)
+                let image = UIImage(data: data!)
+                let scaledImage = imageResize(image!, sizeChange: size)
+                view?.image = scaledImage
                 
                 
                 let button = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-                button.frame.size.width = 44
+                let float = CGFloat(count(annotation1.title))
+                let newFloat = float * 12
+                button.frame.size.width = newFloat
                 button.frame.size.height = 44
-                var data = annotation1.image.getData()
-                var imagebutton: UIImage = UIImage(data: data!)!
+                button.backgroundColor = UIColor.blackColor()
+//                var imagebutton: UIImage = UIImage(data: data!)!
                 
-                button.setImage(imagebutton, forState: UIControlState.Normal)
-                
+                button.setTitle(annotation1.title, forState: .Normal)
+
                 //button.backgroundColor = UIColor.redColor()
                 //button.setImage(UIImage(named: "trash"), forState: .Normal)
-                
                 view!.leftCalloutAccessoryView = button
             }
             
         }
         return view
+    }
+    
+    func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{
+        
+        let hasAlpha = false
+        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        imageObj.drawInRect(CGRect(origin: CGPointZero, size: sizeChange))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage
     }
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {

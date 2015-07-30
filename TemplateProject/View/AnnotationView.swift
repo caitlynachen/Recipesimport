@@ -7,7 +7,11 @@
 //
 
 import UIKit
+import Parse
+import MapKit
 
-class AnnotationView: NSObject {
-   
+class AnnotationView: MKPointAnnotation {
+    var image: UIImage!
+
+
 }
