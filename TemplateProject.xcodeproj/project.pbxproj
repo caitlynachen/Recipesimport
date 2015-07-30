@@ -16,6 +16,7 @@
 		1C13E5881B4C486800FA5F39 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5841B4C486800FA5F39 /* InstructionsViewController.swift */; };
 		1C3DDE521B4AF2EA004E8014 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C3DDE511B4AF2EA004E8014 /* Images.xcassets */; };
 		1C52FFDB1B55C1BE00ADBE8B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */; };
+		1C7EB5CF1B6A845800E013E7 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7EB5CE1B6A845800E013E7 /* AnnotationView.swift */; };
 		1CADAED21B597E0700F341A6 /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CADAED11B597E0700F341A6 /* PinAnnotation.swift */; };
 		1CADAEDA1B599DB600F341A6 /* to delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CADAED91B599DB600F341A6 /* to delete.swift */; };
 		1CAE6F3D1B635A8200FC8E76 /* AutocompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAE6F3C1B635A8200FC8E76 /* AutocompleteTextField.swift */; };
@@ -149,6 +150,7 @@
 		1C13E5841B4C486800FA5F39 /* InstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
 		1C3DDE511B4AF2EA004E8014 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1C7EB5CE1B6A845800E013E7 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		1CADAED11B597E0700F341A6 /* PinAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
 		1CADAED91B599DB600F341A6 /* to delete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "to delete.swift"; sourceTree = "<group>"; };
 		1CAE6F3C1B635A8200FC8E76 /* AutocompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutocompleteTextField.swift; path = "TemplateProject/untitled folder/AutocompleteTextField.swift"; sourceTree = SOURCE_ROOT; };
@@ -225,6 +227,7 @@
 				1C13E57D1B4C485900FA5F39 /* IngredientsTableViewCell.swift */,
 				1C13E57E1B4C485900FA5F39 /* InstructionsTableViewCell.swift */,
 				1CADAED11B597E0700F341A6 /* PinAnnotation.swift */,
+				1C7EB5CE1B6A845800E013E7 /* AnnotationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C1105491B5EB10C0081D073 /* PostDisplayViewController.swift in Sources */,
+				1C7EB5CF1B6A845800E013E7 /* AnnotationView.swift in Sources */,
 				1CADAEDA1B599DB600F341A6 /* to delete.swift in Sources */,
 				1C13E5801B4C485900FA5F39 /* InstructionsTableViewCell.swift in Sources */,
 				1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */,

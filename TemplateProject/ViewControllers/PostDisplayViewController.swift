@@ -13,12 +13,13 @@ import Bond
 
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, NSURLConnectionDataDelegate{
     
+    @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var autocompleteTextfield: AutoCompleteTextField!
     
     @IBOutlet weak var cookTime: UITextField!
     private var responseData:NSMutableData?
-
+    
     @IBOutlet weak var numOfServings: UITextField!
     @IBOutlet weak var prepTime: UITextField!
     private var connection:NSURLConnection?
@@ -48,7 +49,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     var ing: [String]?
     var ins: [String]?
     
-        
+    
     @IBAction func backButton(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
@@ -63,9 +64,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             cookTime.text = annotation?.cook
             prepTime.text = annotation?.prep
             numOfServings.text = annotation?.servings
-//            var data = annotation?.image.getData()
-//            image = UIImage(data: data!)
-//            imageView?.image = image
+            //            var data = annotation?.image.getData()
+            //            image = UIImage(data: data!)
+            //            imageView?.image = image
             autocompleteTextfield.text = annotation?.country
             
             ing = annotation?.ingredients
@@ -84,9 +85,42 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if let ident = identifier {
             if ident == "fromPostDiplayToMap" {
+                if titleTextField.text == "" {
+                    emptyLabel.text = "Please enter a title."
+                    emptyLabel.hidden = false
+                    
+                } else if autocompleteTextfield.text == "" {
+                    emptyLabel.text = "Please enter location tag."
+                    emptyLabel.hidden = false
+                    
+                } else if imageView?.image == nil {
+                    emptyLabel.text = "Please add an image."
+                    emptyLabel.hidden = false
+                    
+                } else if prepTime.text == ""{
+                    emptyLabel.text = "Please enter a prep time."
+                    emptyLabel.hidden = false
+                    
+                } else if cookTime.text == "" {
+                    emptyLabel.text = "Please enter a cook time."
+                    emptyLabel.hidden = false
+                    
+                } else if numOfServings.text == "" {
+                    emptyLabel.text = "Please enter the number of servings."
+                    emptyLabel.hidden = false
+                    
+                } else if self.ingredientsArray.first == nil {
+                    emptyLabel.text = "Please enter at least one ingredient."
+                    emptyLabel.hidden = false
+                    
+                } else if self.instructionsArray.first == nil {
+                    emptyLabel.text = "Please enter at least one instruction."
+                    emptyLabel.hidden = false
+                    
+                } else {
                 
-                return true
-                
+                    return true
+                }
             }
         }
         
@@ -113,11 +147,11 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         photoTakingHelper =
             PhotoTakingHelper(viewController: self) { (image: UIImage?) in
                 // 1
-              
+                
                 self.post.image.value = image!
                 
                 self.imageView?.image = image!
-               
+                
                 
                 //self.imageView?.clipsToBounds = true
                 let imageData = UIImageJPEGRepresentation(image, 0.8)
@@ -126,9 +160,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                 
                 //let post = PFObject(className: "Post")
                 if self.annotation == nil {
-                self.post["imageFile"] = imageFile
-                self.post.save()
-                
+                    self.post["imageFile"] = imageFile
+                    self.post.save()
+                    
                 } else {
                     let imageData = UIImageJPEGRepresentation(self.imageView?.image, 0.8)
                     let imageFile = PFFile(data: imageData)
@@ -230,19 +264,20 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         }
         
     }
- 
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        
+        emptyLabel.hidden = true
         configureTextField()
         handleTextFieldInterfaces()
         
         //picker = UIPickerView()
         
         
-    
+        
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         
         let screenWidth = screenSize.width
@@ -365,7 +400,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     func updatePost() {
         
-//        appendIngredientsAndInstructions()
+        //        appendIngredientsAndInstructions()
         //change parse info
         annotation?.post.prep = prepTime.text
         annotation?.post.cook = cookTime.text
@@ -386,44 +421,43 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     func createPost(){
         
-        post.prep = prepTime.text
-        post.cook = cookTime.text
-        post.servings = numOfServings.text
-        post.caption = descriptionText.text
-        post.RecipeTitle = titleTextField.text
-        post.country = autocompleteTextfield.text
-        post.location = toLoc
-        post.Ingredients = self.ingredientsArray
-        post.Instructions = self.instructionsArray
-        post.date = NSDate()
-        
-        
-        post.save()
-        post.uploadPost()
-        
-        
-        
-        let lat = post.location?.latitude
-        let long = post.location?.longitude
-        var coordinateh = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
-        
-        
-        var coor: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-        
-        let test = post.Ingredients!
-        
-        var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
-        
-        currentAnnotation = annotationToAdd
-        //mapView.mapView.addAnnotation(annotation)
-        
-        mapViewController.viewWillAppear(true)
-        
-        
-        
+            
+            post.prep = prepTime.text
+            post.cook = cookTime.text
+            post.servings = numOfServings.text
+            post.caption = descriptionText.text
+            post.RecipeTitle = titleTextField.text
+            post.country = autocompleteTextfield.text
+            post.location = toLoc
+            post.Ingredients = self.ingredientsArray
+            post.Instructions = self.instructionsArray
+            post.date = NSDate()
+
+            
+            post.save()
+            post.uploadPost()
+            
+            
+            
+            let lat = post.location?.latitude
+            let long = post.location?.longitude
+            var coordinateh = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+            
+            
+            var coor: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+            
+            let test = post.Ingredients!
+            
+            var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
+            
+            currentAnnotation = annotationToAdd
+            //mapView.mapView.addAnnotation(annotation)
+            
+            mapViewController.viewWillAppear(true)
+             
     }
     
 }

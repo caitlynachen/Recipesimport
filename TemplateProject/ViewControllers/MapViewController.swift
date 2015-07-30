@@ -117,11 +117,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     
                     parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
                         // Initialize the ParseLoginHelper with a callback
-                        println("before the error")
-                        if let error = error {
-                            // 1
-                            ErrorHandling.defaultErrorHandler(error)
-                        } else  if let user = user {
+//                        println("before the error")
+//                        if let error = error {
+//                            // 1
+//                            ErrorHandling.defaultErrorHandler(error)
+                       // }
+                       if let user = user {
                             // if login was successful, display the TabBarController
                             // 2
                             println("show post display view controller")

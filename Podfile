@@ -2,7 +2,6 @@
 # platform :ios, '6.0'
 
 target 'TemplateProject' do
-	pod 'GoogleMaps'
 	pod 'DateTools'
 end
 
