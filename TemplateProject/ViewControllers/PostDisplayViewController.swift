@@ -142,6 +142,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             svc.annotationCurrent = currentAnnotation
         }
     }
+    
     @IBAction func cameraButtonTapped(sender: AnyObject) {
         //println("hi")
         photoTakingHelper =
@@ -326,6 +327,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         autocompleteTextfield.autoCompleteAttributes = attributes
     }
     
+    var coordinateh: CLLocationCoordinate2D?
+    
     private func handleTextFieldInterfaces(){
         autocompleteTextfield.onTextChange = {[weak self] text in
             if !text.isEmpty{
@@ -348,6 +351,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                     let coordinate = placemark!.location.coordinate
                     
                     self!.autocompleteTextfield.text = text
+                    
+                    self!.coordinateh = coordinate
                 }
             })
         }
@@ -432,26 +437,17 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             post.Ingredients = self.ingredientsArray
             post.Instructions = self.instructionsArray
             post.date = NSDate()
-
             
             post.save()
             post.uploadPost()
             
-            
-            
-            let lat = post.location?.latitude
-            let long = post.location?.longitude
-            var coordinateh = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
-            
-            
-            var coor: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+        
             
             let test = post.Ingredients!
             
-            var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
+            var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh!, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
             
             currentAnnotation = annotationToAdd
             //mapView.mapView.addAnnotation(annotation)

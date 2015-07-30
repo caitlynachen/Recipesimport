@@ -224,7 +224,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
         let location = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
         
-        currentLocation = location
         
         let span = MKCoordinateSpanMake(0.05, 0.05)
         
@@ -339,9 +338,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         }
     }
     
+    var coordinateAfterPosted: CLLocationCoordinate2D?
+    
     override func viewWillAppear(animated: Bool) {
         if annotationCurrent != nil{
+            coordinateAfterPosted = annotationCurrent?.coordinate
+            self.mapView.setCenterCoordinate(coordinateAfterPosted!, animated: true)
+
             mapView.addAnnotation(annotationCurrent)
+
             if PFUser.currentUser() != nil{
                 toolbar.hidden = false
             } else{
