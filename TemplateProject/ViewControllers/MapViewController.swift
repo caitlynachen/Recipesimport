@@ -240,7 +240,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
         let postsQuery = PFQuery(className: "Post")
         
-        postsQuery.whereKey("location", nearGeoPoint: loc, withinMiles: 100.0)
+        postsQuery.whereKey("location", nearGeoPoint: loc, withinMiles: 5.0)
         //finds all posts near current locations
         
         var posts = postsQuery.findObjects()
@@ -262,7 +262,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 flagBond = Bond<[PFUser]?>() { [unowned self] flagList in
                     
                     if let flagList = flagList {
-                        if flagList.count > 10000 {
+                        if flagList.count > 0 {
                             postcurrent.delete()
                         }
                         
@@ -272,28 +272,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 
                 postcurrent.flags ->> flagBond
                 
-                println(" make stuff")
-                let lati = postcurrent.location!.latitude
-                let longi = postcurrent.location!.longitude
-                let coor = CLLocationCoordinate2D(latitude: lati, longitude: longi)
-                
-                var annotationcurrent = PinAnnotation?()
-                
-                
-                annotationcurrent = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, prep: postcurrent.prep!, cook: postcurrent.cook!, servings: postcurrent.servings!, post: postcurrent)
-                
-                
-                self.mapAnnoations.append(annotationcurrent!)
-                println("append")
-                //for anno in mapAnnoations {
-                self.mapView.addAnnotation(annotationcurrent)
-                
+                if postcurrent.imageFile != nil {
+                    println(" make stuff")
+                    let lati = postcurrent.location!.latitude
+                    let longi = postcurrent.location!.longitude
+                    let coor = CLLocationCoordinate2D(latitude: lati, longitude: longi)
+                    
+                    var annotationcurrent = PinAnnotation?()
+                    
+                    
+                    annotationcurrent = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, prep: postcurrent.prep!, cook: postcurrent.cook!, servings: postcurrent.servings!, post: postcurrent)
+                    
+                    
+                    self.mapAnnoations.append(annotationcurrent!)
+                    println("append")
+                    //for anno in mapAnnoations {
+                    self.mapView.addAnnotation(annotationcurrent)
+                }
             }
         }
         
-//        for anno in mapAnnoations {
-//            mapView.addAnnotation(anno)
-//        }
+        //        for anno in mapAnnoations {
+        //            mapView.addAnnotation(anno)
+        //        }
         
         locationManager.stopUpdatingLocation()
         
@@ -325,7 +326,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             if anView == nil {
                 anView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 anView!.canShowCallout = true
-                anView!.calloutOffset = CGPoint(x: -5, y: 5)
+//                anView!.calloutOffset = CGPoint(x: -10, y: 5)
             }
                 
             else {
@@ -338,7 +339,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             if (pinanno.image.getData() != nil){
                 let data = pinanno.image.getData()
                 let size = CGSize(width: 30.0, height: 30.0)
-
+                
                 let imagee = UIImage(data: data!)
                 let scaledImage = imageResize(imagee!, sizeChange: size)
                 anView!.image = scaledImage
@@ -356,7 +357,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 //button.backgroundColor = UIColor.redColor()
                 //button.setImage(UIImage(named: "trash"), forState: .Normal)
                 anView!.leftCalloutAccessoryView = button
-
+                
                 
             }
             
