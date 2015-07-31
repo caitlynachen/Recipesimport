@@ -10,6 +10,8 @@ import UIKit
 import Bond
 import Parse
 import ParseUI
+import FBSDKCoreKit
+
 //import DateTools
 
 

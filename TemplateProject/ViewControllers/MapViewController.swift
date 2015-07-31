@@ -66,6 +66,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     
     
+    
     @IBAction func logoutTapped(sender: AnyObject) {
         let actionSheetController: UIAlertController = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .Alert)
         
@@ -150,6 +151,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         return false
     }
     
+  
     @IBOutlet var mapView: MKMapView!
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -188,7 +190,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     }
     
     @IBAction func cancelTapped(sender: AnyObject) {
-        autocompleteTextfield.text = nil
+        
+        autocompleteTextfield = nil
     }
     @IBOutlet weak var navbar: UINavigationBar!
     @IBAction func showSearchBar(sender: AnyObject) {
@@ -206,7 +209,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println("error")
     }
-    
     
     //var point = PinAnnotation(title: "newPoint", coordinate: currentLocation!)
     var lat: CLLocationDegrees?
@@ -272,7 +274,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 
                 postcurrent.flags ->> flagBond
                 
-                if postcurrent.imageFile != nil {
+                if postcurrent.imageFile != nil && postcurrent.RecipeTitle != nil && postcurrent.location != nil && postcurrent.caption != nil && postcurrent.country != nil && postcurrent.Instructions != nil && postcurrent.user != nil && postcurrent.date != nil && postcurrent.prep != nil && postcurrent.cook != nil && postcurrent.servings != nil {
                     println(" make stuff")
                     let lati = postcurrent.location!.latitude
                     let longi = postcurrent.location!.longitude
@@ -301,7 +303,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
     }
     
-    
+   
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         var view: MKAnnotationView?
@@ -460,6 +462,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         autocompleteTextfield.onSelect = {[weak self] text, indexpath in
             Location.geocodeAddressString(text, completion: { (placemark, error) -> Void in
                 if placemark != nil{
+                    self!.autocompleteTextfield.text = text
+                    self!.autocompleteTextfield.resignFirstResponder()
                     let coordinate = placemark!.location.coordinate
                     self!.addAnnotation(coordinate, address: text)
                     self?.mapView.setCenterCoordinate(coordinate, animated: true)

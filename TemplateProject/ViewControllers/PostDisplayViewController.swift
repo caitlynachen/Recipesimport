@@ -10,6 +10,8 @@ import UIKit
 import Parse
 import MapKit
 import Bond
+import FBSDKCoreKit
+
 
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, NSURLConnectionDataDelegate{
     
