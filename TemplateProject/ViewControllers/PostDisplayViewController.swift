@@ -329,6 +329,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     var coordinateh: CLLocationCoordinate2D?
     
+    var pfgeopoint: PFGeoPoint?
+
+    
     private func handleTextFieldInterfaces(){
         autocompleteTextfield.onTextChange = {[weak self] text in
             if !text.isEmpty{
@@ -353,6 +356,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                     self!.autocompleteTextfield.text = text
                     
                     self!.coordinateh = coordinate
+                    self!.pfgeopoint = PFGeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
                 }
             })
         }
@@ -426,6 +430,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     func createPost(){
         
+        
             
             post.prep = prepTime.text
             post.cook = cookTime.text
@@ -433,7 +438,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             post.caption = descriptionText.text
             post.RecipeTitle = titleTextField.text
             post.country = autocompleteTextfield.text
-            post.location = toLoc
+            post.location = pfgeopoint
             post.Ingredients = self.ingredientsArray
             post.Instructions = self.instructionsArray
             post.date = NSDate()

@@ -53,7 +53,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     private var connection:NSURLConnection?
     
     private let googleMapsKey = "AIzaSyD8-OfZ21X2QLS1xLzu1CLCfPVmGtch7lo"
-     private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+    private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     
     @IBOutlet weak var logoView: UIView!
     
@@ -65,7 +65,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     }
     
     
-   
+    
     @IBAction func logoutTapped(sender: AnyObject) {
         let actionSheetController: UIAlertController = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .Alert)
         
@@ -89,11 +89,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         }
         actionSheetController.addAction(nextAction)
         //Add a text field
-       
+        
         
         //Present the AlertController
         self.presentViewController(actionSheetController, animated: true, completion: nil)
-
+        
     }
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if let ident = identifier {
@@ -117,12 +117,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     
                     parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
                         // Initialize the ParseLoginHelper with a callback
-//                        println("before the error")
-//                        if let error = error {
-//                            // 1
-//                            ErrorHandling.defaultErrorHandler(error)
-                       // }
-                       if let user = user {
+                        //                        println("before the error")
+                        //                        if let error = error {
+                        //                            // 1
+                        //                            ErrorHandling.defaultErrorHandler(error)
+                        // }
+                        if let user = user {
                             // if login was successful, display the TabBarController
                             // 2
                             println("show post display view controller")
@@ -167,7 +167,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         } else{
             toolbar.hidden = true
         }
-                
+        
         cancel.hidden = true
         
         autocompleteTextfield.delegate = self
@@ -192,11 +192,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     }
     @IBOutlet weak var navbar: UINavigationBar!
     @IBAction func showSearchBar(sender: AnyObject) {
-        
+        let countlol = mapAnnoations.count
+        println(countlol)
         navbar.hidden = true
         
     }
-   
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -239,7 +240,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
         let postsQuery = PFQuery(className: "Post")
         
-        postsQuery.whereKey("location", nearGeoPoint: loc, withinMiles: 5.0)
+        postsQuery.whereKey("location", nearGeoPoint: loc, withinMiles: 100.0)
         //finds all posts near current locations
         
         var posts = postsQuery.findObjects()
@@ -250,6 +251,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if let pts = posts {
             for post in pts {
                 
+                println(pts.count)
+                println("posts from parse")
+                
                 var postcurrent = post as! Post
                 
                 postcurrent.fetchFlags()
@@ -258,21 +262,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 flagBond = Bond<[PFUser]?>() { [unowned self] flagList in
                     
                     if let flagList = flagList {
-                        if flagList.count > 3 {
+                        if flagList.count > 10000 {
                             postcurrent.delete()
-                        } else{
-                            let lati = postcurrent.location!.latitude
-                            let longi = postcurrent.location!.longitude
-                            let coor = CLLocationCoordinate2D(latitude: self.lat!, longitude: self.long!)
-                            
-                            var annotation = PinAnnotation?()
-                            
-                            
-                            annotation = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, prep: postcurrent.prep!, cook: postcurrent.cook!, servings: postcurrent.servings!, post: postcurrent)
-                            
-                            
-                            self.mapAnnoations.append(annotation!)
-                            self.mapView.addAnnotation(annotation)
                         }
                         
                     }
@@ -281,11 +272,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 
                 postcurrent.flags ->> flagBond
                 
+                println(" make stuff")
+                let lati = postcurrent.location!.latitude
+                let longi = postcurrent.location!.longitude
+                let coor = CLLocationCoordinate2D(latitude: lati, longitude: longi)
                 
+                var annotationcurrent = PinAnnotation?()
+                
+                
+                annotationcurrent = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, prep: postcurrent.prep!, cook: postcurrent.cook!, servings: postcurrent.servings!, post: postcurrent)
+                
+                
+                self.mapAnnoations.append(annotationcurrent!)
+                println("append")
+                //for anno in mapAnnoations {
+                self.mapView.addAnnotation(annotationcurrent)
                 
             }
-            
         }
+        
+//        for anno in mapAnnoations {
+//            mapView.addAnnotation(anno)
+//        }
         
         locationManager.stopUpdatingLocation()
         
@@ -299,43 +307,81 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         //let annotation1 = self.mapAnnoations[0]
         if annotation is MKUserLocation{
             return nil
+        } else if !(annotation is PinAnnotation) {
+            return nil
         }
-        for annotation1 in mapAnnoations{
-            let identifier = "pin"
+        
+        var anView: MKAnnotationView?
+        
+        if fromTxtField == false{
             
-            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier){
-                dequeuedView.annotation = annotation1
-                view = dequeuedView
-            } else {
-                var data = annotation1.image.getData()
-
-                view = MKAnnotationView(annotation: annotation1, reuseIdentifier:identifier)
-                view!.canShowCallout = true
-                view!.calloutOffset = CGPoint(x: -5, y: 5)
-                let size = CGSize(width: 30.0, height: 30.0)
-                let image = UIImage(data: data!)
-                let scaledImage = imageResize(image!, sizeChange: size)
-                view?.image = scaledImage
+            // for annotation in mapAnnoations{
+            
+            println("mapAnnotationS: \(mapAnnoations.count)")
+            println("make anno")
+            let identifier = "postsFromParseAnnotations"
+            
+            anView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+            if anView == nil {
+                anView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                anView!.canShowCallout = true
+                anView!.calloutOffset = CGPoint(x: -5, y: 5)
+            }
                 
+            else {
+                
+                anView!.annotation = annotation
+                
+            }
+            
+            let pinanno = annotation as! PinAnnotation
+            if (pinanno.image.getData() != nil){
+                let data = pinanno.image.getData()
+                let size = CGSize(width: 30.0, height: 30.0)
+
+                let imagee = UIImage(data: data!)
+                let scaledImage = imageResize(imagee!, sizeChange: size)
+                anView!.image = scaledImage
                 
                 let button = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-                let float = CGFloat(count(annotation1.title))
+                let float = CGFloat(count(pinanno.title))
                 let newFloat = float * 12
                 button.frame.size.width = newFloat
                 button.frame.size.height = 44
                 button.backgroundColor = UIColor.blackColor()
-//                var imagebutton: UIImage = UIImage(data: data!)!
+                //                var imagebutton: UIImage = UIImage(data: data!)!
                 
-                button.setTitle(annotation1.title, forState: .Normal)
-
+                button.setTitle(pinanno.title, forState: .Normal)
+                
                 //button.backgroundColor = UIColor.redColor()
                 //button.setImage(UIImage(named: "trash"), forState: .Normal)
-                view!.leftCalloutAccessoryView = button
+                anView!.leftCalloutAccessoryView = button
+
+                
             }
             
+            // }
+            
+        } else{
+            let reuseId = "hi"
+            
+            var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+            if anView == nil {
+                anView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                anView!.canShowCallout = true
+                anView!.animatesDrop = true
+                anView!.pinColor = .Purple
+            }
+            else {
+                anView!.annotation = annotation
+            }
+            
+            fromTxtField = false
         }
-        return view
+        return anView
     }
+    
+    
     
     func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{
         
@@ -362,9 +408,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if annotationCurrent != nil{
             coordinateAfterPosted = annotationCurrent?.coordinate
             self.mapView.setCenterCoordinate(coordinateAfterPosted!, animated: true)
-
+            
             mapView.addAnnotation(annotationCurrent)
-
+            
             if PFUser.currentUser() != nil{
                 toolbar.hidden = false
             } else{
@@ -377,7 +423,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             } else{
                 toolbar.hidden = true
             }
-        } 
+        }
     }
     
     private func configureTextField(){
@@ -456,12 +502,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         println("Error: \(error.localizedDescription)")
     }
     
+    var fromTxtField: Bool = false
     //MARK: Map Utilities
     private func addAnnotation(coordinate:CLLocationCoordinate2D, address:String?){
         if selectedPointAnnotation != nil{
             mapView.removeAnnotation(selectedPointAnnotation)
         }
-        
+        fromTxtField = true
         selectedPointAnnotation = MKPointAnnotation()
         selectedPointAnnotation?.coordinate = coordinate
         selectedPointAnnotation?.title = address
