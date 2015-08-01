@@ -838,6 +838,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="R3A-VP-Ru4"/>
                                 <exclude reference="6Vl-Ss-Puw"/>
                                 <exclude reference="Eka-Ja-2aZ"/>
                                 <exclude reference="P2K-Gu-Q5w"/>
@@ -845,7 +846,6 @@
                                 <exclude reference="bHw-By-aeb"/>
                                 <exclude reference="mh0-ac-Fi4"/>
                                 <exclude reference="nr2-v6-thn"/>
-                                <exclude reference="R3A-VP-Ru4"/>
                                 <exclude reference="Wcn-RA-PsP"/>
                             </mask>
                         </variation>
@@ -886,7 +886,7 @@
         <image name="heart-selected" width="72" height="68"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mXG-pM-Xcc"/>
         <segue reference="GjT-Rn-vyF"/>
+        <segue reference="mXG-pM-Xcc"/>
     </inferredMetricsTieBreakers>
 </document>

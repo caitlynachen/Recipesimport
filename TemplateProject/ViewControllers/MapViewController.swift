@@ -15,6 +15,7 @@ import CoreLocation
 import Parse
 import ParseUI
 import Bond
+import FBSDKCoreKit
 
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate, UITextFieldDelegate {
@@ -58,6 +59,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     @IBAction func unwindToVC(segue:UIStoryboardSegue) {
         if(segue.identifier == "fromPostToMap"){
+            if PFUser.currentUser() != nil{
+                toolbar.hidden = false
+            } else{
+                toolbar.hidden = true
+            }
+
             
         }
         
@@ -112,34 +119,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
                     
                     loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
-                    
                     let logo = UIImage(named: "logo")
                     let logoView = UIImageView(image: logo)
                     loginViewController.logInView?.logo = logoView
                     
                     
+                    
+                    
                     parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
                         // Initialize the ParseLoginHelper with a callback
-                        //                        println("before the error")
-                        //                        if let error = error {
-                        //                            // 1
-                        //                            ErrorHandling.defaultErrorHandler(error)
-                        // }
-                        if let user = user {
+                        println("before the error")
+                        if let error = error {
+                            // 1
+                            ErrorHandling.defaultErrorHandler(error)
+                        } else  if let user = user {
                             // if login was successful, display the TabBarController
                             // 2
-                            println("show post display view controller")
+                            println("show post  view controller")
                             
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            let postDisplayViewController = storyboard.instantiateViewControllerWithIdentifier("postDisplayViewController") as! PostDisplayViewController
-                            self.dismissViewControllerAnimated(false, completion: nil)
-                            self.presentViewController(postDisplayViewController, animated: true, completion: nil)
+                            self.loginViewController.dismissViewControllerAnimated(true, completion: nil)
+                            //****
+                            
                             
                         }
                     }
                     
                     loginViewController.delegate = parseLoginHelper
                     loginViewController.signUpController?.delegate = parseLoginHelper
+
                     
                     
                     
@@ -153,11 +160,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         return false
     }
     
+
+    
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
+        
 
-        self.loginViewController.logInView?.logo?.frame = CGRect(x: 35.0, y: 287.0, width: 108.5, height: 68.5)
+        self.loginViewController.logInView?.logo?.frame = CGRect(x: 80.0, y: 70.0, width: 187.0, height: 119.1)
         
     }
   
@@ -438,6 +448,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             }
         }
     }
+    
     
     private func configureTextField(){
         autocompleteTextfield.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)

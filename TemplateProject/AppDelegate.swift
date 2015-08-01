@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
     
     // check if we have logged in user
+       
+    // check if we have logged in user
     // 2
     let user = PFUser.currentUser()
     

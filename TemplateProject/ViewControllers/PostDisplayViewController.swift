@@ -57,7 +57,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
         self.dismissViewControllerAnimated(false, completion: nil)
         self.presentViewController(mapViewController, animated: true, completion: nil)
+        mapViewController.viewDidAppear(true)
     }
+        
     
     override func viewWillAppear(animated: Bool) {
         if (annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.country != nil && annotation?.servings != nil && annotation?.prep != nil && annotation?.cook != nil) {
