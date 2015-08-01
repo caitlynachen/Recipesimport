@@ -230,6 +230,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         println("error")
     }
     
+    func toolBar() {
+        if PFUser.currentUser() != nil{
+            toolbar.hidden = false
+        } else{
+            toolbar.hidden = true
+        }
+
+    }
+    
     //var point = PinAnnotation(title: "newPoint", coordinate: currentLocation!)
     var lat: CLLocationDegrees?
     var long: CLLocationDegrees?
@@ -447,6 +456,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 toolbar.hidden = true
             }
         }
+        
+        toolBar()
     }
     
     
