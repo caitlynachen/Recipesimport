@@ -177,7 +177,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                     
                 }
                 
-                
+            self.cameraButton.hidden = true
         }
         
     }
