@@ -55,7 +55,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     private let googleMapsKey = "AIzaSyD8-OfZ21X2QLS1xLzu1CLCfPVmGtch7lo"
     private let baseURLString = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     
-    @IBOutlet weak var logoView: UIView!
     
     @IBAction func unwindToVC(segue:UIStoryboardSegue) {
         if(segue.identifier == "fromPostToMap"){
@@ -113,7 +112,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
                     
                     loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
-                    loginViewController.logInView?.logo = self.logoView
+                    
+                    let logo = UIImage(named: "logo")
+                    let logoView = UIImageView(image: logo)
+                    loginViewController.logInView?.logo = logoView
                     
                     
                     parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
@@ -151,6 +153,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         return false
     }
     
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+
+        self.loginViewController.logInView?.logo?.frame = CGRect(x: 35.0, y: 287.0, width: 108.5, height: 68.5)
+        
+    }
   
     @IBOutlet var mapView: MKMapView!
     
@@ -163,6 +172,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     //    var flaggedPosts: [Post]?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         if PFUser.currentUser() != nil{
             toolbar.hidden = false

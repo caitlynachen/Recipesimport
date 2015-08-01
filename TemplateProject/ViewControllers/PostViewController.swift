@@ -30,7 +30,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var anno: PinAnnotation?
     
-    @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var DescriptionLabel: UILabel!
     @IBOutlet weak var imageViewDisplay: UIImageView!
     @IBOutlet weak var countryLabel: UILabel!
@@ -55,8 +54,11 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
             
             loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
-            logoView.hidden = false
-                        loginViewController.logInView?.logo = self.logoView
+            let logo = UIImage(named: "logo")
+            let logoView = UIImageView(image: logo)
+            loginViewController.logInView?.logo = logoView
+            
+
             
             
             parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
@@ -213,8 +215,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                         self.loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
                         
                         self.loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
-                        self.logoView.hidden = false
-                                    self.loginViewController.logInView?.logo = self.logoView
+                        let logo = UIImage(named: "logo")
+                        let logoView = UIImageView(image: logo)
+                        self.loginViewController.logInView?.logo = logoView
+                        
                         
                         
                         self.parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
@@ -300,7 +304,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.ingredientsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.instructionsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "instruccell")
         
-        logoView.hidden = true
         //post = anno?.post
         cook.text = anno?.cook
         prep.text = anno?.prep
