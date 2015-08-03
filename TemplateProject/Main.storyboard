@@ -489,8 +489,8 @@
                                                     </mask>
                                                 </variation>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxG-qQ-TJa">
-                                                <rect key="frame" x="10" y="127" width="46" height="20"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxG-qQ-TJa">
+                                                <rect key="frame" x="10" y="127" width="355" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="fkx-o8-gPm"/>
                                                 </constraints>
@@ -698,6 +698,7 @@
                                             <constraint firstAttribute="height" constant="1650" id="Iid-oe-YNb"/>
                                             <constraint firstItem="crw-1i-lvH" firstAttribute="leading" secondItem="3j3-zk-l7p" secondAttribute="leading" id="Iz7-Mo-9GU"/>
                                             <constraint firstItem="cnF-ca-tTI" firstAttribute="leading" secondItem="yHc-0A-6Th" secondAttribute="leading" id="J64-4s-9DU"/>
+                                            <constraint firstItem="cxG-qQ-TJa" firstAttribute="trailing" secondItem="tqp-DC-Ool" secondAttribute="trailing" id="Jc9-EK-bft"/>
                                             <constraint firstItem="crw-1i-lvH" firstAttribute="top" secondItem="3j3-zk-l7p" secondAttribute="bottom" constant="10" id="K91-31-PBw"/>
                                             <constraint firstItem="cnF-ca-tTI" firstAttribute="height" secondItem="TQ5-Fc-vmX" secondAttribute="height" id="LeZ-1P-URp"/>
                                             <constraint firstItem="B7d-4Q-DHK" firstAttribute="top" secondItem="YV1-gm-MeW" secondAttribute="bottom" constant="10" id="Lw8-dQ-h9h"/>

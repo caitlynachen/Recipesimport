@@ -307,7 +307,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         placeholderInstructionsLabelExample.sizeToFit()
         instructionsTextView.addSubview(placeholderInstructionsLabelExample)
         
-        placeholderInstructionsLabelExample.frame.origin = CGPoint(x: 5, y: 20)
+        placeholderInstructionsLabelExample.frame.origin = CGPoint(x: 5, y: 22)
         placeholderInstructionsLabelExample.textColor = UIColor(white: 0, alpha: 0.2)
         placeholderInstructionsLabelExample.hidden = count(instructionsTextView.text) != 0
 
@@ -318,7 +318,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         placeholderIngredientsLabelExample.sizeToFit()
         ingTextView.addSubview(placeholderIngredientsLabelExample)
         
-        placeholderIngredientsLabelExample.frame.origin = CGPoint(x: 5, y: 20)
+        placeholderIngredientsLabelExample.frame.origin = CGPoint(x: 5, y: 22)
         placeholderIngredientsLabelExample.textColor = UIColor(white: 0, alpha: 0.2)
         placeholderIngredientsLabelExample.hidden = count(ingTextView.text) != 0
         
