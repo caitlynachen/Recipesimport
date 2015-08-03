@@ -395,7 +395,7 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Create a Recipe" id="EOh-Yy-Imu">
-                                        <barButtonItem key="leftBarButtonItem" image="Back" id="HbH-oW-EOO">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="HbH-oW-EOO">
                                             <connections>
                                                 <action selector="backButton:" destination="uqa-oC-wvG" id="0Rd-xk-u43"/>
                                             </connections>
@@ -472,7 +472,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="1650"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3e-6R-jtk">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1472.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1472"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvR-bf-hfE">
                                                 <rect key="frame" x="10" y="100" width="105.5" height="17"/>
@@ -581,38 +581,6 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w0R-hB-zmD">
-                                                <rect key="frame" x="8" y="707" width="357" height="300"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="300" id="RRf-KP-g5c"/>
-                                                </constraints>
-                                                <prototypes>
-                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="4cD-LK-Zou">
-                                                        <rect key="frame" x="0.0" y="0.0" width="357" height="44"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4cD-LK-Zou" id="ntf-Ki-amJ">
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shq-2t-vDg">
-                                                                    <rect key="frame" x="8" y="11" width="42" height="20.5"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="centerY" secondItem="shq-2t-vDg" secondAttribute="centerY" id="FiR-4W-6AD"/>
-                                                                <constraint firstItem="shq-2t-vDg" firstAttribute="leading" secondItem="ntf-Ki-amJ" secondAttribute="leadingMargin" id="h7F-oh-4X5"/>
-                                                            </constraints>
-                                                        </tableViewCellContentView>
-                                                    </tableViewCell>
-                                                </prototypes>
-                                                <connections>
-                                                    <outlet property="dataSource" destination="ocg-v3-WDZ" id="VC7-ok-p5C"/>
-                                                    <outlet property="delegate" destination="ocg-v3-WDZ" id="6mV-pi-eHr"/>
-                                                </connections>
-                                            </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3j3-zk-l7p">
                                                 <rect key="frame" x="10" y="1022" width="94.5" height="20"/>
                                                 <constraints>
@@ -679,6 +647,38 @@
                                                 <connections>
                                                     <outlet property="dataSource" destination="ocg-v3-WDZ" id="a2z-Eq-HbX"/>
                                                     <outlet property="delegate" destination="ocg-v3-WDZ" id="9Cj-j5-Qhn"/>
+                                                </connections>
+                                            </tableView>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w0R-hB-zmD">
+                                                <rect key="frame" x="8" y="707" width="357" height="300"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="300" id="RRf-KP-g5c"/>
+                                                </constraints>
+                                                <prototypes>
+                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="4cD-LK-Zou">
+                                                        <rect key="frame" x="0.0" y="0.0" width="357" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4cD-LK-Zou" id="ntf-Ki-amJ">
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shq-2t-vDg">
+                                                                    <rect key="frame" x="8" y="11" width="42" height="20.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="centerY" secondItem="shq-2t-vDg" secondAttribute="centerY" id="FiR-4W-6AD"/>
+                                                                <constraint firstItem="shq-2t-vDg" firstAttribute="leading" secondItem="ntf-Ki-amJ" secondAttribute="leadingMargin" id="h7F-oh-4X5"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="ocg-v3-WDZ" id="VC7-ok-p5C"/>
+                                                    <outlet property="delegate" destination="ocg-v3-WDZ" id="6mV-pi-eHr"/>
                                                 </connections>
                                             </tableView>
                                         </subviews>

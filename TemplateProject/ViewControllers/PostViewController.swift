@@ -375,10 +375,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ingredientsTableView {
-            return ing!.count;
+            var i = anno?.ingredients.count
+            return i!
         } else {
-            return ins!.count;
-        }
+            var i = anno?.instructions.count
+            return i!
+       }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

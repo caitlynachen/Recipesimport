@@ -63,11 +63,29 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     @IBAction func backButton(sender: AnyObject) {
         
+        let actionSheetController: UIAlertController = UIAlertController(title: "Cancel", message: "Are you sure you want to cancel?", preferredStyle: .Alert)
+        
+        //Create and add the Cancel action
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
             self.dismissViewControllerAnimated(false, completion: nil)
             self.presentViewController(mapViewController, animated: true, completion: nil)
             mapViewController.viewDidAppear(true)
+            //Do some stuff
+        }
+        actionSheetController.addAction(cancelAction)
+        //Create and an option action
+        let nextAction: UIAlertAction = UIAlertAction(title: "Continue", style: .Default) { action -> Void in
+            //Do some other stuff
+        }
+        actionSheetController.addAction(nextAction)
+        //Add a text field
+                //Present the AlertController
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        
+        
             
             //Do some stuff
         
