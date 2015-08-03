@@ -39,6 +39,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     @IBOutlet weak var toolbar: UIToolbar!
     var ann: PinAnnotation?
     
+    var updatedPost: Bool?
+    
     @IBOutlet weak var cancelSearchBar: UIButton!
     var points: [PFGeoPoint] = []
     
@@ -62,11 +64,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     @IBAction func unwindToVC(segue:UIStoryboardSegue) {
         if(segue.identifier == "fromPostToMap"){
-            if PFUser.currentUser() != nil{
-                toolbar.hidden = false
-            } else{
-                toolbar.hidden = true
-            }
             
             
         }
@@ -350,19 +347,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         var anView: MKAnnotationView?
         
         if fromTxtField == false{
-            
-            // for annotation in mapAnnoations{
-            
-            println("mapAnnotationS: \(mapAnnoations.count)")
-            println("make anno")
+        
             let identifier = "postsFromParseAnnotations"
             
             anView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
             if anView == nil {
                 anView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                anView!.canShowCallout = true
-                //                anView!.calloutOffset = CGPoint(x: -10, y: 5)
-            }
+                anView!.canShowCallout = true            }
                 
             else {
                 
@@ -385,12 +376,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 button.frame.size.width = newFloat
                 button.frame.size.height = 44
                 button.backgroundColor = UIColor.blackColor()
-                //                var imagebutton: UIImage = UIImage(data: data!)!
                 
                 button.setTitle(pinanno.title, forState: .Normal)
-                
-                //button.backgroundColor = UIColor.redColor()
-                //button.setImage(UIImage(named: "trash"), forState: .Normal)
+            
                 anView!.leftCalloutAccessoryView = button
                 
                 
@@ -443,7 +431,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     override func viewWillAppear(animated: Bool) {
         if annotationCurrent != nil{
             coordinateAfterPosted = annotationCurrent?.coordinate
-            self.mapView.setCenterCoordinate(coordinateAfterPosted!, animated: true)
+//            self.mapView.setCenterCoordinate(coordinateAfterPosted!, animated: true)
             
             mapView.addAnnotation(annotationCurrent)
             
@@ -461,7 +449,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             }
         } else if fromGeoButton == true {
             geoButton()
-        }
+        } 
         
         toolBar()
     }

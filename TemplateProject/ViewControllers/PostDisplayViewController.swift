@@ -41,7 +41,10 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var postButton: UIBarButtonItem!
     
     var placeholderLabel: UILabel!
-    
+    var placeholderInstructionsLabel: UILabel!
+    var placeholderIngredientsLabel: UILabel!
+
+
     
     let post = Post()
     
@@ -75,13 +78,21 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             //            imageView?.image = image
             autocompleteTextfield.text = annotation?.country
             
-            ing = annotation?.ingredients
-            ins = annotation?.instructions
+            let ingredientsArrayFromMap = annotation?.ingredients
+            let stringedi = "\n".join(ingredientsArrayFromMap!)
+            ingTextView.text = stringedi
             
-            ingredientsArray = ing!
-            instructionsArray = ins!
+            
+            let instructionsArrayFromMap = annotation?.instructions
+            let strinstuc = "\n".join(instructionsArrayFromMap!)
+            instructionsTextView.text = strinstuc
+
             
             placeholderLabel.hidden = count(descriptionText.text) != 0
+            placeholderIngredientsLabel.hidden = count(ingTextView.text) != 0
+
+            placeholderInstructionsLabel.hidden = count(instructionsTextView.text) != 0
+
             
             
         }
@@ -135,17 +146,20 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "fromPostDiplayToMap") {
+            var svc = segue.destinationViewController as! MapViewController;
+
             if annotation?.post == nil{
                 createPost()
                 
+                
             } else {
                 updatePost()
+                svc.updatedPost = true
             }
             
             
-            var svc = segue.destinationViewController as! MapViewController;
-            
             svc.annotationCurrent = currentAnnotation
+            svc.viewWillAppear(true)
         }
     }
     
@@ -187,7 +201,15 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     var ingredientsArray: [String] = []
     var instructionsArray: [String] = []
     func textViewDidChange(textView: UITextView) {
-        placeholderLabel.hidden = count(textView.text) != 0
+        if textView == descriptionText{
+            placeholderLabel.hidden = count(textView.text) != 0
+
+        } else if textView == ingTextView{
+            placeholderIngredientsLabel.hidden = count(textView.text) != 0
+
+        } else if textView == instructionsTextView {
+            placeholderInstructionsLabel.hidden = count(textView.text) != 0
+        }
     }
     
     func appendIngredientsAndInstructions(){
@@ -230,6 +252,28 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         placeholderLabel.frame.origin = CGPointMake(5, descriptionText.font.pointSize / 2)
         placeholderLabel.textColor = UIColor(white: 0, alpha: 0.3)
         placeholderLabel.hidden = count(descriptionText.text) != 0
+        
+        ingTextView.delegate = self
+        placeholderIngredientsLabel = UILabel()
+        placeholderIngredientsLabel.text = "Put each new ingredient on a separate line."
+        placeholderIngredientsLabel.sizeToFit()
+        ingTextView.addSubview(placeholderIngredientsLabel)
+        
+        placeholderIngredientsLabel.frame.origin = CGPointMake(5, ingTextView.font.pointSize / 2)
+        placeholderIngredientsLabel.textColor = UIColor(white: 0, alpha: 0.3)
+        placeholderIngredientsLabel.hidden = count(ingTextView.text) != 0
+        
+        
+        instructionsTextView.delegate = self
+        placeholderInstructionsLabel = UILabel()
+        placeholderInstructionsLabel.text = "Put each new instruction on a separate line."
+        placeholderInstructionsLabel.sizeToFit()
+        instructionsTextView.addSubview(placeholderInstructionsLabel)
+        
+        placeholderInstructionsLabel.frame.origin = CGPointMake(5, descriptionText.font.pointSize / 2)
+        placeholderInstructionsLabel.textColor = UIColor(white: 0, alpha: 0.3)
+        placeholderInstructionsLabel.hidden = count(instructionsTextView.text) != 0
+        
         
         appendIngredientsAndInstructions()
         
@@ -344,7 +388,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     func updatePost() {
         
-        //        appendIngredientsAndInstructions()
+        appendIngredientsAndInstructions()
         //change parse info
         annotation?.post.prep = prepTime.text
         annotation?.post.cook = cookTime.text
@@ -359,6 +403,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         annotation?.post.save()
         annotation?.post.saveInBackgroundWithBlock(nil)
+        
+        
         
         
     }
