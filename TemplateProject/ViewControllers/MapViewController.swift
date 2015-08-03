@@ -333,7 +333,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
     }
     
-    
+//    func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
+//        <#code#>
+//    }
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         var view: MKAnnotationView?
@@ -429,18 +431,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     var coordinateAfterPosted: CLLocationCoordinate2D?
     
     override func viewWillAppear(animated: Bool) {
-        if annotationCurrent != nil{
-            coordinateAfterPosted = annotationCurrent?.coordinate
-//            self.mapView.setCenterCoordinate(coordinateAfterPosted!, animated: true)
-            
-            mapView.addAnnotation(annotationCurrent)
-            
-            if PFUser.currentUser() != nil{
-                toolbar.hidden = false
-            } else{
-                toolbar.hidden = true
-            }
-        } else if ann != nil {
+        if ann != nil {
             mapView.removeAnnotation(ann)
             if PFUser.currentUser() != nil{
                 toolbar.hidden = false
@@ -452,6 +443,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         } 
         
         toolBar()
+    }
+    
+    func addPostedAnnotation (){
+        self.mapView.addAnnotation(annotationCurrent)
+        
     }
     
     func geoButton (){

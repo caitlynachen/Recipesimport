@@ -73,9 +73,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             cookTime.text = annotation?.cook
             prepTime.text = annotation?.prep
             numOfServings.text = annotation?.servings
-            //            var data = annotation?.image.getData()
-            //            image = UIImage(data: data!)
-            //            imageView?.image = image
+            
             autocompleteTextfield.text = annotation?.country
             
             let ingredientsArrayFromMap = annotation?.ingredients
@@ -159,7 +157,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             
             
             svc.annotationCurrent = currentAnnotation
-            svc.viewWillAppear(true)
+            svc.addPostedAnnotation()
         }
     }
     
@@ -437,9 +435,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh!, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
         
         currentAnnotation = annotationToAdd
-        //mapView.mapView.addAnnotation(annotation)
+//        mapViewController.mapView.addAnnotation(annotationToAdd)
         
-        mapViewController.viewWillAppear(true)
         
     }
     
