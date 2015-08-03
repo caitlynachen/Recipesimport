@@ -348,6 +348,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     //println("append")
                     //for anno in mapAnnoations {
                     self.mapView.addAnnotation(annotationParseQuery)
+                    println("addanno")
                 }
             }
         }
@@ -422,6 +423,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             
             fromTxtField = false
         }
+
         return anView
     }
     
