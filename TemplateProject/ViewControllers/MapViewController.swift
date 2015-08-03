@@ -266,7 +266,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
         mapView.setRegion(region, animated: true)
         
-        var loc = PFGeoPoint(latitude: lat!, longitude: long!)
+        
+        //        for anno in mapAnnoations {
+        //            mapView.addAnnotation(anno)
+        //        }
+        
+        locationManager.stopUpdatingLocation()
+        
+        
+    }
+    
+    func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
+        var loc = PFGeoPoint(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         
         
         
@@ -323,19 +334,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 }
             }
         }
-        
-        //        for anno in mapAnnoations {
-        //            mapView.addAnnotation(anno)
-        //        }
-        
-        locationManager.stopUpdatingLocation()
-        
-        
+
     }
-    
-//    func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool) {
-//        <#code#>
-//    }
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         var view: MKAnnotationView?
