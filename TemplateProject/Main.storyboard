@@ -166,7 +166,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="HRC-oR-Mrh"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Country of Origin" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Gg-YK-JlY" customClass="AutoCompleteTextField" customModule="TemplateProject" customModuleProvider="target">
@@ -193,7 +193,7 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ug-5u-GyY">
                                                 <rect key="frame" x="125" y="203" width="240" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Prep Time" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mwc-Ml-7tD">

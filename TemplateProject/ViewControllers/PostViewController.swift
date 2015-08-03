@@ -31,6 +31,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var anno: PinAnnotation?
     
+    var flagBond: Bond<[PFUser]?>!
+
+    
     @IBOutlet weak var DescriptionLabel: UILabel!
     @IBOutlet weak var imageViewDisplay: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -206,7 +209,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             actionSheetController.addAction(cancelAction)
             //Create and add first option action
             let takePictureAction: UIAlertAction = UIAlertAction(title: "Report Inappropriate", style: .Default) { action -> Void in
-                let deleteAlert: UIAlertController = UIAlertController(title: "Flag", message: "", preferredStyle: .Alert)
+                let deleteAlert: UIAlertController = UIAlertController(title: "Flag", message: "Are you sure you want to flag this recipe?", preferredStyle: .Alert)
                 
                 let dontDeleteAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
                 }
@@ -215,6 +218,27 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     if PFUser.currentUser() != nil{
                         self.anno?.post.flagPost(PFUser.currentUser()!)
+                        
+                        let flagNotification: UIAlertController = UIAlertController(title: "Flagged", message: "Successfully Flagged Post!", preferredStyle: .Alert)
+                        
+                        
+                        self.presentViewController(flagNotification, animated: true, completion: nil)
+                        flagNotification.dismissViewControllerAnimated(true, completion: nil)
+                    
+                        //***
+                        self.anno?.post.fetchFlags()
+                        
+                        
+                        self.flagBond = Bond<[PFUser]?>() { [unowned self] flagList in
+                            
+                            if let flagList = flagList {
+                                if flagList.count > 0 {
+                                    self.anno?.post.delete()
+                                }
+                                
+                            }
+                            
+                        }
                     } else{
                         self.loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
                         

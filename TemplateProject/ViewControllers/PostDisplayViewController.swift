@@ -44,6 +44,10 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     var placeholderInstructionsLabel: UILabel!
     var placeholderIngredientsLabel: UILabel!
 
+    var placeholderInstructionsLabelExample: UILabel!
+    var placeholderIngredientsLabelExample: UILabel!
+
+
 
     
     let post = Post()
@@ -58,11 +62,17 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     
     @IBAction func backButton(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
-        self.dismissViewControllerAnimated(false, completion: nil)
-        self.presentViewController(mapViewController, animated: true, completion: nil)
-        mapViewController.viewDidAppear(true)
+        
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+            self.dismissViewControllerAnimated(false, completion: nil)
+            self.presentViewController(mapViewController, animated: true, completion: nil)
+            mapViewController.viewDidAppear(true)
+            
+            //Do some stuff
+        
+        //Present the AlertController
+        
     }
     
     
@@ -201,9 +211,12 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
 
         } else if textView == ingTextView{
             placeholderIngredientsLabel.hidden = count(textView.text) != 0
+            placeholderIngredientsLabelExample.hidden = count(textView.text) != 0
 
         } else if textView == instructionsTextView {
             placeholderInstructionsLabel.hidden = count(textView.text) != 0
+            placeholderInstructionsLabelExample.hidden = count(textView.text) != 0
+
         }
     }
     
@@ -233,7 +246,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         imageView!.layer.cornerRadius = 5
         
         
-        
         ingTextView.layer.borderWidth = 0.5
         ingTextView.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.2).CGColor
         ingTextView.layer.cornerRadius = 5
@@ -261,11 +273,13 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         descriptionText.addSubview(placeholderLabel)
         
         placeholderLabel.frame.origin = CGPointMake(5, descriptionText.font.pointSize / 2)
+        placeholderLabel.font = UIFont(name: placeholderLabel.font.fontName, size: 12)
         placeholderLabel.textColor = UIColor(white: 0, alpha: 0.2)
         placeholderLabel.hidden = count(descriptionText.text) != 0
         
         ingTextView.delegate = self
         placeholderIngredientsLabel = UILabel()
+        placeholderIngredientsLabel.font = UIFont(name: placeholderLabel.font.fontName, size: 12)
         placeholderIngredientsLabel.text = "Put each new ingredient on a separate line."
         placeholderIngredientsLabel.sizeToFit()
         ingTextView.addSubview(placeholderIngredientsLabel)
@@ -277,6 +291,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         instructionsTextView.delegate = self
         placeholderInstructionsLabel = UILabel()
+        placeholderInstructionsLabel.font = UIFont(name: placeholderLabel.font.fontName, size: 12)
         placeholderInstructionsLabel.text = "Put each new instruction on a separate line."
         placeholderInstructionsLabel.sizeToFit()
         instructionsTextView.addSubview(placeholderInstructionsLabel)
@@ -284,7 +299,28 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         placeholderInstructionsLabel.frame.origin = CGPointMake(5, descriptionText.font.pointSize / 2)
         placeholderInstructionsLabel.textColor = UIColor(white: 0, alpha: 0.2)
         placeholderInstructionsLabel.hidden = count(instructionsTextView.text) != 0
+
         
+        placeholderInstructionsLabelExample = UILabel()
+        placeholderInstructionsLabelExample.font = UIFont(name: placeholderLabel.font.fontName, size: 12)
+        placeholderInstructionsLabelExample.text = "Ex. Preheat oven to 350 degrees F."
+        placeholderInstructionsLabelExample.sizeToFit()
+        instructionsTextView.addSubview(placeholderInstructionsLabelExample)
+        
+        placeholderInstructionsLabelExample.frame.origin = CGPoint(x: 5, y: 20)
+        placeholderInstructionsLabelExample.textColor = UIColor(white: 0, alpha: 0.2)
+        placeholderInstructionsLabelExample.hidden = count(instructionsTextView.text) != 0
+
+        
+        placeholderIngredientsLabelExample = UILabel()
+        placeholderIngredientsLabelExample.font = UIFont(name: placeholderLabel.font.fontName, size: 12)
+        placeholderIngredientsLabelExample.text = "Ex. 3 eggs"
+        placeholderIngredientsLabelExample.sizeToFit()
+        ingTextView.addSubview(placeholderIngredientsLabelExample)
+        
+        placeholderIngredientsLabelExample.frame.origin = CGPoint(x: 5, y: 20)
+        placeholderIngredientsLabelExample.textColor = UIColor(white: 0, alpha: 0.2)
+        placeholderIngredientsLabelExample.hidden = count(ingTextView.text) != 0
         
         appendIngredientsAndInstructions()
         
@@ -295,7 +331,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             
             
         }
-        
         
         
         
