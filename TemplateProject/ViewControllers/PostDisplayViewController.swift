@@ -228,7 +228,23 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         configureTextField()
         handleTextFieldInterfaces()
         
-        //picker = UIPickerView()
+        imageView!.layer.borderWidth = 0.5
+        imageView!.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.2).CGColor
+        imageView!.layer.cornerRadius = 5
+        
+        
+        
+        ingTextView.layer.borderWidth = 0.5
+        ingTextView.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.2).CGColor
+        ingTextView.layer.cornerRadius = 5
+
+        
+        instructionsTextView.layer.borderWidth = 0.5
+        instructionsTextView.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.2).CGColor
+        instructionsTextView.layer.cornerRadius = 5
+
+        
+        //picker = UIPickerView(2
         
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -245,7 +261,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         descriptionText.addSubview(placeholderLabel)
         
         placeholderLabel.frame.origin = CGPointMake(5, descriptionText.font.pointSize / 2)
-        placeholderLabel.textColor = UIColor(white: 0, alpha: 0.3)
+        placeholderLabel.textColor = UIColor(white: 0, alpha: 0.2)
         placeholderLabel.hidden = count(descriptionText.text) != 0
         
         ingTextView.delegate = self
@@ -255,7 +271,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         ingTextView.addSubview(placeholderIngredientsLabel)
         
         placeholderIngredientsLabel.frame.origin = CGPointMake(5, ingTextView.font.pointSize / 2)
-        placeholderIngredientsLabel.textColor = UIColor(white: 0, alpha: 0.3)
+        placeholderIngredientsLabel.textColor = UIColor(white: 0, alpha: 0.2)
         placeholderIngredientsLabel.hidden = count(ingTextView.text) != 0
         
         
@@ -266,7 +282,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         instructionsTextView.addSubview(placeholderInstructionsLabel)
         
         placeholderInstructionsLabel.frame.origin = CGPointMake(5, descriptionText.font.pointSize / 2)
-        placeholderInstructionsLabel.textColor = UIColor(white: 0, alpha: 0.3)
+        placeholderInstructionsLabel.textColor = UIColor(white: 0, alpha: 0.2)
         placeholderInstructionsLabel.hidden = count(instructionsTextView.text) != 0
         
         
