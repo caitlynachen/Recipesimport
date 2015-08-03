@@ -13,8 +13,10 @@ import Bond
 import FBSDKCoreKit
 
 
-class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, NSURLConnectionDataDelegate{
+class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextViewDelegate, NSURLConnectionDataDelegate{
     
+    @IBOutlet weak var ingTextView: UITextView!
+    @IBOutlet weak var instructionsTextView: UITextView!
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var autocompleteTextfield: AutoCompleteTextField!
@@ -33,9 +35,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var imageView: UIImageView?
-    @IBOutlet weak var instructionTableView: UITableView!
+//    @IBOutlet weak var instructionTableView: UITableView!
     @IBOutlet weak var descriptionText: UITextView!
-    @IBOutlet weak var ingredientsTableView: UITableView!
+//    @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var postButton: UIBarButtonItem!
     
     var placeholderLabel: UILabel!
@@ -113,11 +115,11 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                     emptyLabel.text = "Please enter the number of servings."
                     emptyLabel.hidden = false
                     
-                } else if self.ingredientsArray.first == nil {
+                } else if ingTextView.text == nil {
                     emptyLabel.text = "Please enter at least one ingredient."
                     emptyLabel.hidden = false
                     
-                } else if self.instructionsArray.first == nil {
+                } else if instructionsTextView.text == nil {
                     emptyLabel.text = "Please enter at least one instruction."
                     emptyLabel.hidden = false
                     
@@ -182,95 +184,21 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
     }
     
-    //var ingredientsDict: [String:String] = [:]
     var ingredientsArray: [String] = []
-    var ingredientBond:Bond<String>!
     var instructionsArray: [String] = []
-    var instructionBond:Bond<String>!
-    
-    var numOfRows: Int = 10
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == ingredientsTableView {
-            return numOfRows // Create 1 row as an example
-        } else {
-            return numOfRows
-        }
-    }
-    
-    
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if tableView == ingredientsTableView {
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier("IngredientsInputCell") as! IngredientsTableViewCell
-            
-            if (indexPath.row < ingredientsArray.count){
-                cell.textField.text = ingredientsArray[indexPath.row]
-            }
-            else{
-                if indexPath.row == 0 {
-                    cell.configure(text: "", placeholder: "Ex. 1 cup of flour")
-                    
-                } else{
-                    cell.configure(text: "", placeholder: "")
-                    
-                }
-            }
-            
-            cell.ingredient.map { $0 } ->> ingredientBond
-            
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("InstructionsInputCell") as! InstructionsTableViewCell
-            
-            
-            if (indexPath.row < instructionsArray.count){
-                cell.textView.text = instructionsArray[indexPath.row]
-            }
-                
-            else{
-                if indexPath.row == 0 {
-                    cell.configure(text: "", placeholder: "Ex. 1 cup of flour")
-                    
-                } else{
-                    cell.configure(text: "", placeholder: "")
-                    
-                }
-            }
-            
-            
-//            var height = NSLayoutConstraint(item: cell, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: cell.textView, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 100)
-//            cell.addConstraint(height)
-            
-            cell.instruction.map { $0 } ->> instructionBond
-            
-            return cell
-        }
-        
-    }
-    
     func textViewDidChange(textView: UITextView) {
         placeholderLabel.hidden = count(textView.text) != 0
     }
     
     func appendIngredientsAndInstructions(){
-        ingredientBond = Bond<String>(){ ingredient in
-            
-            var contained = contains(self.ingredientsArray, ingredient)
-            if contained == false && ingredient != "" {
-                
-                self.ingredientsArray.append(ingredient)
-                println(contained)
-            }
-            
-        }
         
-        instructionBond = Bond<String>(){ instruction in
-            var contained = contains(self.instructionsArray, instruction)
-            if contained == false && instruction != "" {
-                self.instructionsArray.append(instruction)
-            }
-        }
+        var ingredi = split(ingTextView.text) {$0 == "\n"}
+        self.ingredientsArray = ingredi
+
+        
+        var instruc = split(instructionsTextView.text) {$0 == "\n"}
+       
+        self.instructionsArray = instruc
         
     }
     
@@ -437,7 +365,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     func createPost(){
         
-        
+        appendIngredientsAndInstructions()
+
         
         post.prep = prepTime.text
         post.cook = cookTime.text
