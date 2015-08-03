@@ -157,7 +157,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             
             
             svc.annotationCurrent = currentAnnotation
-            svc.addPostedAnnotation()
         }
     }
     
@@ -171,8 +170,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                 
                 self.imageView?.image = image!
                 
-                
-                //self.imageView?.clipsToBounds = true
                 let imageData = UIImageJPEGRepresentation(image, 0.8)
                 let imageFile = PFFile(data: imageData)
                 //imageFile.save()

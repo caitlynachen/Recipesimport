@@ -184,6 +184,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         super.viewDidLoad()
         
         
+        
         if PFUser.currentUser() != nil{
             toolbar.hidden = false
         } else{
@@ -206,6 +207,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
+        if annotationCurrent != nil{
+            self.mapView.addAnnotation(annotationCurrent)
+            
+            
+        }
         
     }
     
@@ -248,25 +254,36 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
-        var userLocation : CLLocation = locations[0] as! CLLocation
-        
-        self.lat = userLocation.coordinate.latitude
-        self.long = userLocation.coordinate.longitude
-        
-        //self.mapView.addAnnotation(point)
-        
-        let location = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
-        
-        
-        let span = MKCoordinateSpanMake(0.05, 0.05)
-        
-        let region = MKCoordinateRegion(center: location, span: span)
-        
-        regionCenter = region.center
-        
-        mapView.setRegion(region, animated: true)
-        
-        
+        if annotationCurrent != nil {
+            var coordin = annotationCurrent?.coordinate
+            let span = MKCoordinateSpanMake(0.05, 0.05)
+            
+            let region = MKCoordinateRegion(center: coordin!, span: span)
+            
+            regionCenter = region.center
+            
+            mapView.setRegion(region, animated: true)
+        }
+        else {
+            var userLocation : CLLocation = locations[0] as! CLLocation
+            
+            self.lat = userLocation.coordinate.latitude
+            self.long = userLocation.coordinate.longitude
+            
+            //self.mapView.addAnnotation(point)
+            
+            let location = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+            
+            
+            let span = MKCoordinateSpanMake(0.05, 0.05)
+            
+            let region = MKCoordinateRegion(center: location, span: span)
+            
+            regionCenter = region.center
+            
+            mapView.setRegion(region, animated: true)
+            
+        }
         //        for anno in mapAnnoations {
         //            mapView.addAnnotation(anno)
         //        }
@@ -321,20 +338,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     let longi = postcurrent.location!.longitude
                     let coor = CLLocationCoordinate2D(latitude: lati, longitude: longi)
                     
-                    var annotationcurrent = PinAnnotation?()
+                    var annotationParseQuery = PinAnnotation?()
                     
                     
-                    annotationcurrent = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, prep: postcurrent.prep!, cook: postcurrent.cook!, servings: postcurrent.servings!, post: postcurrent)
+                    annotationParseQuery = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, prep: postcurrent.prep!, cook: postcurrent.cook!, servings: postcurrent.servings!, post: postcurrent)
                     
                     
-                    self.mapAnnoations.append(annotationcurrent!)
-                    println("append")
+                    //self.mapAnnoations.append(annotationcurrent!)
+                    //println("append")
                     //for anno in mapAnnoations {
-                    self.mapView.addAnnotation(annotationcurrent)
+                    self.mapView.addAnnotation(annotationParseQuery)
                 }
             }
         }
-
+        
     }
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -349,13 +366,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         var anView: MKAnnotationView?
         
         if fromTxtField == false{
-        
+            
             let identifier = "postsFromParseAnnotations"
             
             anView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
             if anView == nil {
                 anView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                anView!.canShowCallout = true            }
+                anView!.canShowCallout = true
+            }
                 
             else {
                 
@@ -380,7 +398,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 button.backgroundColor = UIColor.blackColor()
                 
                 button.setTitle(pinanno.title, forState: .Normal)
-            
+                
                 anView!.leftCalloutAccessoryView = button
                 
                 
@@ -440,40 +458,40 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             }
         } else if fromGeoButton == true {
             geoButton()
-        } 
+        }
         
         toolBar()
     }
     
-    func addPostedAnnotation (){
-        self.mapView.addAnnotation(annotationCurrent)
-        
-    }
+    //    func addPostedAnnotation (){
+    //        self.mapView.addAnnotation(annotationCurrent)
+    //
+    //    }
     
     func geoButton (){
         navbar.hidden = true
         autocompleteTextfield.text = geoButtonTitle
         
         
-            Location.geocodeAddressString(autocompleteTextfield.text, completion: { (placemark, error) -> Void in
-                if placemark != nil{
-//                    self!.autocompleteTextfield.text = text
-                    self.autocompleteTextfield.resignFirstResponder()
-                    let coordinate = placemark!.location.coordinate
-                    self.addAnnotation(coordinate, address: self.autocompleteTextfield.text)
-                    let span = MKCoordinateSpanMake(0.05, 0.05)
-                    
-                    let region = MKCoordinateRegion(center: coordinate, span: span)
-                    
-                    self.regionCenter = region.center
-                    
-                    self.mapView.setRegion(region, animated: true)
-                    
-                    //update new posts
-            
-                }
-            })
-//        }
+        Location.geocodeAddressString(autocompleteTextfield.text, completion: { (placemark, error) -> Void in
+            if placemark != nil{
+                //                    self!.autocompleteTextfield.text = text
+                self.autocompleteTextfield.resignFirstResponder()
+                let coordinate = placemark!.location.coordinate
+                self.addAnnotation(coordinate, address: self.autocompleteTextfield.text)
+                let span = MKCoordinateSpanMake(0.05, 0.05)
+                
+                let region = MKCoordinateRegion(center: coordinate, span: span)
+                
+                self.regionCenter = region.center
+                
+                self.mapView.setRegion(region, animated: true)
+                
+                //update new posts
+                
+            }
+        })
+        //        }
         
         
         fromGeoButton = false
