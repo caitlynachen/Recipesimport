@@ -24,6 +24,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     @IBOutlet weak var cancel: UIButton!
     var annotationCurrent: PinAnnotation?
     
+    var fromGeoButton: Bool?
+    var geoButtonTitle: String?
+    
     var searchController:UISearchController!
     var annotation:MKAnnotation!
     var localSearchRequest:MKLocalSearchRequest!
@@ -64,7 +67,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             } else{
                 toolbar.hidden = true
             }
-
+            
             
         }
         
@@ -146,7 +149,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     
                     loginViewController.delegate = parseLoginHelper
                     loginViewController.signUpController?.delegate = parseLoginHelper
-
+                    
                     
                     
                     
@@ -160,17 +163,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         return false
     }
     
-
+    
     
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
         
-
+        
         self.loginViewController.logInView?.logo?.frame = CGRect(x: 80.0, y: 70.0, width: 187.0, height: 119.1)
         
     }
-  
+    
     @IBOutlet var mapView: MKMapView!
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -231,12 +234,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     }
     
     func toolBar() {
-        if PFUser.currentUser() != nil{
-            toolbar.hidden = false
-        } else{
-            toolbar.hidden = true
+        if toolbar != nil{
+            if PFUser.currentUser() != nil{
+                toolbar.hidden = false
+            } else{
+                toolbar.hidden = true
+            }
         }
-
     }
     
     //var point = PinAnnotation(title: "newPoint", coordinate: currentLocation!)
@@ -332,7 +336,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
     }
     
-   
+    
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         var view: MKAnnotationView?
@@ -357,7 +361,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             if anView == nil {
                 anView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 anView!.canShowCallout = true
-//                anView!.calloutOffset = CGPoint(x: -10, y: 5)
+                //                anView!.calloutOffset = CGPoint(x: -10, y: 5)
             }
                 
             else {
@@ -455,11 +459,43 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             } else{
                 toolbar.hidden = true
             }
+        } else if fromGeoButton == true {
+            geoButton()
         }
         
         toolBar()
     }
     
+    func geoButton (){
+        navbar.hidden = true
+        autocompleteTextfield.text = geoButtonTitle
+        
+        
+            Location.geocodeAddressString(autocompleteTextfield.text, completion: { (placemark, error) -> Void in
+                if placemark != nil{
+//                    self!.autocompleteTextfield.text = text
+                    self.autocompleteTextfield.resignFirstResponder()
+                    let coordinate = placemark!.location.coordinate
+                    self.addAnnotation(coordinate, address: self.autocompleteTextfield.text)
+                    let span = MKCoordinateSpanMake(0.05, 0.05)
+                    
+                    let region = MKCoordinateRegion(center: coordinate, span: span)
+                    
+                    self.regionCenter = region.center
+                    
+                    self.mapView.setRegion(region, animated: true)
+                    
+                    //update new posts
+            
+                }
+            })
+//        }
+        
+        
+        fromGeoButton = false
+        
+        
+    }
     
     private func configureTextField(){
         autocompleteTextfield.autoCompleteTextColor = UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 128.0/255.0, alpha: 1.0)

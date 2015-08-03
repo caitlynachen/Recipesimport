@@ -9,41 +9,45 @@
 import UIKit
 import Bond
 
-class InstructionsTableViewCell: UITableViewCell, UITextFieldDelegate {
+class InstructionsTableViewCell: UITableViewCell, UITextViewDelegate {
+    
 
-    @IBOutlet weak var textField: UITextField!{
+
+
+
+    @IBOutlet weak var textView: UITextView!{
         didSet{
-            textField.delegate = self
+            textView.delegate = self
         }
+
     }
     
     let instruction: Dynamic<String> = Dynamic("")
 
-    func textFieldDidEndEditing(textfield: UITextField){
+    func textViewDidEndEditing(textView: UITextView){
         // println("hello")
         //println(textfield.text)
-        instruction.value = textfield.text
+        instruction.value = textView.text
         //println(instruction.value)
     }
+    
+    
     
     //sourcetreeeee
     
     func configure(#text: String?, placeholder: String) {
-        textField.text = text
-        textField.placeholder = placeholder
+        textView.text = text
         
-        textFieldDidEndEditing(textField)
-
+        textViewDidEndEditing(textView)
         
-        textField.accessibilityValue = text
-        textField.accessibilityLabel = placeholder
+        textView.accessibilityValue = text
     }
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
+//    func textFieldShouldReturn(textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

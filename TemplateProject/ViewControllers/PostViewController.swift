@@ -24,6 +24,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var geoButton: UIButton!
     
     @IBOutlet weak var instructionsTableView: UITableView!
     @IBOutlet weak var ingredientsTableView: UITableView!
@@ -32,7 +33,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var DescriptionLabel: UILabel!
     @IBOutlet weak var imageViewDisplay: UIImageView!
-    @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     var likeBond: Bond<[PFUser]?>!
@@ -45,6 +45,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var likeLabel: UILabel!
     
     var login: PFLogInViewController?
+    
+    @IBAction func geoButtonTApped(sender: AnyObject) {
+        self.performSegueWithIdentifier("fromGeoButtonToMap", sender: nil)
+    }
     
     @IBAction func likeButtonTapped(sender: AnyObject) {
         if PFUser.currentUser() != nil{
@@ -304,12 +308,12 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.ingredientsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.instructionsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "instruccell")
         
+        geoButton.setTitle(anno?.country, forState: .Normal)
         //post = anno?.post
         cook.text = anno?.cook
         prep.text = anno?.prep
         servings.text = anno?.servings
         titleLabel.text = anno?.title
-        countryLabel.text = anno?.country
         DescriptionLabel.text = anno?.Description
         var userfetch = anno?.user.fetchIfNeeded()
         usernameLabel.text = anno?.user.username
@@ -392,6 +396,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             mapViewController.viewWillAppear(true)
             
             
+        } else if (segue.identifier == "fromGeoButtonToMap"){
+            var dest = segue.destinationViewController as! MapViewController;
+            dest.fromGeoButton = true
+            dest.geoButtonTitle = anno?.country
+            let mapViewController = storyboard!.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+            
+            
+            mapViewController.viewWillAppear(true)
         }
     }
     

@@ -59,7 +59,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         self.presentViewController(mapViewController, animated: true, completion: nil)
         mapViewController.viewDidAppear(true)
     }
-        
+    
     
     override func viewWillAppear(animated: Bool) {
         if (annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.country != nil && annotation?.servings != nil && annotation?.prep != nil && annotation?.cook != nil) {
@@ -122,7 +122,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                     emptyLabel.hidden = false
                     
                 } else {
-                
+                    
                     return true
                 }
             }
@@ -177,7 +177,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                     
                 }
                 
-            self.cameraButton.hidden = true
+                self.cameraButton.hidden = true
         }
         
     }
@@ -225,7 +225,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             
             
             if (indexPath.row < instructionsArray.count){
-                cell.textField.text = instructionsArray[indexPath.row]
+                cell.textView.text = instructionsArray[indexPath.row]
             }
                 
             else{
@@ -237,6 +237,10 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                     
                 }
             }
+            
+            
+//            var height = NSLayoutConstraint(item: cell, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: cell.textView, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 100)
+//            cell.addConstraint(height)
             
             cell.instruction.map { $0 } ->> instructionBond
             
@@ -280,7 +284,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         handleTextFieldInterfaces()
         
         //picker = UIPickerView()
-        
         
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -334,7 +337,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     var coordinateh: CLLocationCoordinate2D?
     
     var pfgeopoint: PFGeoPoint?
-
+    
     
     private func handleTextFieldInterfaces(){
         autocompleteTextfield.onTextChange = {[weak self] text in
@@ -435,34 +438,34 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     func createPost(){
         
         
-            
-            post.prep = prepTime.text
-            post.cook = cookTime.text
-            post.servings = numOfServings.text
-            post.caption = descriptionText.text
-            post.RecipeTitle = titleTextField.text
-            post.country = autocompleteTextfield.text
-            post.location = pfgeopoint
-            post.Ingredients = self.ingredientsArray
-            post.Instructions = self.instructionsArray
-            post.date = NSDate()
-            
-            post.save()
-            post.uploadPost()
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
         
-            
-            let test = post.Ingredients!
-            
-            var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh!, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
-            
-            currentAnnotation = annotationToAdd
-            //mapView.mapView.addAnnotation(annotation)
-            
-            mapViewController.viewWillAppear(true)
-             
+        post.prep = prepTime.text
+        post.cook = cookTime.text
+        post.servings = numOfServings.text
+        post.caption = descriptionText.text
+        post.RecipeTitle = titleTextField.text
+        post.country = autocompleteTextfield.text
+        post.location = pfgeopoint
+        post.Ingredients = self.ingredientsArray
+        post.Instructions = self.instructionsArray
+        post.date = NSDate()
+        
+        post.save()
+        post.uploadPost()
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+        
+        
+        let test = post.Ingredients!
+        
+        var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh!, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
+        
+        currentAnnotation = annotationToAdd
+        //mapView.mapView.addAnnotation(annotation)
+        
+        mapViewController.viewWillAppear(true)
+        
     }
     
 }
