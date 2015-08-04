@@ -390,7 +390,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 let imagee = UIImage(data: data!)
                 let scaledImage = imageResize(imagee!, sizeChange: size)
                 anView!.image = scaledImage
-                anView?.layer.borderColor = UIColor.blackColor().CGColor
+                anView?.layer.borderColor = UIColor.whiteColor().CGColor
                 anView?.layer.borderWidth = 1
                 
                 let button = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton

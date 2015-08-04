@@ -12,8 +12,6 @@
 		1C13E57F1B4C485900FA5F39 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E57D1B4C485900FA5F39 /* IngredientsTableViewCell.swift */; };
 		1C13E5801B4C485900FA5F39 /* InstructionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E57E1B4C485900FA5F39 /* InstructionsTableViewCell.swift */; };
 		1C13E5851B4C486800FA5F39 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5811B4C486800FA5F39 /* PostViewController.swift */; };
-		1C13E5871B4C486800FA5F39 /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5831B4C486800FA5F39 /* IngredientsViewController.swift */; };
-		1C13E5881B4C486800FA5F39 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5841B4C486800FA5F39 /* InstructionsViewController.swift */; };
 		1C3DDE521B4AF2EA004E8014 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C3DDE511B4AF2EA004E8014 /* Images.xcassets */; };
 		1C52FFDB1B55C1BE00ADBE8B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */; };
 		1CADAED21B597E0700F341A6 /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CADAED11B597E0700F341A6 /* PinAnnotation.swift */; };
@@ -146,8 +144,6 @@
 		1C13E57E1B4C485900FA5F39 /* InstructionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsTableViewCell.swift; sourceTree = "<group>"; };
 		1C13E5811B4C486800FA5F39 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		1C13E5821B4C486800FA5F39 /* PostDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDisplayViewController.swift; sourceTree = "<group>"; };
-		1C13E5831B4C486800FA5F39 /* IngredientsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
-		1C13E5841B4C486800FA5F39 /* InstructionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
 		1C3DDE511B4AF2EA004E8014 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		1CADAED11B597E0700F341A6 /* PinAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
@@ -238,8 +234,6 @@
 				1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */,
 				1C13E5811B4C486800FA5F39 /* PostViewController.swift */,
 				1C13E5821B4C486800FA5F39 /* PostDisplayViewController.swift */,
-				1C13E5831B4C486800FA5F39 /* IngredientsViewController.swift */,
-				1C13E5841B4C486800FA5F39 /* InstructionsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -563,11 +557,9 @@
 				1C13E5851B4C486800FA5F39 /* PostViewController.swift in Sources */,
 				624262C01B4460CB00005CE3 /* AppDelegate.swift in Sources */,
 				1CADAED21B597E0700F341A6 /* PinAnnotation.swift in Sources */,
-				1C13E5881B4C486800FA5F39 /* InstructionsViewController.swift in Sources */,
 				1CD9DFF31B4DC61600DF28E3 /* PhotoTakingHelper.swift in Sources */,
 				624262C41B4460CB00005CE3 /* ParseLoginHelper.swift in Sources */,
 				1CAE6F3D1B635A8200FC8E76 /* AutocompleteTextField.swift in Sources */,
-				1C13E5871B4C486800FA5F39 /* IngredientsViewController.swift in Sources */,
 				624262C31B4460CB00005CE3 /* ErrorHandling.swift in Sources */,
 				1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */,
 				1C52FFDB1B55C1BE00ADBE8B /* MapViewController.swift in Sources */,
