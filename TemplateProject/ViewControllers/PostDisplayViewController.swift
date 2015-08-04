@@ -268,7 +268,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         super.viewDidLoad()
         
         titleTextField.delegate = self
-        autocompleteTextfield.delegate = self
         prepTime.delegate = self
         cookTime.delegate = self
         numOfServings.delegate = self

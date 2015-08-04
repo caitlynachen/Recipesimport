@@ -406,13 +406,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 anView?.layer.borderWidth = 1
                 
                 let button = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-                let float = CGFloat(count(pinanno.title))
-                let newFloat = float * 12
-                button.frame.size.width = newFloat
+//                let float = CGFloat(count(pinanno.title))
+//                let newFloat = float * 12
+                button.frame.size.width = 44
                 button.frame.size.height = 44
-                button.backgroundColor = UIColor.blackColor()
-                
-                button.setTitle(pinanno.title, forState: .Normal)
+                button.setImage(scaledImage, forState: .Normal)
                 
                 anView!.leftCalloutAccessoryView = button
                 
