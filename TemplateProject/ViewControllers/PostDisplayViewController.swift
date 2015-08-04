@@ -35,24 +35,24 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var imageView: UIImageView?
-//    @IBOutlet weak var instructionTableView: UITableView!
+    //    @IBOutlet weak var instructionTableView: UITableView!
     @IBOutlet weak var descriptionText: UITextView!
-//    @IBOutlet weak var ingredientsTableView: UITableView!
+    //    @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var postButton: UIBarButtonItem!
     
     var placeholderLabel: UILabel!
     var placeholderInstructionsLabel: UILabel!
     var placeholderIngredientsLabel: UILabel!
-
+    
     var placeholderInstructionsLabelExample: UILabel!
     var placeholderIngredientsLabelExample: UILabel!
-
-
-
+    
+    
+    
     
     let post = Post()
     
-//    var toLoc: PFGeoPoint?
+    //    var toLoc: PFGeoPoint?
     var image: UIImage?
     var annotation: PinAnnotation?
     @IBOutlet weak var cameraButton: UIButton!
@@ -60,6 +60,21 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     var ing: [String]?
     var ins: [String]?
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if textField == prepTime{
+            let newLength = count(textField.text!) + count(string) - range.length
+            return newLength <= 13 //Bool
+        } else if textField == cookTime {
+            let newLength = count(textField.text!) + count(string) - range.length
+            return newLength <= 13 //Bo
+        } else if textField == numOfServings {
+            let newLength = count(textField.text!) + count(string) - range.length
+            return newLength <= 13 //Bo
+        } else {
+            let newLength = count(textField.text!) + count(string) - range.length
+            return newLength <= 100 //Bo
+        }
+    }
     
     @IBAction func backButton(sender: AnyObject) {
         
@@ -82,12 +97,12 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         }
         actionSheetController.addAction(nextAction)
         //Add a text field
-                //Present the AlertController
+        //Present the AlertController
         self.presentViewController(actionSheetController, animated: true, completion: nil)
         
         
-            
-            //Do some stuff
+        
+        //Do some stuff
         
         //Present the AlertController
         
@@ -112,13 +127,13 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             let instructionsArrayFromMap = annotation?.instructions
             let strinstuc = "\n".join(instructionsArrayFromMap!)
             instructionsTextView.text = strinstuc
-
+            
             
             placeholderLabel.hidden = count(descriptionText.text) != 0
             placeholderIngredientsLabel.hidden = count(ingTextView.text) != 0
-
+            
             placeholderInstructionsLabel.hidden = count(instructionsTextView.text) != 0
-
+            
             
             
         }
@@ -173,7 +188,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "fromPostDiplayToMap") {
             var svc = segue.destinationViewController as! MapViewController;
-
+            
             if annotation?.post == nil{
                 createPost()
                 
@@ -226,15 +241,15 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     func textViewDidChange(textView: UITextView) {
         if textView == descriptionText{
             placeholderLabel.hidden = count(textView.text) != 0
-
+            
         } else if textView == ingTextView{
             placeholderIngredientsLabel.hidden = count(textView.text) != 0
             placeholderIngredientsLabelExample.hidden = count(textView.text) != 0
-
+            
         } else if textView == instructionsTextView {
             placeholderInstructionsLabel.hidden = count(textView.text) != 0
             placeholderInstructionsLabelExample.hidden = count(textView.text) != 0
-
+            
         }
     }
     
@@ -250,14 +265,14 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         var ingredi = split(ingTextView.text) {$0 == "\n"}
         self.ingredientsArray = ingredi
-
+        
         
         var instruc = split(instructionsTextView.text) {$0 == "\n"}
-       
+        
         self.instructionsArray = instruc
         
     }
-
+    
     
     @IBAction func hideKeyboard(sender: AnyObject) {
         ingTextView.endEditing(true)
@@ -284,12 +299,12 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         ingTextView.layer.borderWidth = 0.5
         ingTextView.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.2).CGColor
         ingTextView.layer.cornerRadius = 5
-
+        
         
         instructionsTextView.layer.borderWidth = 0.5
         instructionsTextView.layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.2).CGColor
         instructionsTextView.layer.cornerRadius = 5
-
+        
         
         //picker = UIPickerView(2
         
@@ -334,7 +349,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         placeholderInstructionsLabel.frame.origin = CGPointMake(5, descriptionText.font.pointSize / 2)
         placeholderInstructionsLabel.textColor = UIColor(white: 0, alpha: 0.2)
         placeholderInstructionsLabel.hidden = count(instructionsTextView.text) != 0
-
+        
         
         placeholderInstructionsLabelExample = UILabel()
         placeholderInstructionsLabelExample.font = UIFont(name: placeholderLabel.font.fontName, size: 12)
@@ -345,7 +360,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         placeholderInstructionsLabelExample.frame.origin = CGPoint(x: 5, y: 22)
         placeholderInstructionsLabelExample.textColor = UIColor(white: 0, alpha: 0.2)
         placeholderInstructionsLabelExample.hidden = count(instructionsTextView.text) != 0
-
+        
         
         placeholderIngredientsLabelExample = UILabel()
         placeholderIngredientsLabelExample.font = UIFont(name: placeholderLabel.font.fontName, size: 12)
@@ -493,7 +508,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     func createPost(){
         
         appendIngredientsAndInstructions()
-
+        
         
         post.prep = prepTime.text
         post.cook = cookTime.text
@@ -518,7 +533,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh!, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
         
         currentAnnotation = annotationToAdd
-//        mapViewController.mapView.addAnnotation(annotationToAdd)
+        //        mapViewController.mapView.addAnnotation(annotationToAdd)
         
         
     }

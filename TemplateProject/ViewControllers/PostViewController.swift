@@ -44,6 +44,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var login: PFLogInViewController?
     
+   
+    
     @IBAction func geoButtonTApped(sender: AnyObject) {
         self.performSegueWithIdentifier("fromGeoButtonToMap", sender: nil)
     }
@@ -259,9 +261,25 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     var ins: [String]?
     
     var image: UIImage?
+    
+    override func viewDidAppear(animated: Bool) {
+        ingredientsTableView.reloadData()
+        instructionsTableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ingredientsTableView.delegate = self
+        
+        ingredientsTableView.estimatedRowHeight = 44.0
+        ingredientsTableView.rowHeight = UITableViewAutomaticDimension
+        
+        instructionsTableView.delegate = self
+        
+        instructionsTableView.estimatedRowHeight = 44.0
+        instructionsTableView.rowHeight = UITableViewAutomaticDimension
+                
         
         ing = anno?.ingredients
         ins = anno?.instructions
