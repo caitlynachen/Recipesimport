@@ -12,9 +12,6 @@ import Parse
 import ParseUI
 import FBSDKCoreKit
 
-//import DateTools
-
-
 
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -156,7 +153,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return commaSeparatedUserList
     }
-    
+
     
     @IBAction func moreButtonTapped(sender: AnyObject) {
         if(PFUser.currentUser()?.username == usernameLabel.text){
@@ -207,26 +204,16 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             actionSheetController.addAction(cancelAction)
             //Create and add first option action
             let takePictureAction: UIAlertAction = UIAlertAction(title: "Report Inappropriate", style: .Default) { action -> Void in
-                let deleteAlert: UIAlertController = UIAlertController(title: "Flag", message: "Are you sure you want to flag this recipe?", preferredStyle: .Alert)
+                let deleteAlert: UIAlertController = UIAlertController(title: "Flag", message: "Are you sure you want to flag this recipe? Flagging will delete this post from GeoRecipe.", preferredStyle: .Alert)
                 
                 let dontDeleteAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
                 }
                 deleteAlert.addAction(dontDeleteAction)
                 let deleteAction: UIAlertAction = UIAlertAction(title: "Flag", style: .Default) { action -> Void in
                     
-//                    let flagNotification: UIAlertController = UIAlertController(title: "Flagged", message: "Successfully Flagged Post!", preferredStyle: .Alert)
-//                    
-//                    
-//                    self.presentViewController(flagNotification, animated: true, completion: nil)
-//                    flagNotification.dismissViewControllerAnimated(true, completion: nil)
+                    self.performSegueWithIdentifier("fromPostMap", sender: nil)
+                                        
                     
-                                
-                        self.performSegueWithIdentifier("fromPostMap", sender: nil)
-                        
-                        
-                     
-                    
-                    //flag row in parse
                 }
                 deleteAlert.addAction(deleteAction)
                 

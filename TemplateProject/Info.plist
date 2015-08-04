@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>Make-School.TemplateProject</string>
+	<string>Make-School.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -25,14 +25,14 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb871482206278105</string>
+				<string>fb1462291050761165</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>871482206278105</string>
+	<string>1462291050761165</string>
 	<key>FacebookDisplayName</key>
 	<string>GeoRecipe</string>
 	<key>LSRequiresIPhoneOS</key>

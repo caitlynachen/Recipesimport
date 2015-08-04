@@ -13,7 +13,7 @@ import Bond
 import FBSDKCoreKit
 
 
-class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextViewDelegate, NSURLConnectionDataDelegate{
+class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextViewDelegate, UITextFieldDelegate, NSURLConnectionDataDelegate{
     
     @IBOutlet weak var ingTextView: UITextView!
     @IBOutlet weak var instructionsTextView: UITextView!
@@ -238,6 +238,14 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         }
     }
     
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
     func appendIngredientsAndInstructions(){
         
         var ingredi = split(ingTextView.text) {$0 == "\n"}
@@ -249,11 +257,21 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         self.instructionsArray = instruc
         
     }
+
     
-    
-    
+    @IBAction func hideKeyboard(sender: AnyObject) {
+        ingTextView.endEditing(true)
+        descriptionText.endEditing(true)
+        instructionsTextView.endEditing(true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        titleTextField.delegate = self
+        autocompleteTextfield.delegate = self
+        prepTime.delegate = self
+        cookTime.delegate = self
+        numOfServings.delegate = self
         
         emptyLabel.hidden = true
         configureTextField()

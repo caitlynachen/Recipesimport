@@ -16,7 +16,7 @@ import Parse
 import ParseUI
 import Bond
 import FBSDKCoreKit
-
+import FBSDKLoginKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate, UITextFieldDelegate {
     
