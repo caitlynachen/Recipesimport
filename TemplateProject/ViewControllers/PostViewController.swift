@@ -61,7 +61,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
             
             loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
-            let logo = UIImage(named: "logo")
+            let logo = UIImage(named: "logoforparse")
             let logoView = UIImageView(image: logo)
             loginViewController.logInView?.logo = logoView
             
@@ -243,7 +243,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                         self.loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
                         
                         self.loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
-                        let logo = UIImage(named: "logo")
+                        let logo = UIImage(named: "logoforparse")
                         let logoView = UIImageView(image: logo)
                         self.loginViewController.logInView?.logo = logoView
                         

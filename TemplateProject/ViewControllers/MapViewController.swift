@@ -119,7 +119,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
                     
                     loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
-                    let logo = UIImage(named: "logo")
+                    let logo = UIImage(named: "logoforparse")
                     let logoView = UIImageView(image: logo)
                     loginViewController.logInView?.logo = logoView
                     
@@ -161,15 +161,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     }
     
     
-    
-    override func viewDidLayoutSubviews() {
-        
-        super.viewDidLayoutSubviews()
-        
-        
-        self.loginViewController.logInView?.logo?.frame = CGRect(x: 80.0, y: 70.0, width: 187.0, height: 119.1)
-        
-    }
     
     @IBOutlet var mapView: MKMapView!
     
