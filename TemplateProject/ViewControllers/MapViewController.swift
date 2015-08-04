@@ -138,6 +138,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                             println("show post  view controller")
                             
                             self.loginViewController.dismissViewControllerAnimated(true, completion: nil)
+                            
+                            self.performSegueWithIdentifier("segueToPostDisplay", sender: self)
+                            
                             //****
                             
                             
@@ -175,7 +178,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         super.viewDidLoad()
         
         
-        
         if PFUser.currentUser() != nil{
             toolbar.hidden = false
         } else{
@@ -184,12 +186,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
         cancel.hidden = true
         
-        autocompleteTextfield.delegate = self
         
+        println("in MapViewController")
+        
+        
+        autocompleteTextfield.delegate = self
         
         configureTextField()
         handleTextFieldInterfaces()
-        println("in MapViewController")
+        
         
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
@@ -202,7 +207,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             self.mapView.addAnnotation(annotationCurrent)
             
             
+        }  else if ann != nil {
+            ann?.post.delete()
+            
+            self.mapView.removeAnnotation(ann)
+            
+        } else{
+            if fromGeoButton == true {
+                geoButton()
+            }
+            
+            
         }
+        
+        
         
     }
     
@@ -227,6 +245,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         println("error")
     }
     
+    override func viewWillAppear(animated: Bool) {
+        toolBar()
+    }
     func toolBar() {
         if toolbar != nil{
             if PFUser.currentUser() != nil{
@@ -416,7 +437,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             
             fromTxtField = false
         }
-
+        
         return anView
     }
     
@@ -443,20 +464,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     var coordinateAfterPosted: CLLocationCoordinate2D?
     
-    override func viewWillAppear(animated: Bool) {
-        if ann != nil {
-            mapView.removeAnnotation(ann)
-            if PFUser.currentUser() != nil{
-                toolbar.hidden = false
-            } else{
-                toolbar.hidden = true
-            }
-        } else if fromGeoButton == true {
-            geoButton()
-        }
-        
-        toolBar()
-    }
+    
     
     //    func addPostedAnnotation (){
     //        self.mapView.addAnnotation(annotationCurrent)
@@ -589,7 +597,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if (segue.identifier == "segueToPostDisplay") {
             var svc = segue.destinationViewController as! PostDisplayViewController;
             
-            svc.toLoc = PFGeoPoint(latitude: lat!, longitude: long!)
+            //            svc.toLoc = PFGeoPoint(latitude: lat!, longitude: long!)
         }
         
         if (segue.identifier == "toPostView"){

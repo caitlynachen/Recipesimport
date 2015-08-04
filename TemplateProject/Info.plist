@@ -25,16 +25,16 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1620045658283942</string>
+				<string>fb871482206278105</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>1620045658283942</string>
+	<string>871482206278105</string>
 	<key>FacebookDisplayName</key>
-	<string>GEORECIPE</string>
+	<string>GeoRecipe</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>

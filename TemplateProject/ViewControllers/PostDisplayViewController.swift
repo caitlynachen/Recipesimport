@@ -52,7 +52,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     let post = Post()
     
-    var toLoc: PFGeoPoint?
+//    var toLoc: PFGeoPoint?
     var image: UIImage?
     var annotation: PinAnnotation?
     @IBOutlet weak var cameraButton: UIButton!

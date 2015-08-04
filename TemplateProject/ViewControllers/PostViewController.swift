@@ -31,8 +31,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var anno: PinAnnotation?
     
-    var flagBond: Bond<[PFUser]?>!
-
     
     @IBOutlet weak var DescriptionLabel: UILabel!
     @IBOutlet weak var imageViewDisplay: UIImageView!
@@ -65,7 +63,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             let logoView = UIImageView(image: logo)
             loginViewController.logInView?.logo = logoView
             
-
+            
             
             
             parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
@@ -175,7 +173,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 deleteAlert.addAction(dontDeleteAction)
                 let deleteAction: UIAlertAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
                     
-                    self.anno?.post.delete()
+                    //                    self.anno?.post.delete()
                     
                     self.performSegueWithIdentifier("fromPostMap", sender: nil)
                     
@@ -216,65 +214,17 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 deleteAlert.addAction(dontDeleteAction)
                 let deleteAction: UIAlertAction = UIAlertAction(title: "Flag", style: .Default) { action -> Void in
                     
-                    if PFUser.currentUser() != nil{
-                        self.anno?.post.flagPost(PFUser.currentUser()!)
-                        
-                        let flagNotification: UIAlertController = UIAlertController(title: "Flagged", message: "Successfully Flagged Post!", preferredStyle: .Alert)
-                        
-                        
-                        self.presentViewController(flagNotification, animated: true, completion: nil)
-                        flagNotification.dismissViewControllerAnimated(true, completion: nil)
+//                    let flagNotification: UIAlertController = UIAlertController(title: "Flagged", message: "Successfully Flagged Post!", preferredStyle: .Alert)
+//                    
+//                    
+//                    self.presentViewController(flagNotification, animated: true, completion: nil)
+//                    flagNotification.dismissViewControllerAnimated(true, completion: nil)
                     
-                        //***
-                        self.anno?.post.fetchFlags()
-                        
-                        
-                        self.flagBond = Bond<[PFUser]?>() { [unowned self] flagList in
-                            
-                            if let flagList = flagList {
-                                if flagList.count > 0 {
-                                    self.anno?.post.delete()
-                                }
                                 
-                            }
-                            
-                        }
-                    } else{
-                        self.loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
-                        
-                        self.loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
-                        let logo = UIImage(named: "logoforparse")
-                        let logoView = UIImageView(image: logo)
-                        self.loginViewController.logInView?.logo = logoView
+                        self.performSegueWithIdentifier("fromPostMap", sender: nil)
                         
                         
-                        
-                        self.parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
-                            // Initialize the ParseLoginHelper with a callback
-                            println("before the error")
-                            if let error = error {
-                                // 1
-                                ErrorHandling.defaultErrorHandler(error)
-                            } else  if let user = user {
-                                // if login was successful, display the TabBarController
-                                // 2
-                                println("show post hi view controller")
-                                self.loginViewController.dismissViewControllerAnimated(true, completion: nil)
-
-                                //****
-                                self.anno?.post.flagPost(PFUser.currentUser()!)
-                                
-                            }
-                        }
-                        
-                        self.loginViewController.delegate = self.parseLoginHelper
-                        self.loginViewController.signUpController?.delegate = self.parseLoginHelper
-                        
-                        
-                        self.presentViewController(self.loginViewController, animated: true, completion: nil)
-                        
-                    }
-                    
+                     
                     
                     //flag row in parse
                 }
@@ -380,7 +330,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             var i = anno?.instructions.count
             return i!
-       }
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -402,7 +352,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
     }
-
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "editPost"){
@@ -415,11 +365,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             var dest = segue.destinationViewController as! MapViewController;
             dest.ann = anno
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
-            
-            
-            mapViewController.viewWillAppear(true)
             
             
         } else if (segue.identifier == "fromGeoButtonToMap"){
@@ -429,7 +374,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             let mapViewController = storyboard!.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
             
             
-            mapViewController.viewWillAppear(true)
         }
     }
     
