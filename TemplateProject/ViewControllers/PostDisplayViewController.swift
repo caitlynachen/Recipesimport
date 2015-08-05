@@ -134,7 +134,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             
             placeholderInstructionsLabel.hidden = count(instructionsTextView.text) != 0
             
-            
+            placeholderIngredientsLabelExample.hidden = count(ingTextView.text) != 0
+            placeholderInstructionsLabelExample.hidden = count(ingTextView.text) != 0
+
             
         }
     }

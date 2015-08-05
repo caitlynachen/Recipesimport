@@ -683,9 +683,8 @@
                                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4cD-LK-Zou" id="ntf-Ki-amJ">
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shq-2t-vDg">
-                                                                    <rect key="frame" x="10" y="5" width="1043" height="33.5"/>
-                                                                    <string key="text">kandv cooll awesome fun do it now go go go kandv cooll awesome fun do it now go go go kandv cooll awesome fun do it now go go go</string>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shq-2t-vDg">
+                                                                    <rect key="frame" x="10" y="5" width="337" height="33.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -719,15 +718,6 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mku-0N-NQ2">
-                                                <rect key="frame" x="212" y="89" width="46" height="30"/>
-                                                <state key="normal" title="Button">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="forceReload:" destination="ocg-v3-WDZ" eventType="touchDown" id="tj1-Sp-aP6"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -737,7 +727,6 @@
                                             <constraint firstItem="Zkq-6g-exi" firstAttribute="trailing" secondItem="j2O-zA-lGh" secondAttribute="trailing" id="4qh-oQ-U2G"/>
                                             <constraint firstItem="5zZ-Jq-Nja" firstAttribute="top" secondItem="cnF-ca-tTI" secondAttribute="bottom" constant="30" id="7kL-Ir-0ki"/>
                                             <constraint firstItem="cnF-ca-tTI" firstAttribute="trailing" secondItem="yHc-0A-6Th" secondAttribute="trailing" id="AvU-6d-WLJ"/>
-                                            <constraint firstAttribute="trailing" secondItem="Mku-0N-NQ2" secondAttribute="trailing" constant="117" id="C1g-7H-gXr"/>
                                             <constraint firstItem="vvR-bf-hfE" firstAttribute="trailing" secondItem="tqp-DC-Ool" secondAttribute="trailing" id="C6l-K9-MaO"/>
                                             <constraint firstItem="YV1-gm-MeW" firstAttribute="leading" secondItem="B7d-4Q-DHK" secondAttribute="leading" id="C7Q-X7-ajG"/>
                                             <constraint firstItem="yHc-0A-6Th" firstAttribute="leading" secondItem="YV1-gm-MeW" secondAttribute="leading" id="DGU-Bj-RAc"/>
@@ -775,7 +764,6 @@
                                             <constraint firstItem="yHc-0A-6Th" firstAttribute="height" secondItem="j2O-zA-lGh" secondAttribute="height" id="gOk-Np-ukf"/>
                                             <constraint firstItem="tqp-DC-Ool" firstAttribute="top" secondItem="cxG-qQ-TJa" secondAttribute="bottom" constant="10" id="i1M-U0-umS"/>
                                             <constraint firstItem="B7d-4Q-DHK" firstAttribute="trailing" secondItem="tqp-DC-Ool" secondAttribute="trailing" id="iBR-4p-jM4"/>
-                                            <constraint firstItem="cxG-qQ-TJa" firstAttribute="top" secondItem="Mku-0N-NQ2" secondAttribute="bottom" constant="8" symbolic="YES" id="iJb-UM-2qW"/>
                                             <constraint firstItem="vvR-bf-hfE" firstAttribute="top" secondItem="A3e-6R-jtk" secondAttribute="top" constant="140" id="lex-jG-T65"/>
                                             <constraint firstItem="w0R-hB-zmD" firstAttribute="top" secondItem="5zZ-Jq-Nja" secondAttribute="bottom" constant="10" id="nu2-Bc-TGq"/>
                                             <constraint firstItem="YV1-gm-MeW" firstAttribute="leading" secondItem="A3e-6R-jtk" secondAttribute="leading" constant="10" id="q8s-Ff-dCR"/>
