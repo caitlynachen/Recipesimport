@@ -58,7 +58,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             anno?.post.toggleLikePost(PFUser.currentUser()!)
         } else{
             //login parse viewcontroller
-            loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
+            loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten
             
             loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
             let logo = UIImage(named: "logoforparse")

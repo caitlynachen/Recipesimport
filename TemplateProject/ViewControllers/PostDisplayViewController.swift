@@ -128,6 +128,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             let strinstuc = "\n".join(instructionsArrayFromMap!)
             instructionsTextView.text = strinstuc
             
+            cameraButton.hidden = true
             
             placeholderLabel.hidden = count(descriptionText.text) != 0
             placeholderIngredientsLabel.hidden = count(ingTextView.text) != 0
@@ -438,6 +439,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                     
                     self!.coordinateh = coordinate
                     self!.pfgeopoint = PFGeoPoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                    self?.autocompleteTextfield.resignFirstResponder()
                 }
             })
         }

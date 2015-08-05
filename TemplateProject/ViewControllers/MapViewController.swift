@@ -121,7 +121,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
 //                    mixpanel.track("Launch Login Screen", parameters: ["From which screen": "from MapView(Add button)"])
 
                     
-                    loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
+                    loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten
                     
                     loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
                     let logo = UIImage(named: "logoforparse")
@@ -215,14 +215,39 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if annotationCurrent != nil{
             self.mapView.addAnnotation(annotationCurrent)
             
-        
+            var latt = annotationCurrent?.coordinate.latitude
+            var longg = annotationCurrent?.coordinate.longitude
+            var coordd = CLLocationCoordinate2D(latitude: latt!, longitude: longg!)
+            let dumbcoor = CLLocationCoordinate2D(latitude: (latt!) - 1, longitude: (longg!) - 1)
+            self.mapView.setCenterCoordinate(dumbcoor, animated: true)
+            let span = MKCoordinateSpanMake(0.05, 0.05)
+            
+            let region = MKCoordinateRegion(center: coordd, span: span)
+            
+            regionCenter = region.center
+            
+            mapView.setRegion(region, animated: true)
             
         } else if ann != nil {
             ann?.post.delete()
             
             self.mapView.removeAnnotation(ann)
             
-        } else{
+        } else if updatedPost != nil{
+            var latt = updatedPost?.coordinate.latitude
+            var longg = updatedPost?.coordinate.longitude
+            var coordd = CLLocationCoordinate2D(latitude: latt!, longitude: longg!)
+            let dumbcoor = CLLocationCoordinate2D(latitude: (latt!) - 1, longitude: (longg!) - 1)
+            self.mapView.setCenterCoordinate(dumbcoor, animated: true)
+            let span = MKCoordinateSpanMake(0.05, 0.05)
+            
+            let region = MKCoordinateRegion(center: coordd, span: span)
+            
+            regionCenter = region.center
+            
+            mapView.setRegion(region, animated: true)
+            
+        } else {
             if fromGeoButton == true {
                 geoButton()
 //                mixpanel.track("Search", parameters: ["From": "Post View Label"])
@@ -280,35 +305,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
-        if annotationCurrent != nil{
-            var latt = annotationCurrent?.coordinate.latitude
-            var longg = annotationCurrent?.coordinate.longitude
-            var coordd = CLLocationCoordinate2D(latitude: latt!, longitude: longg!)
-            let dumbcoor = CLLocationCoordinate2D(latitude: (latt!) - 1, longitude: (longg!) - 1)
-            self.mapView.setCenterCoordinate(dumbcoor, animated: true)
-            let span = MKCoordinateSpanMake(0.05, 0.05)
-            
-            let region = MKCoordinateRegion(center: coordd, span: span)
-            
-            regionCenter = region.center
-            
-            mapView.setRegion(region, animated: true)
-        }
-        else if updatedPost != nil{
-            var latt = updatedPost?.coordinate.latitude
-            var longg = updatedPost?.coordinate.longitude
-            var coordd = CLLocationCoordinate2D(latitude: latt!, longitude: longg!)
-            let dumbcoor = CLLocationCoordinate2D(latitude: (latt!) - 1, longitude: (longg!) - 1)
-            self.mapView.setCenterCoordinate(dumbcoor, animated: true)
-            let span = MKCoordinateSpanMake(0.05, 0.05)
-            
-            let region = MKCoordinateRegion(center: coordd, span: span)
-            
-            regionCenter = region.center
-            
-            mapView.setRegion(region, animated: true)
-            
-        } else {
+        if annotationCurrent == nil && updatedPost == nil {
       
         
             var userLocation : CLLocation = locations[0] as! CLLocation
@@ -576,7 +573,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     self!.autocompleteTextfield.resignFirstResponder()
                     let coordinate = placemark!.location.coordinate
                     self!.addAnnotation(coordinate, address: text)
-                    let dumbcoor = CLLocationCoordinate2D(latitude: (coordinate.latitude) - 1, longitude: (coordinate.longitude) - 1)
+                    let dumbcoor = CLLocationCoordinate2D(latitude: (coordinate.latitude) - 2, longitude: (coordinate.longitude) - 1)
                     self!.mapView.setCenterCoordinate(dumbcoor, animated: true)
                     let span = MKCoordinateSpanMake(0.05, 0.05)
                     
@@ -645,6 +642,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             
             annotationCurrent = nil
             updatedPost = nil
+            if (lat == nil && long == nil){
+                lat = 37.40549
+                long = -121.977655
+            }
+            
             svc.toLoc = PFGeoPoint(latitude: lat!, longitude: long!)
         }
         
