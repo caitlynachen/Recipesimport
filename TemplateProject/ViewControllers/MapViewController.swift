@@ -168,7 +168,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     @IBOutlet var mapView: MKMapView!
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        cancel.hidden = false
+        
+        autocompleteTextfield.autoCompleteTableHeight = 100
+
+//        cancel.hidden = false
     }
     
     
@@ -184,7 +187,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             toolbar.hidden = true
         }
         
-        cancel.hidden = true
+//        cancel.hidden = true
         
         
         println("in MapViewController")
@@ -224,10 +227,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
     }
     
-    @IBAction func cancelTapped(sender: AnyObject) {
-        
-        autocompleteTextfield = nil
-    }
+//    @IBAction func cancelTapped(sender: AnyObject) {
+//        
+//        autocompleteTextfield = nil
+//    }
     @IBOutlet weak var navbar: UINavigationBar!
     @IBAction func showSearchBar(sender: AnyObject) {
         let countlol = mapAnnoations.count
@@ -610,9 +613,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     
     @IBAction func cancelSerachBar(sender: AnyObject) {
-        autocompleteTextfield.text = nil
+//        autocompleteTextfield.autoCompleteTableHeight = 0
+        autocompleteTextfield.text = ""
+        autocompleteTextfield.hidesWhenEmpty = true
         navbar.hidden = false
-        
     }
     
     

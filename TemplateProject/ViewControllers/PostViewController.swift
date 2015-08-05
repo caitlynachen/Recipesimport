@@ -44,6 +44,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var login: PFLogInViewController?
     
+    @IBAction func forceReload(sender: AnyObject) {
+        ingredientsTableView.reloadData()
+    }
    
     
     @IBAction func geoButtonTApped(sender: AnyObject) {
@@ -206,7 +209,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             actionSheetController.addAction(cancelAction)
             //Create and add first option action
             let takePictureAction: UIAlertAction = UIAlertAction(title: "Report Inappropriate", style: .Default) { action -> Void in
-                let deleteAlert: UIAlertController = UIAlertController(title: "Flag", message: "Are you sure you want to flag this recipe? Flagging will delete this post from GeoRecipe.", preferredStyle: .Alert)
+                let deleteAlert: UIAlertController = UIAlertController(title: "Flag", message: "Are you sure you want to flag this recipe?", preferredStyle: .Alert)
                 
                 let dontDeleteAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
                 }
@@ -272,7 +275,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         ingredientsTableView.delegate = self
         
-        ingredientsTableView.estimatedRowHeight = 44.0
+        ingredientsTableView.estimatedRowHeight = 74.0
         ingredientsTableView.rowHeight = UITableViewAutomaticDimension
         
         instructionsTableView.delegate = self
@@ -328,6 +331,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ingredientsTableView {
             var i = anno?.ingredients.count
@@ -340,7 +347,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var myFont = UIFont(name: "Arial", size: 14.0)
-        if tableView == ingredientsTableView{
+        if tableView == ingredientsTableView {
             var cell: UITableViewCell = self.ingredientsTableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             
             
