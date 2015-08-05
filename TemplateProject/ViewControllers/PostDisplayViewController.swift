@@ -52,7 +52,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     
     let post = Post()
     
-    //    var toLoc: PFGeoPoint?
+        var toLoc: PFGeoPoint?
     var image: UIImage?
     var annotation: PinAnnotation?
     @IBOutlet weak var cameraButton: UIButton!
@@ -258,6 +258,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         textField.resignFirstResponder()
         
+        if textField == autocompleteTextfield {
+            autocompleteTextfield.hidesWhenEmpty =  true
+        }
         return true
     }
     
@@ -283,6 +286,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         super.viewDidLoad()
         
         titleTextField.delegate = self
+        autocompleteTextfield.delegate = self
         prepTime.delegate = self
         cookTime.delegate = self
         numOfServings.delegate = self
@@ -509,6 +513,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         appendIngredientsAndInstructions()
         
+        if pfgeopoint == nil {
+            pfgeopoint = toLoc
+        }
         
         post.prep = prepTime.text
         post.cook = cookTime.text
@@ -529,6 +536,14 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         
         let test = post.Ingredients!
+        
+      
+        if coordinateh == nil{
+            var latitu = toLoc?.latitude
+            var longit = toLoc?.longitude
+            
+            coordinateh = CLLocationCoordinate2DMake(latitu!, longit!)
+        }
         
         var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh!, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
         

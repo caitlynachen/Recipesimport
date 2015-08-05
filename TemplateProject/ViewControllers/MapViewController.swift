@@ -266,6 +266,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     var long: CLLocationDegrees?
     var currentLocation: CLLocationCoordinate2D?
     var regionCenter: CLLocationCoordinate2D?
+    var locforPost: CLLocationCoordinate2D?
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
@@ -285,6 +286,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             self.lat = userLocation.coordinate.latitude
             self.long = userLocation.coordinate.longitude
             
+            locforPost = CLLocationCoordinate2DMake(self.lat!, self.long!)
             //self.mapView.addAnnotation(point)
             
             let location = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
@@ -598,7 +600,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if (segue.identifier == "segueToPostDisplay") {
             var svc = segue.destinationViewController as! PostDisplayViewController;
             
-            //            svc.toLoc = PFGeoPoint(latitude: lat!, longitude: long!)
+                svc.toLoc = PFGeoPoint(latitude: lat!, longitude: long!)
         }
         
         if (segue.identifier == "toPostView"){
