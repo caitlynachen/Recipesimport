@@ -530,8 +530,46 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         post.Instructions = self.instructionsArray
         post.date = NSDate()
         
-        post.save()
-        post.uploadPost()
+        if titleTextField.text == "" {
+            emptyLabel.text = "Please enter a title."
+            emptyLabel.hidden = false
+            
+        } else if autocompleteTextfield.text == "" {
+            emptyLabel.text = "Please enter location tag."
+            emptyLabel.hidden = false
+            
+        } else if imageView?.image == nil {
+            emptyLabel.text = "Please add an image."
+            emptyLabel.hidden = false
+            
+        } else if prepTime.text == ""{
+            emptyLabel.text = "Please enter a prep time."
+            emptyLabel.hidden = false
+            
+        } else if cookTime.text == "" {
+            emptyLabel.text = "Please enter a cook time."
+            emptyLabel.hidden = false
+            
+        } else if numOfServings.text == "" {
+            emptyLabel.text = "Please enter the number of servings."
+            emptyLabel.hidden = false
+            
+        } else if ingTextView.text == nil {
+            emptyLabel.text = "Please enter at least one ingredient."
+            emptyLabel.hidden = false
+            
+        } else if instructionsTextView.text == nil {
+            emptyLabel.text = "Please enter at least one instruction."
+            emptyLabel.hidden = false
+            
+        } else {
+            
+            post.save()
+            post.uploadPost()
+        }
+
+        
+        
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let mapViewController = storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController

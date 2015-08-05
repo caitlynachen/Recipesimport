@@ -24,7 +24,6 @@
 		1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */; };
 		1CDF7A481B55EC4100609CE1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CDF7A471B55EC4100609CE1 /* MapKit.framework */; };
 		1CDF7A4F1B55EC5100609CE1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B991B06C31F000913E4 /* CoreLocation.framework */; };
-		2E95B993E556282C18803165 /* libPods-TemplateProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E52C4C0B2D9C603C1F998FAF /* libPods-TemplateProject.a */; };
 		624262C01B4460CB00005CE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624262B21B4460CB00005CE3 /* AppDelegate.swift */; };
 		624262C11B4460CB00005CE3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 624262B31B4460CB00005CE3 /* LaunchScreen.xib */; };
 		624262C31B4460CB00005CE3 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624262B81B4460CB00005CE3 /* ErrorHandling.swift */; };
@@ -48,6 +47,7 @@
 		62A07D661B1F79F2001F6916 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A07D651B1F79F2001F6916 /* libstdc++.6.dylib */; };
 		62A07D6E1B1F7FB9001F6916 /* Bond.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B7E1B06BFA2000913E4 /* Bond.framework */; };
 		62A07D6F1B1F7FB9001F6916 /* Bond.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62551B7E1B06BFA2000913E4 /* Bond.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7B7DEB9F400E3291206CC1D3 /* Pods_TemplateProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA1B79874AD9A704AD7C152A /* Pods_TemplateProject.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,7 +183,7 @@
 		62A07D651B1F79F2001F6916 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		62C8C1E01B06BD6500DC3EA7 /* TemplateProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TemplateProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A527F9DFA72AE5B50D0571DE /* Pods-TemplateProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TemplateProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TemplateProject/Pods-TemplateProject.debug.xcconfig"; sourceTree = "<group>"; };
-		E52C4C0B2D9C603C1F998FAF /* libPods-TemplateProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TemplateProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA1B79874AD9A704AD7C152A /* Pods_TemplateProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TemplateProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,7 +210,7 @@
 				62551B6D1B06BF6D000913E4 /* FBSDKCoreKit.framework in Frameworks */,
 				62551B6E1B06BF6D000913E4 /* FBSDKLoginKit.framework in Frameworks */,
 				62551B701B06BF6D000913E4 /* Parse.framework in Frameworks */,
-				2E95B993E556282C18803165 /* libPods-TemplateProject.a in Frameworks */,
+				7B7DEB9F400E3291206CC1D3 /* Pods_TemplateProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,7 +315,7 @@
 				62551B691B06BF6D000913E4 /* ParseFacebookUtils.framework */,
 				62551B6A1B06BF6D000913E4 /* ParseFacebookUtilsV4.framework */,
 				62551B6B1B06BF6D000913E4 /* ParseUI.framework */,
-				E52C4C0B2D9C603C1F998FAF /* libPods-TemplateProject.a */,
+				BA1B79874AD9A704AD7C152A /* Pods_TemplateProject.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -383,6 +383,7 @@
 				62C8C1DE1B06BD6500DC3EA7 /* Resources */,
 				62A07D1C1B1E56C2001F6916 /* Embed Frameworks */,
 				954223EB6011FAE070298440 /* Copy Pods Resources */,
+				B162D27A6562F6D47189603E /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -523,6 +524,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TemplateProject/Pods-TemplateProject-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B162D27A6562F6D47189603E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TemplateProject/Pods-TemplateProject-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BF5DD5B84249A684B60D4701 /* Check Pods Manifest.lock */ = {

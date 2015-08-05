@@ -1,13 +1,15 @@
 PODS:
   - DateTools (1.6.1)
-  - GoogleMaps (1.10.1)
+  - Mixpanel (2.8.2):
+    - Mixpanel/Mixpanel (= 2.8.2)
+  - Mixpanel/Mixpanel (2.8.2)
 
 DEPENDENCIES:
   - DateTools
-  - GoogleMaps
+  - Mixpanel
 
 SPEC CHECKSUMS:
   DateTools: 9bcc89e4f2f9004d8a7a2bd1b49269cf78968e65
-  GoogleMaps: ebf08677f181d9c2dcdbd1721d206f02beccc9b1
+  Mixpanel: f4d71ac2a306e7cda6ad03d4a2be249a0fd7a967
 
 COCOAPODS: 0.38.2

@@ -56,6 +56,8 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
               if (success) {
                 // updated username could be stored -> call success
                 self.callback(user, error)
+                
+//                mixpanel.track("Sign Up", parameters: ["With": "Facebook"])
               } else {
                 // updating username failed -> hand error to callback
                 self.callback(nil, error)
@@ -80,6 +82,8 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
 extension ParseLoginHelper : PFSignUpViewControllerDelegate {
   
   func signUpViewController(signUpController: PFSignUpViewController, didSignUpUser user: PFUser) {
+//    mixpanel.track("Sign Up", parameters: ["With": "Email"])
+
     self.callback(user, nil)
   }
   

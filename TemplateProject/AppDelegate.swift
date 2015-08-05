@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import FBSDKCoreKit
 import ParseUI
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    
+    
+    Mixpanel.sharedInstanceWithToken("6b0ae6b1fde98b8c8a2035c11bd70dc9")
+    let mixpanel: Mixpanel = Mixpanel.sharedInstance()
+    mixpanel.track("App launched")
+    
     // Override point for customization after application launch.
     Post.registerSubclass()
 

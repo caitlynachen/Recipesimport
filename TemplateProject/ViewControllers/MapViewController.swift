@@ -17,6 +17,7 @@ import ParseUI
 import Bond
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Mixpanel
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate, UITextFieldDelegate {
     
@@ -93,6 +94,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             logoutNotification.dismissViewControllerAnimated(true, completion: nil)
             self.toolbar.hidden = true
             
+//            mixpanel.track("Logged out")
+            
         }
         actionSheetController.addAction(nextAction)
         //Add a text field
@@ -115,6 +118,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     
                 } else {
                     
+//                    mixpanel.track("Launch Login Screen", parameters: ["From which screen": "from MapView(Add button)"])
+
                     
                     loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
                     
@@ -169,7 +174,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     func textFieldDidBeginEditing(textField: UITextField) {
         
-        autocompleteTextfield.autoCompleteTableHeight = 100
+
+//            mixpanel.track("Search", parameters: ["With": "Search Bar On Map"])
 
 //        cancel.hidden = false
     }
@@ -218,6 +224,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         } else{
             if fromGeoButton == true {
                 geoButton()
+//                mixpanel.track("Search", parameters: ["From": "Post View Label"])
+
+
             }
             
             
@@ -485,6 +494,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 self.autocompleteTextfield.resignFirstResponder()
                 let coordinate = placemark!.location.coordinate
                 self.addAnnotation(coordinate, address: self.autocompleteTextfield.text)
+                let dumbcoor = CLLocationCoordinate2D(latitude: (coordinate.latitude) - 1, longitude: (coordinate.longitude) - 1)
+                self.mapView.setCenterCoordinate(dumbcoor, animated: true)
                 let span = MKCoordinateSpanMake(0.05, 0.05)
                 
                 let region = MKCoordinateRegion(center: coordinate, span: span)
@@ -542,7 +553,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     self!.autocompleteTextfield.resignFirstResponder()
                     let coordinate = placemark!.location.coordinate
                     self!.addAnnotation(coordinate, address: text)
-                    self?.mapView.setCenterCoordinate(coordinate, animated: true)
+                    let dumbcoor = CLLocationCoordinate2D(latitude: (coordinate.latitude) - 1, longitude: (coordinate.longitude) - 1)
+                    self!.mapView.setCenterCoordinate(dumbcoor, animated: true)
+                    let span = MKCoordinateSpanMake(0.05, 0.05)
+                    
+                    let region = MKCoordinateRegion(center: coordinate, span: span)
+                    
+                    self!.regionCenter = region.center
+                    
+                    self!.mapView.setRegion(region, animated: true)
+                    
                 }
             })
         }

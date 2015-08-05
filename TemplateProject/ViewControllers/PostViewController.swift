@@ -296,14 +296,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         dateLabel.text = anno?.date.shortTimeAgoSinceDate(NSDate())
         
-        var cellHeight  = CGFloat(self.ingredientsTableView.rowHeight)
-        
-        var counttt = anno?.ingredients.count
-        var totalCity   = CGFloat(counttt!)
-        
-        var totalHeight = cellHeight * totalCity
-        
-        self.ingredientsTableView.frame.size.height = CGFloat(totalHeight)
         
         var data = anno?.image.getData()
         image = UIImage(data: data!)

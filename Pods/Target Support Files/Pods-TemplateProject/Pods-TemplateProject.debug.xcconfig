@@ -1,6 +1,6 @@
-FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/GoogleMaps/Frameworks"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/DateTools" "${PODS_ROOT}/Headers/Public/GoogleMaps" "${PODS_ROOT}/Headers/Public/GoogleMaps/GoogleMaps"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/DateTools" -isystem "${PODS_ROOT}/Headers/Public/GoogleMaps" -isystem "${PODS_ROOT}/Headers/Public/GoogleMaps/GoogleMaps"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"DateTools" -l"c++" -l"icucore" -l"z" -framework "AVFoundation" -framework "Accelerate" -framework "CoreBluetooth" -framework "CoreData" -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreText" -framework "GLKit" -framework "GoogleMaps" -framework "ImageIO" -framework "OpenGLES" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/DateTools.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Mixpanel.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "DateTools" -framework "Mixpanel"
+PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-TemplateProject
 PODS_ROOT = ${SRCROOT}/Pods
