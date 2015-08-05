@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "62C8C1DF1B06BD6500DC3EA7"
                BuildableName = "TemplateProject.app"
-               BlueprintName = "TemplateProject"
-               ReferencedContainer = "container:TemplateProject.xcodeproj">
+               BlueprintName = "GeoRecipe"
+               ReferencedContainer = "container:GeoRecipe.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "62C8C1DF1B06BD6500DC3EA7"
             BuildableName = "TemplateProject.app"
-            BlueprintName = "TemplateProject"
-            ReferencedContainer = "container:TemplateProject.xcodeproj">
+            BlueprintName = "GeoRecipe"
+            ReferencedContainer = "container:GeoRecipe.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -54,8 +54,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "62C8C1DF1B06BD6500DC3EA7"
             BuildableName = "TemplateProject.app"
-            BlueprintName = "TemplateProject"
-            ReferencedContainer = "container:TemplateProject.xcodeproj">
+            BlueprintName = "GeoRecipe"
+            ReferencedContainer = "container:GeoRecipe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -73,8 +73,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "62C8C1DF1B06BD6500DC3EA7"
             BuildableName = "TemplateProject.app"
-            BlueprintName = "TemplateProject"
-            ReferencedContainer = "container:TemplateProject.xcodeproj">
+            BlueprintName = "GeoRecipe"
+            ReferencedContainer = "container:GeoRecipe.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
