@@ -197,7 +197,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                 
             } else {
                 updatePost()
-                svc.updatedPost = true
+                svc.updatedPost = annotation
             }
             
             

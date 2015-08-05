@@ -40,7 +40,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     @IBOutlet weak var toolbar: UIToolbar!
     var ann: PinAnnotation?
     
-    var updatedPost: Bool?
+    var updatedPost: PinAnnotation?
     
     @IBOutlet weak var cancelSearchBar: UIButton!
     var points: [PFGeoPoint] = []
@@ -215,8 +215,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if annotationCurrent != nil{
             self.mapView.addAnnotation(annotationCurrent)
             
+        
             
-        }  else if ann != nil {
+        } else if ann != nil {
             ann?.post.delete()
             
             self.mapView.removeAnnotation(ann)
@@ -279,17 +280,37 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
-        if annotationCurrent != nil {
-            var coordin = annotationCurrent?.coordinate
+        if annotationCurrent != nil{
+            var latt = annotationCurrent?.coordinate.latitude
+            var longg = annotationCurrent?.coordinate.longitude
+            var coordd = CLLocationCoordinate2D(latitude: latt!, longitude: longg!)
+            let dumbcoor = CLLocationCoordinate2D(latitude: (latt!) - 1, longitude: (longg!) - 1)
+            self.mapView.setCenterCoordinate(dumbcoor, animated: true)
             let span = MKCoordinateSpanMake(0.05, 0.05)
             
-            let region = MKCoordinateRegion(center: coordin!, span: span)
+            let region = MKCoordinateRegion(center: coordd, span: span)
             
             regionCenter = region.center
             
             mapView.setRegion(region, animated: true)
         }
-        else {
+        else if updatedPost != nil{
+            var latt = updatedPost?.coordinate.latitude
+            var longg = updatedPost?.coordinate.longitude
+            var coordd = CLLocationCoordinate2D(latitude: latt!, longitude: longg!)
+            let dumbcoor = CLLocationCoordinate2D(latitude: (latt!) - 1, longitude: (longg!) - 1)
+            self.mapView.setCenterCoordinate(dumbcoor, animated: true)
+            let span = MKCoordinateSpanMake(0.05, 0.05)
+            
+            let region = MKCoordinateRegion(center: coordd, span: span)
+            
+            regionCenter = region.center
+            
+            mapView.setRegion(region, animated: true)
+            
+        } else {
+      
+        
             var userLocation : CLLocation = locations[0] as! CLLocation
             
             self.lat = userLocation.coordinate.latitude
@@ -309,11 +330,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             
             mapView.setRegion(region, animated: true)
             
-        }
+        
         //        for anno in mapAnnoations {
         //            mapView.addAnnotation(anno)
         //        }
-        
+
+        }
         locationManager.stopUpdatingLocation()
         
         
@@ -621,7 +643,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if (segue.identifier == "segueToPostDisplay") {
             var svc = segue.destinationViewController as! PostDisplayViewController;
             
-                svc.toLoc = PFGeoPoint(latitude: lat!, longitude: long!)
+            annotationCurrent = nil
+            updatedPost = nil
+            svc.toLoc = PFGeoPoint(latitude: lat!, longitude: long!)
         }
         
         if (segue.identifier == "toPostView"){
@@ -639,6 +663,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
 //        autocompleteTextfield.autoCompleteTableHeight = 0
         autocompleteTextfield.text = ""
         autocompleteTextfield.hidesWhenEmpty = true
+        autocompleteTextfield.resignFirstResponder()
         navbar.hidden = false
     }
     

@@ -284,6 +284,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.ingredientsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.instructionsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "instruccell")
         
+        
         geoButton.setTitle(anno?.country, forState: .Normal)
         //post = anno?.post
         cook.text = anno?.cook
@@ -309,6 +310,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             post.likes ->> likeBond
         }
         // Do any additional setup after loading the view.
+        
+
     }
     
     
@@ -339,7 +342,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    var height: CGFloat?
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var myFont = UIFont(name: "Arial", size: 14.0)
@@ -354,6 +356,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             cell.textLabel?.font = myFont
             cell.textLabel?.text = anno?.ingredients[indexPath.row]
+            
             
             return cell
             
