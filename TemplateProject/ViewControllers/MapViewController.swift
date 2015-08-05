@@ -487,6 +487,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         navbar.hidden = true
         autocompleteTextfield.text = geoButtonTitle
         
+        //hello
         
         Location.geocodeAddressString(autocompleteTextfield.text, completion: { (placemark, error) -> Void in
             if placemark != nil{
