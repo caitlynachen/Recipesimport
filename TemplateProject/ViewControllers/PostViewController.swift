@@ -123,7 +123,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -274,15 +273,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         ingredientsTableView.delegate = self
-        
-        ingredientsTableView.estimatedRowHeight = 74.0
-        ingredientsTableView.rowHeight = UITableViewAutomaticDimension
+      
         
         instructionsTableView.delegate = self
         
-        instructionsTableView.estimatedRowHeight = 44.0
-        instructionsTableView.rowHeight = UITableViewAutomaticDimension
-                
         
         ing = anno?.ingredients
         ins = anno?.instructions
@@ -302,6 +296,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         dateLabel.text = anno?.date.shortTimeAgoSinceDate(NSDate())
         
+        var cellHeight  = CGFloat(self.ingredientsTableView.rowHeight)
+        
+        var counttt = anno?.ingredients.count
+        var totalCity   = CGFloat(counttt!)
+        
+        var totalHeight = cellHeight * totalCity
+        
+        self.ingredientsTableView.frame.size.height = CGFloat(totalHeight)
         
         var data = anno?.image.getData()
         image = UIImage(data: data!)
@@ -345,18 +347,33 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    var height: CGFloat?
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var myFont = UIFont(name: "Arial", size: 14.0)
         if tableView == ingredientsTableView {
             var cell: UITableViewCell = self.ingredientsTableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
-            
+            var width = ingredientsTableView.frame.width
+
+            cell.textLabel?.frame = CGRect(x: 0, y: 0, width: width, height: CGFloat.max)
+            cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            cell.textLabel?.sizeToFit()
             
             cell.textLabel?.font = myFont
             cell.textLabel?.text = anno?.ingredients[indexPath.row]
+            
             return cell
             
         } else {
             var cell: UITableViewCell = self.instructionsTableView.dequeueReusableCellWithIdentifier("instruccell") as! UITableViewCell
+            var width = instructionsTableView.frame.width
+
+            cell.textLabel?.frame = CGRect(x: 0, y: 0, width: width, height: CGFloat.max)
+            cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            cell.textLabel?.sizeToFit()
+            
             
             cell.textLabel?.font = myFont
             cell.textLabel?.text = anno?.instructions[indexPath.row]

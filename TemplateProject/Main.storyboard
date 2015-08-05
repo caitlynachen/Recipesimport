@@ -634,6 +634,7 @@
                                                 <rect key="frame" x="10" y="1067" width="355" height="400"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="400" id="ElI-05-MGw"/>
                                                     <constraint firstAttribute="height" constant="400" id="TB8-2l-w8n"/>
                                                 </constraints>
                                                 <prototypes>
@@ -665,6 +666,11 @@
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
                                                 </prototypes>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="ElI-05-MGw"/>
+                                                    </mask>
+                                                </variation>
                                                 <connections>
                                                     <outlet property="dataSource" destination="ocg-v3-WDZ" id="a2z-Eq-HbX"/>
                                                     <outlet property="delegate" destination="ocg-v3-WDZ" id="9Cj-j5-Qhn"/>
@@ -674,7 +680,8 @@
                                                 <rect key="frame" x="8" y="722" width="357" height="300"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="300" id="RRf-KP-g5c"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="RRf-KP-g5c"/>
+                                                    <constraint firstAttribute="height" constant="300" id="w0b-03-5HC"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="4cD-LK-Zou">
@@ -707,6 +714,11 @@
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
                                                 </prototypes>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="RRf-KP-g5c"/>
+                                                    </mask>
+                                                </variation>
                                                 <connections>
                                                     <outlet property="dataSource" destination="ocg-v3-WDZ" id="VC7-ok-p5C"/>
                                                     <outlet property="delegate" destination="ocg-v3-WDZ" id="6mV-pi-eHr"/>
