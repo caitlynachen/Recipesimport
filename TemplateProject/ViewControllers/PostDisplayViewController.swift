@@ -128,8 +128,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             let strinstuc = "\n".join(instructionsArrayFromMap!)
             instructionsTextView.text = strinstuc
             
-            cameraButton.hidden = true
-            autocompleteTextfield.enabled = false
+//            autocompleteTextfield.enabled = false
             
             placeholderLabel.hidden = count(descriptionText.text) != 0
             placeholderIngredientsLabel.hidden = count(ingTextView.text) != 0
@@ -497,6 +496,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         appendIngredientsAndInstructions()
         //change parse info
         
+        annotation?.post.location = pfgeopoint
         annotation?.post.prep = prepTime.text
         annotation?.post.cook = cookTime.text
         annotation?.post.servings = numOfServings.text
