@@ -40,6 +40,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     @IBOutlet weak var toolbar: UIToolbar!
     var ann: PinAnnotation?
     
+    var coorForUpdatedPost: CLLocationCoordinate2D?
+    
     var updatedPost: PinAnnotation?
     
     @IBOutlet weak var cancelSearchBar: UIButton!
@@ -234,8 +236,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             self.mapView.removeAnnotation(ann)
             
         } else if updatedPost != nil{
-            var latt = updatedPost?.coordinate.latitude
-            var longg = updatedPost?.coordinate.longitude
+            var latt = updatedPost?.post.location?.latitude
+            var longg = updatedPost?.post.location?.longitude
             var coordd = CLLocationCoordinate2D(latitude: latt!, longitude: longg!)
             let dumbcoor = CLLocationCoordinate2D(latitude: (latt!) - 1, longitude: (longg!) - 1)
             self.mapView.setCenterCoordinate(dumbcoor, animated: true)
@@ -327,10 +329,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             
             mapView.setRegion(region, animated: true)
             
-        
-        //        for anno in mapAnnoations {
-        //            mapView.addAnnotation(anno)
-        //        }
 
         }
         locationManager.stopUpdatingLocation()
@@ -452,21 +450,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             
             // }
             
-        } else{
-            let reuseId = "hi"
-            
-            var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
-            if anView == nil {
-                anView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                anView!.canShowCallout = true
-                anView!.animatesDrop = true
-                anView!.pinColor = .Purple
-            }
-            else {
-                anView!.annotation = annotation
-            }
-            
-            fromTxtField = false
         }
         
         return anView
@@ -510,10 +493,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
         Location.geocodeAddressString(autocompleteTextfield.text, completion: { (placemark, error) -> Void in
             if placemark != nil{
-                //                    self!.autocompleteTextfield.text = text
                 self.autocompleteTextfield.resignFirstResponder()
                 let coordinate = placemark!.location.coordinate
-                self.addAnnotation(coordinate, address: self.autocompleteTextfield.text)
+
                 let dumbcoor = CLLocationCoordinate2D(latitude: (coordinate.latitude) - 1, longitude: (coordinate.longitude) - 1)
                 self.mapView.setCenterCoordinate(dumbcoor, animated: true)
                 let span = MKCoordinateSpanMake(0.05, 0.05)
@@ -572,7 +554,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     self!.autocompleteTextfield.text = text
                     self!.autocompleteTextfield.resignFirstResponder()
                     let coordinate = placemark!.location.coordinate
-                    self!.addAnnotation(coordinate, address: text)
                     let dumbcoor = CLLocationCoordinate2D(latitude: (coordinate.latitude) - 2, longitude: (coordinate.longitude) - 1)
                     self!.mapView.setCenterCoordinate(dumbcoor, animated: true)
                     let span = MKCoordinateSpanMake(0.05, 0.05)
@@ -625,16 +606,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     var fromTxtField: Bool = false
     //MARK: Map Utilities
-    private func addAnnotation(coordinate:CLLocationCoordinate2D, address:String?){
-        if selectedPointAnnotation != nil{
-            mapView.removeAnnotation(selectedPointAnnotation)
-        }
-        fromTxtField = true
-        selectedPointAnnotation = MKPointAnnotation()
-        selectedPointAnnotation?.coordinate = coordinate
-        selectedPointAnnotation?.title = address
-        mapView.addAnnotation(selectedPointAnnotation)
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "segueToPostDisplay") {

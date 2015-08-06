@@ -199,6 +199,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             } else {
                 updatePost()
                 svc.updatedPost = annotation
+//                svc.coorForUpdatedPost = annotation?.coordinate
             }
             
             
@@ -494,6 +495,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         appendIngredientsAndInstructions()
         //change parse info
+        
+        
+        annotation?.post.location = pfgeopoint
         annotation?.post.prep = prepTime.text
         annotation?.post.cook = cookTime.text
         annotation?.post.servings = numOfServings.text
@@ -502,7 +506,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         annotation?.post.country = autocompleteTextfield.text
         annotation?.post.Ingredients = ingredientsArray
         annotation?.post.Instructions = instructionsArray
-        
         
         
         annotation?.post.save()
