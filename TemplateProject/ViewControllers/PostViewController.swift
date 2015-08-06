@@ -11,9 +11,14 @@ import Bond
 import Parse
 import ParseUI
 import FBSDKCoreKit
+import Mixpanel
 
 
 class PostViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    let mixpanel = Mixpanel.sharedInstance()
+    
+    var flagBond: Bond<[PFUser]?>!
+    
     
     @IBOutlet weak var servings: UILabel!
     @IBOutlet weak var cook: UILabel!
@@ -54,10 +59,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func likeButtonTapped(sender: AnyObject) {
+        mixpanel.track("Like process", properties: ["action": "like tapped"])
         if PFUser.currentUser() != nil{
+            mixpanel.track("Like process", properties: ["action": "already logged in"])
+            
             anno?.post.toggleLikePost(PFUser.currentUser()!)
         } else{
             //login parse viewcontroller
+            mixpanel.track("Like process", properties: ["action": "launch login screen"])
             loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten
             
             loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
@@ -69,7 +78,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             
             parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
-                // Initialize the ParseLoginHelper with a callback
+                // Initialize the ParseLogiseguenHelper with a callback
                 println("before the error")
                 if let error = error {
                     // 1
@@ -77,6 +86,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 } else  if let user = user {
                     // if login was successful, display the TabBarController
                     // 2
+                    self.mixpanel.track("Like process", properties: ["action": "login completed and liked"])
                     println("show post  view controller")
                     
                     self.loginViewController.dismissViewControllerAnimated(true, completion: nil)
@@ -167,6 +177,31 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func flagBondz (){
+        anno?.post.fetchFlags()
+        
+        var flags = anno?.post.flags
+        
+        
+       flagBond = Bond<[PFUser]?>() { [unowned self] flagList in
+            
+            if let flagList = flagList {
+                if flagList.count > 4 {
+                    self.performSegueWithIdentifier("fromPostMap", sender: nil)
+                } else {
+                    self.performSegueWithIdentifier("fromPostMapForFlagBond", sender: nil)
+                }
+                
+            }
+        }
+        
+        flags! ->> flagBond
+
+        
+        
+        
+    }
+    
     
     @IBAction func moreButtonTapped(sender: AnyObject) {
         if(PFUser.currentUser()?.username == usernameLabel.text){
@@ -184,6 +219,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let deleteAction: UIAlertAction = UIAlertAction(title: "Delete", style: .Default) { action -> Void in
                     
                     //                    self.anno?.post.delete()
+                    self.mixpanel.track("Segue", properties: ["from Post to Map View": "Delete"])
                     
                     self.performSegueWithIdentifier("fromPostMap", sender: nil)
                     
@@ -197,7 +233,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             actionSheetController.addAction(takePictureAction)
             let choosePictureAction: UIAlertAction = UIAlertAction(title: "Edit", style: .Default) { action -> Void in
                 self.performSegueWithIdentifier("editPost", sender: nil)
-                
+                self.mixpanel.track("Segue", properties: ["from Post to Map View": "Edit"])
             }
             actionSheetController.addAction(choosePictureAction)
             
@@ -224,7 +260,58 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 deleteAlert.addAction(dontDeleteAction)
                 let deleteAction: UIAlertAction = UIAlertAction(title: "Flag", style: .Default) { action -> Void in
                     
-                    self.performSegueWithIdentifier("fromPostMap", sender: nil)
+                    if PFUser.currentUser() != nil{
+                        self.anno?.post.flagPost(PFUser.currentUser()!)
+                        
+                        self.mixpanel.track("Segue", properties: ["from Post to Map View": "Flag"])
+                        
+                        self.flagBondz()
+                        
+                        
+                    } else{
+                        //login parse viewcontroller
+                        self.loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten
+                        
+                        self.loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
+                        let logo = UIImage(named: "logoforparse")
+                        let logoView = UIImageView(image: logo)
+                        self.loginViewController.logInView?.logo = logoView
+                        
+                        
+                        
+                        
+                        self.parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
+                            // Initialize the ParseLogiseguenHelper with a callback
+                            println("before the error")
+                            if let error = error {
+                                // 1
+                                ErrorHandling.defaultErrorHandler(error)
+                            } else  if let user = user {
+                                // if login was successful, display the TabBarController
+                                // 2
+                                //                            self.mixpanel.track("Like process", properties: ["action": "login completed and liked"])
+                                //                            println("show post  view controller")
+                                //
+                                //                            self.loginViewController.dismissViewControllerAnimated(true, completion: nil)
+                                //                            //****
+                                //                            self.anno?.post.toggleLikePost(PFUser.currentUser()!)
+                                
+                                
+                            }
+                        }
+                        
+                        self.loginViewController.delegate = self.parseLoginHelper
+                        self.loginViewController.signUpController?.delegate = self.parseLoginHelper
+                        
+                        
+                        
+                        self.presentViewController(self.loginViewController, animated: true, completion: nil)
+                        
+                        
+                    }
+                    
+                    
+                    
                     
                     
                 }
@@ -401,12 +488,16 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             
         } else if (segue.identifier == "fromGeoButtonToMap"){
+            self.mixpanel.track("Segue", properties: ["from Post to Map View": "Geo Button"])
             var dest = segue.destinationViewController as! MapViewController;
             dest.fromGeoButton = true
             dest.geoButtonTitle = anno?.country
             let mapViewController = storyboard!.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
             
             
+        } else if (segue.identifier == "fromPostMapForFlagBond"){
+            var dest = segue.destinationViewController as! MapViewController;
+            dest.annForFlagPost = anno
         }
     }
     

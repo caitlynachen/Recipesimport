@@ -11,9 +11,11 @@ import Parse
 import MapKit
 import Bond
 import FBSDKCoreKit
-
+import Mixpanel
 
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextViewDelegate, UITextFieldDelegate, NSURLConnectionDataDelegate{
+    let mixpanel = Mixpanel.sharedInstance()
+
     
     @IBOutlet weak var ingTextView: UITextView!
     @IBOutlet weak var instructionsTextView: UITextView!
@@ -195,11 +197,13 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             var svc = segue.destinationViewController as! MapViewController;
             
             if annotation?.post == nil{
+               
                 createPost()
-                
+                 self.mixpanel.track("Segue", properties: ["from Post Display to Map View": "Create"])
                 
             } else {
                 updatePost()
+                self.mixpanel.track("Segue", properties: ["from Post Display to Map View": "Update"])
                 svc.updatedPost = annotation
 //                svc.coorForUpdatedPost = annotation?.coordinate
             }

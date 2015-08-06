@@ -21,6 +21,9 @@ import Mixpanel
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, MKMapViewDelegate, UITextFieldDelegate {
     
+    let mixpanel = Mixpanel.sharedInstance()
+
+    
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var cancel: UIButton!
     var annotationCurrent: PinAnnotation?
@@ -39,7 +42,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     @IBOutlet weak var toolbar: UIToolbar!
     var ann: PinAnnotation?
-    
+    var annForFlagPost: PinAnnotation?
     var coorForUpdatedPost: CLLocationCoordinate2D?
     
     var updatedPost: PinAnnotation?
@@ -53,7 +56,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     var mapAnnoations: [PinAnnotation] = []
     
-    var flagBond: Bond<[PFUser]?>!
     
     @IBOutlet weak var autocompleteTextfield: AutoCompleteTextField!
     
@@ -90,13 +92,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             //Do some other stuff
             PFUser.logOut()
             let logoutNotification: UIAlertController = UIAlertController(title: "Logout", message: "Successfully Logged Out!", preferredStyle: .Alert)
-            
+        
             
             self.presentViewController(logoutNotification, animated: true, completion: nil)
             logoutNotification.dismissViewControllerAnimated(true, completion: nil)
             self.toolbar.hidden = true
             
-//            mixpanel.track("Logged out")
+            self.mixpanel.track("Logged out")
             
         }
         actionSheetController.addAction(nextAction)
@@ -111,6 +113,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if let ident = identifier {
             if ident == "segueToPostDisplay" {
                 if let user = PFUser.currentUser(){
+                       self.mixpanel.track("Segue", properties: ["from Map View to Post Display": "Add Button"])
                     println("Should show post display View Controller")
                     return true
                     //show post display view controller
@@ -120,7 +123,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     
                 } else {
                     
-//                    mixpanel.track("Launch Login Screen", parameters: ["From which screen": "from MapView(Add button)"])
+                    mixpanel.track("Launch Login Screen", properties: ["From which screen": "from MapView(Add button)"])
 
                     
                     loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten
@@ -142,10 +145,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                         } else  if let user = user {
                             // if login was successful, display the TabBarController
                             // 2
+                            
+                            self.mixpanel.track("Login in successful", properties: ["From which screen": "from MapView(Add button)"])
                             println("show post  view controller")
                             
                             self.loginViewController.dismissViewControllerAnimated(true, completion: nil)
                             
+                            self.mixpanel.track("Segue", properties: ["from Login to Post Display": "Add Button"])
+
                             self.performSegueWithIdentifier("segueToPostDisplay", sender: self)
                             
                             //****
@@ -235,7 +242,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             
             self.mapView.removeAnnotation(ann)
             
-        } else if updatedPost != nil{
+        } else if annForFlagPost != nil{
+            self.mapView.removeAnnotation(annForFlagPost)
+            
+        } else if updatedPost != nil {
             var latt = updatedPost?.post.location?.latitude
             var longg = updatedPost?.post.location?.longitude
             var coordd = CLLocationCoordinate2D(latitude: latt!, longitude: longg!)
@@ -359,22 +369,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 
                 var postcurrent = post as! Post
                 
-                postcurrent.fetchFlags()
                 
                 
-                
-                flagBond = Bond<[PFUser]?>() { [unowned self] flagList in
-                    
-                    if let flagList = flagList {
-                        if flagList.count > 0 {
-                            postcurrent.delete()
-                        }
-                        
-                    }
-                    
-                }
-                
-                postcurrent.flags ->> flagBond
                 
                 if postcurrent.imageFile != nil && postcurrent.RecipeTitle != nil && postcurrent.location != nil && postcurrent.caption != nil && postcurrent.country != nil && postcurrent.Instructions != nil && postcurrent.user != nil && postcurrent.date != nil && postcurrent.prep != nil && postcurrent.cook != nil && postcurrent.servings != nil {
                     println(" make stuff")
@@ -393,6 +389,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     //for anno in mapAnnoations {
                     self.mapView.addAnnotation(annotationParseQuery)
                     println("addanno")
+                    
                 }
             }
         }
@@ -472,6 +469,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
         if let annotation = view.annotation as? PinAnnotation {
+               self.mixpanel.track("Segue", properties: ["from Map View to Post": "Annotation callout"])
             
             performSegueWithIdentifier("toPostView", sender: annotation)
         }
