@@ -118,7 +118,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             numOfServings.text = annotation?.servings
             
             autocompleteTextfield.text = annotation?.country
-            
+            configureTextField()
+            handleTextFieldInterfaces()
+
             let ingredientsArrayFromMap = annotation?.ingredients
             let stringedi = "\n".join(ingredientsArrayFromMap!)
             ingTextView.text = stringedi
@@ -496,7 +498,10 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         appendIngredientsAndInstructions()
         //change parse info
         
-        annotation?.post.location = pfgeopoint
+        if pfgeopoint != nil {
+            annotation?.post.location = pfgeopoint
+
+        }
         annotation?.post.prep = prepTime.text
         annotation?.post.cook = cookTime.text
         annotation?.post.servings = numOfServings.text
