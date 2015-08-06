@@ -362,6 +362,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 postcurrent.fetchFlags()
                 
                 
+                
                 flagBond = Bond<[PFUser]?>() { [unowned self] flagList in
                     
                     if let flagList = flagList {

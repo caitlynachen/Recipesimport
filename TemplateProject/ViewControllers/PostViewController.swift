@@ -47,7 +47,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func forceReload(sender: AnyObject) {
         ingredientsTableView.reloadData()
     }
-   
+    
     
     @IBAction func geoButtonTApped(sender: AnyObject) {
         self.performSegueWithIdentifier("fromGeoButtonToMap", sender: nil)
@@ -132,7 +132,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             // 2
             if let likeList = likeList {
                 // 3
+                
                 self.likeLabel.text = self.stringFromUserList(likeList)
+                
+                
                 // 4
                 if PFUser.currentUser() != nil{
                     self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
@@ -155,9 +158,15 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         // 2
         let commaSeparatedUserList = ", ".join(usernameList)
         
-        return commaSeparatedUserList
+        if usernameList.count < 4 {
+            
+            return commaSeparatedUserList
+        } else {
+            var string = "\(usernameList.count)"
+            return string
+        }
     }
-
+    
     
     @IBAction func moreButtonTapped(sender: AnyObject) {
         if(PFUser.currentUser()?.username == usernameLabel.text){
@@ -216,7 +225,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let deleteAction: UIAlertAction = UIAlertAction(title: "Flag", style: .Default) { action -> Void in
                     
                     self.performSegueWithIdentifier("fromPostMap", sender: nil)
-                                        
+                    
                     
                 }
                 deleteAlert.addAction(deleteAction)
@@ -273,7 +282,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         ingredientsTableView.delegate = self
-      
+        
         
         instructionsTableView.delegate = self
         
@@ -311,7 +320,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         // Do any additional setup after loading the view.
         
-
+        
     }
     
     
@@ -348,7 +357,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         if tableView == ingredientsTableView {
             var cell: UITableViewCell = self.ingredientsTableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
             var width = ingredientsTableView.frame.width
-
+            
             cell.textLabel?.frame = CGRect(x: 0, y: 0, width: width, height: CGFloat.max)
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
@@ -363,7 +372,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             var cell: UITableViewCell = self.instructionsTableView.dequeueReusableCellWithIdentifier("instruccell") as! UITableViewCell
             var width = instructionsTableView.frame.width
-
+            
             cell.textLabel?.frame = CGRect(x: 0, y: 0, width: width, height: CGFloat.max)
             cell.textLabel?.numberOfLines = 0
             cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
