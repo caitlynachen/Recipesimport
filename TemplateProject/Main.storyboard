@@ -473,8 +473,7 @@
                         <outlet property="imageView" destination="Lhs-Z6-zMt" id="mgy-ZD-kWY"/>
                         <outlet property="ingTextView" destination="BbO-qI-15R" id="KEV-Or-EZs"/>
                         <outlet property="instructionsTextView" destination="n8e-r3-DG7" id="B4N-1k-MZI"/>
-                        <outlet property="navbar" destination="BC3-Fe-T9J" id="72e-al-C9e"/>
-                        <outlet property="navbartitle" destination="EOh-Yy-Imu" id="337-QY-7QQ"/>
+                        <outlet property="navbar" destination="BC3-Fe-T9J" id="YaV-1Y-xHD"/>
                         <outlet property="numOfServings" destination="W9X-Lf-Ybv" id="7Ud-gd-Myf"/>
                         <outlet property="prepTime" destination="mwc-Ml-7tD" id="jFp-Jn-RxY"/>
                         <outlet property="scrollView" destination="nWx-pt-sAl" id="Uip-94-FhH"/>

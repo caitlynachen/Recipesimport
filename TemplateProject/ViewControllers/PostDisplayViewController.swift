@@ -14,9 +14,9 @@ import FBSDKCoreKit
 import Mixpanel
 
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextViewDelegate, UITextFieldDelegate, NSURLConnectionDataDelegate{
-    @IBOutlet weak var navbartitle: UINavigationItem!
     let mixpanel = Mixpanel.sharedInstance()
 
+    @IBOutlet weak var navbar: UINavigationBar!
     
     @IBOutlet weak var editLocButton: UIButton!
     @IBOutlet weak var ingTextView: UITextView!
@@ -374,8 +374,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         if (annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.country != nil && annotation?.servings != nil && annotation?.prep != nil && annotation?.cook != nil) {
             
-            navbartitle.title = "Edit Post"
-            
+            navbar.topItem?.title = "Edit Post"
             
             titleTextField.text = annotation?.title
             descriptionText.text = annotation?.Description
