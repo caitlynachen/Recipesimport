@@ -11,10 +11,14 @@ import Parse
 import MapKit
 import Bond
 import FBSDKCoreKit
-
+import Mixpanel
 
 class PostDisplayViewController: UIViewController, UINavigationControllerDelegate,UIImagePickerControllerDelegate, UITextViewDelegate, UITextFieldDelegate, NSURLConnectionDataDelegate{
+    @IBOutlet weak var navbartitle: UINavigationItem!
+    let mixpanel = Mixpanel.sharedInstance()
+
     
+    @IBOutlet weak var editLocButton: UIButton!
     @IBOutlet weak var ingTextView: UITextView!
     @IBOutlet weak var instructionsTextView: UITextView!
     @IBOutlet weak var emptyLabel: UILabel!
@@ -47,7 +51,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     var placeholderInstructionsLabelExample: UILabel!
     var placeholderIngredientsLabelExample: UILabel!
     
-    
+    var locationLabelFromPostDisplay: String?
+
     
     
     let post = Post()
@@ -109,40 +114,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     }
     
     
-    override func viewWillAppear(animated: Bool) {
-        if (annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.country != nil && annotation?.servings != nil && annotation?.prep != nil && annotation?.cook != nil) {
-            titleTextField.text = annotation?.title
-            descriptionText.text = annotation?.Description
-            cookTime.text = annotation?.cook
-            prepTime.text = annotation?.prep
-            numOfServings.text = annotation?.servings
-            
-            autocompleteTextfield.text = annotation?.country
-            
-            let ingredientsArrayFromMap = annotation?.ingredients
-            let stringedi = "\n".join(ingredientsArrayFromMap!)
-            ingTextView.text = stringedi
-            
-            
-            let instructionsArrayFromMap = annotation?.instructions
-            let strinstuc = "\n".join(instructionsArrayFromMap!)
-            instructionsTextView.text = strinstuc
-            
-//            autocompleteTextfield.enabled = false
-            
-            placeholderLabel.hidden = count(descriptionText.text) != 0
-            placeholderIngredientsLabel.hidden = count(ingTextView.text) != 0
-            
-            placeholderInstructionsLabel.hidden = count(instructionsTextView.text) != 0
-            
-            placeholderIngredientsLabelExample.hidden = count(ingTextView.text) != 0
-            placeholderInstructionsLabelExample.hidden = count(ingTextView.text) != 0
-
-            
-        }
-    }
-    
-    
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if let ident = identifier {
             if ident == "fromPostDiplayToMap" {
@@ -182,6 +153,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                     
                     return true
                 }
+            } else if ident == "PresentEditLocationScene" {
+                    return true
+                
             }
         }
         
@@ -193,17 +167,22 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             var svc = segue.destinationViewController as! MapViewController;
             
             if annotation?.post == nil{
+               
                 createPost()
-                
+                 self.mixpanel.track("Segue", properties: ["from Post Display to Map View": "Create"])
                 
             } else {
                 updatePost()
+                self.mixpanel.track("Segue", properties: ["from Post Display to Map View": "Update"])
                 svc.updatedPost = annotation
 //                svc.coorForUpdatedPost = annotation?.coordinate
             }
             
             
             svc.annotationCurrent = currentAnnotation
+        } else if (segue.identifier == "PresentEditLocationScene") {
+             var svc = segue.destinationViewController as! ViewController;
+            svc.anno = annotation
         }
     }
     
@@ -288,6 +267,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        editLocButton.hidden = true
         
         titleTextField.delegate = self
         autocompleteTextfield.delegate = self
@@ -386,6 +367,65 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             var data = annotation?.image.getData()
             image = UIImage(data: data!)
             imageView?.image = image
+            
+            
+        }
+        
+        
+        if (annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.country != nil && annotation?.servings != nil && annotation?.prep != nil && annotation?.cook != nil) {
+            
+            navbartitle.title = "Edit Post"
+            
+            
+            titleTextField.text = annotation?.title
+            descriptionText.text = annotation?.Description
+            cookTime.text = annotation?.cook
+            prepTime.text = annotation?.prep
+            numOfServings.text = annotation?.servings
+            
+//            autocompleteTextfield.text = annotation?.country
+//            configureTextField()
+//            handleTextFieldInterfaces()
+            
+            autocompleteTextfield.hidden = true
+            editLocButton.hidden = false
+            
+            if locationLabelFromPostDisplay != nil{
+                autocompleteTextfield.text = "Using buton instead"
+                editLocButton.setTitle(locationLabelFromPostDisplay, forState: .Normal)
+                println(annotation?.post.country = editLocButton.currentTitle)
+                annotation?.post.country = editLocButton.currentTitle
+                annotation?.post.location = pfgeopoint
+                
+                locationLabelFromPostDisplay = nil
+
+            } else{
+            
+                autocompleteTextfield.text = "Using buton instead"
+
+
+                editLocButton.setTitle(annotation?.country, forState: .Normal)
+            }
+            
+            
+            let ingredientsArrayFromMap = annotation?.ingredients
+            let stringedi = "\n".join(ingredientsArrayFromMap!)
+            ingTextView.text = stringedi
+            
+            
+            let instructionsArrayFromMap = annotation?.instructions
+            let strinstuc = "\n".join(instructionsArrayFromMap!)
+            instructionsTextView.text = strinstuc
+            
+            //            autocompleteTextfield.enabled = false
+            
+            placeholderLabel.hidden = count(descriptionText.text) != 0
+            placeholderIngredientsLabel.hidden = count(ingTextView.text) != 0
+            
+            placeholderInstructionsLabel.hidden = count(instructionsTextView.text) != 0
+            
+            placeholderIngredientsLabelExample.hidden = count(ingTextView.text) != 0
+            placeholderInstructionsLabelExample.hidden = count(ingTextView.text) != 0
             
             
         }
@@ -496,13 +536,16 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         appendIngredientsAndInstructions()
         //change parse info
         
-        annotation?.post.location = pfgeopoint
+//        if pfgeopoint != nil {
+//            annotation?.post.location = pfgeopoint
+//
+//        }
         annotation?.post.prep = prepTime.text
         annotation?.post.cook = cookTime.text
         annotation?.post.servings = numOfServings.text
         annotation?.post.RecipeTitle = titleTextField.text
         annotation?.post.caption = descriptionText.text
-        annotation?.post.country = autocompleteTextfield.text
+        annotation?.post.country = editLocButton.currentTitle
         annotation?.post.Ingredients = ingredientsArray
         annotation?.post.Instructions = instructionsArray
         
@@ -539,7 +582,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             emptyLabel.text = "Please enter a title."
             emptyLabel.hidden = false
             
-        } else if autocompleteTextfield.text == "" {
+        } else if autocompleteTextfield.text == ""{
             emptyLabel.text = "Please enter location tag."
             emptyLabel.hidden = false
             

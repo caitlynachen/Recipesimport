@@ -12,13 +12,14 @@
 		1C13E57F1B4C485900FA5F39 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E57D1B4C485900FA5F39 /* IngredientsTableViewCell.swift */; };
 		1C13E5801B4C485900FA5F39 /* InstructionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E57E1B4C485900FA5F39 /* InstructionsTableViewCell.swift */; };
 		1C13E5851B4C486800FA5F39 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5811B4C486800FA5F39 /* PostViewController.swift */; };
-		1C3DDE521B4AF2EA004E8014 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C3DDE511B4AF2EA004E8014 /* Images.xcassets */; };
 		1C52FFDB1B55C1BE00ADBE8B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */; };
+		1C5B38361B746C300086BF2C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C5B38351B746C300086BF2C /* Images.xcassets */; };
 		1CADAED21B597E0700F341A6 /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CADAED11B597E0700F341A6 /* PinAnnotation.swift */; };
 		1CADAEDA1B599DB600F341A6 /* to delete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CADAED91B599DB600F341A6 /* to delete.swift */; };
 		1CAE6F3D1B635A8200FC8E76 /* AutocompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAE6F3C1B635A8200FC8E76 /* AutocompleteTextField.swift */; };
 		1CAE6F3F1B635ACC00FC8E76 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAE6F3E1B635ACC00FC8E76 /* Location.swift */; };
 		1CC0CF501B6A94700022C0A5 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC0CF4F1B6A94700022C0A5 /* AnnotationView.swift */; };
+		1CCF95281B75140E00915C0B /* LocationEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCF95271B75140E00915C0B /* LocationEditViewController.swift */; };
 		1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */; };
 		1CD9DFF31B4DC61600DF28E3 /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */; };
 		1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */; };
@@ -144,13 +145,14 @@
 		1C13E57E1B4C485900FA5F39 /* InstructionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsTableViewCell.swift; sourceTree = "<group>"; };
 		1C13E5811B4C486800FA5F39 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		1C13E5821B4C486800FA5F39 /* PostDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDisplayViewController.swift; sourceTree = "<group>"; };
-		1C3DDE511B4AF2EA004E8014 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1C5B38351B746C300086BF2C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1CADAED11B597E0700F341A6 /* PinAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
 		1CADAED91B599DB600F341A6 /* to delete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "to delete.swift"; sourceTree = "<group>"; };
 		1CAE6F3C1B635A8200FC8E76 /* AutocompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutocompleteTextField.swift; path = "TemplateProject/untitled folder/AutocompleteTextField.swift"; sourceTree = SOURCE_ROOT; };
 		1CAE6F3E1B635ACC00FC8E76 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		1CC0CF4F1B6A94700022C0A5 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		1CCF95271B75140E00915C0B /* LocationEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditViewController.swift; sourceTree = "<group>"; };
 		1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = "TemplateProject/untitled folder/Post.swift"; sourceTree = SOURCE_ROOT; };
 		1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
 		1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */,
 				1C13E5811B4C486800FA5F39 /* PostViewController.swift */,
 				1C13E5821B4C486800FA5F39 /* PostDisplayViewController.swift */,
+				1CCF95271B75140E00915C0B /* LocationEditViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -253,7 +256,6 @@
 				1CD9DF9C1B4D9D5000DF28E3 /* Models */,
 				1C13E57C1B4C484400FA5F39 /* View */,
 				1C13E57A1B4C46EC00FA5F39 /* Main.storyboard */,
-				1C3DDE511B4AF2EA004E8014 /* Images.xcassets */,
 				1C3DDE4E1B4AF24A004E8014 /* ViewControllers */,
 				624262B21B4460CB00005CE3 /* AppDelegate.swift */,
 				624262B31B4460CB00005CE3 /* LaunchScreen.xib */,
@@ -268,6 +270,7 @@
 		624262B71B4460CB00005CE3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				1C5B38351B746C300086BF2C /* Images.xcassets */,
 				624262B81B4460CB00005CE3 /* ErrorHandling.swift */,
 				624262B91B4460CB00005CE3 /* ParseLoginHelper.swift */,
 				1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */,
@@ -407,6 +410,7 @@
 				TargetAttributes = {
 					62C8C1DF1B06BD6500DC3EA7 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = P52BHBX235;
 					};
 				};
 			};
@@ -502,8 +506,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C5B38361B746C300086BF2C /* Images.xcassets in Resources */,
 				1C13E57B1B4C46EC00FA5F39 /* Main.storyboard in Resources */,
-				1C3DDE521B4AF2EA004E8014 /* Images.xcassets in Resources */,
 				624262C11B4460CB00005CE3 /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -576,6 +580,7 @@
 				1CD9DFF31B4DC61600DF28E3 /* PhotoTakingHelper.swift in Sources */,
 				624262C41B4460CB00005CE3 /* ParseLoginHelper.swift in Sources */,
 				1CAE6F3D1B635A8200FC8E76 /* AutocompleteTextField.swift in Sources */,
+				1CCF95281B75140E00915C0B /* LocationEditViewController.swift in Sources */,
 				624262C31B4460CB00005CE3 /* ErrorHandling.swift in Sources */,
 				1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */,
 				1C52FFDB1B55C1BE00ADBE8B /* MapViewController.swift in Sources */,
@@ -697,7 +702,10 @@
 			baseConfigurationReference = A527F9DFA72AE5B50D0571DE /* Pods-TemplateProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -710,6 +718,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = GeoRecipe;
+				PROVISIONING_PROFILE = "17749e7b-8c42-4f59-826e-3c78a0149da1";
 				SWIFT_OBJC_BRIDGING_HEADER = "TemplateProject/TemplateProject-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -720,7 +729,10 @@
 			baseConfigurationReference = 43A6272A2D59AD4D19AB5004 /* Pods-TemplateProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -733,6 +745,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = GeoRecipe;
+				PROVISIONING_PROFILE = "17749e7b-8c42-4f59-826e-3c78a0149da1";
 				SWIFT_OBJC_BRIDGING_HEADER = "TemplateProject/TemplateProject-Bridging-Header.h";
 			};
 			name = Release;

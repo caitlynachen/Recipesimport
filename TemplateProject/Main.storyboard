@@ -9,7 +9,7 @@
         <!--Map View Controller-->
         <scene sceneID="Nrr-mi-cSf">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" id="oFf-i6-dje" customClass="MapViewController" customModule="TemplateProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="oFf-i6-dje" customClass="MapViewController" customModule="GeoRecipe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bQD-CM-YxP"/>
                         <viewControllerLayoutGuide type="bottom" id="3Vj-nx-wmB"/>
@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZQK-MF-ZxV" customClass="AutoCompleteTextField" customModule="TemplateProject" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZQK-MF-ZxV" customClass="AutoCompleteTextField" customModule="GeoRecipe" customModuleProvider="target">
                                 <rect key="frame" x="16" y="20" width="525" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="uVm-zg-RpW"/>
@@ -128,7 +128,7 @@
         <!--Post Display View Controller-->
         <scene sceneID="E5d-YF-Pi6">
             <objects>
-                <viewController storyboardIdentifier="postDisplayViewController" id="uqa-oC-wvG" customClass="PostDisplayViewController" customModule="TemplateProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="postDisplayViewController" id="uqa-oC-wvG" customClass="PostDisplayViewController" customModule="GeoRecipe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dea-At-xA1"/>
                         <viewControllerLayoutGuide type="bottom" id="fQa-op-SHs"/>
@@ -211,6 +211,15 @@
                                                     </mask>
                                                 </variation>
                                             </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YxQ-H1-2Z6" userLabel="EditLocButton">
+                                                <rect key="frame" x="10" y="158" width="355" height="30"/>
+                                                <state key="normal" title="Button">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="7Ii-8h-OIH" kind="presentation" identifier="PresentEditLocationScene" id="pPq-En-hF0"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOp-BE-WlB">
                                                 <rect key="frame" x="10" y="802" width="94.5" height="30"/>
                                                 <constraints>
@@ -286,7 +295,7 @@
                                                     <constraint firstAttribute="height" constant="1" id="nUi-m9-zrM"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location Tag (long press to select)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Gg-YK-JlY" customClass="AutoCompleteTextField" customModule="TemplateProject" customModuleProvider="target">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location Tag (long press to select)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Gg-YK-JlY" customClass="AutoCompleteTextField" customModule="GeoRecipe" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="158" width="355" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -299,6 +308,8 @@
                                             <constraint firstItem="1Fs-8n-9HK" firstAttribute="height" secondItem="7Gg-YK-JlY" secondAttribute="height" id="0BW-T8-CVg"/>
                                             <constraint firstItem="1Fs-8n-9HK" firstAttribute="leading" secondItem="3ad-nV-oA9" secondAttribute="leading" constant="10" id="1JM-sM-Kae"/>
                                             <constraint firstAttribute="centerX" secondItem="aCX-s6-nss" secondAttribute="centerX" id="3Jw-Fq-exB"/>
+                                            <constraint firstItem="YxQ-H1-2Z6" firstAttribute="top" secondItem="1Fs-8n-9HK" secondAttribute="bottom" constant="15" id="49f-aX-gMh"/>
+                                            <constraint firstItem="1Fs-8n-9HK" firstAttribute="leading" secondItem="YxQ-H1-2Z6" secondAttribute="leading" id="5Jg-Ly-slI"/>
                                             <constraint firstAttribute="trailing" secondItem="MyQ-Pf-2yP" secondAttribute="trailing" constant="10" id="5PC-dJ-XUy"/>
                                             <constraint firstItem="mwc-Ml-7tD" firstAttribute="top" secondItem="QK4-nT-bus" secondAttribute="top" id="5dZ-74-3Ca"/>
                                             <constraint firstItem="BbO-qI-15R" firstAttribute="trailing" secondItem="n8e-r3-DG7" secondAttribute="trailing" id="6gV-yC-5sw"/>
@@ -312,6 +323,7 @@
                                             <constraint firstItem="MyQ-Pf-2yP" firstAttribute="top" secondItem="Lhs-Z6-zMt" secondAttribute="top" constant="-30" id="EMT-ws-KKB"/>
                                             <constraint firstItem="2Ug-5u-GyY" firstAttribute="top" secondItem="7Gg-YK-JlY" secondAttribute="bottom" constant="15" id="FE4-b5-OEw"/>
                                             <constraint firstAttribute="height" constant="1650" id="Fyi-pc-J9K"/>
+                                            <constraint firstItem="1Fs-8n-9HK" firstAttribute="trailing" secondItem="YxQ-H1-2Z6" secondAttribute="trailing" id="HfO-jh-U6H"/>
                                             <constraint firstItem="hOp-BE-WlB" firstAttribute="top" secondItem="BbO-qI-15R" secondAttribute="bottom" constant="247" id="JDJ-fk-fET"/>
                                             <constraint firstItem="MyQ-Pf-2yP" firstAttribute="leading" secondItem="3ad-nV-oA9" secondAttribute="leading" constant="10" id="JEu-2V-ZMC"/>
                                             <constraint firstItem="DrD-Hu-luW" firstAttribute="top" secondItem="n8e-r3-DG7" secondAttribute="bottom" constant="15" id="JGj-UP-EEz"/>
@@ -456,10 +468,13 @@
                         <outlet property="cameraButton" destination="TP1-ko-Z8y" id="KrQ-x0-OZ5"/>
                         <outlet property="cookTime" destination="QK4-nT-bus" id="Y8W-PV-3sr"/>
                         <outlet property="descriptionText" destination="2Ug-5u-GyY" id="ETp-RM-VyD"/>
+                        <outlet property="editLocButton" destination="YxQ-H1-2Z6" id="Nlf-og-Bmb"/>
                         <outlet property="emptyLabel" destination="aCX-s6-nss" id="bfy-gh-Z5g"/>
                         <outlet property="imageView" destination="Lhs-Z6-zMt" id="mgy-ZD-kWY"/>
                         <outlet property="ingTextView" destination="BbO-qI-15R" id="KEV-Or-EZs"/>
                         <outlet property="instructionsTextView" destination="n8e-r3-DG7" id="B4N-1k-MZI"/>
+                        <outlet property="navbar" destination="BC3-Fe-T9J" id="72e-al-C9e"/>
+                        <outlet property="navbartitle" destination="EOh-Yy-Imu" id="337-QY-7QQ"/>
                         <outlet property="numOfServings" destination="W9X-Lf-Ybv" id="7Ud-gd-Myf"/>
                         <outlet property="prepTime" destination="mwc-Ml-7tD" id="jFp-Jn-RxY"/>
                         <outlet property="scrollView" destination="nWx-pt-sAl" id="Uip-94-FhH"/>
@@ -478,7 +493,7 @@
         <!--Post View Controller-->
         <scene sceneID="Kp1-G8-VH3">
             <objects>
-                <viewController id="ocg-v3-WDZ" customClass="PostViewController" customModule="TemplateProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ocg-v3-WDZ" customClass="PostViewController" customModule="GeoRecipe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dan-cj-gyK"/>
                         <viewControllerLayoutGuide type="bottom" id="yHi-UJ-SXb"/>
@@ -901,12 +916,77 @@
                         <segue destination="uqa-oC-wvG" kind="presentation" identifier="editPost" id="mXG-pM-Xcc"/>
                         <segue destination="uSI-7y-nJp" kind="unwind" identifier="fromLoginToPostView" unwindAction="unwindToPostView:" id="Eoe-Ex-gv9"/>
                         <segue destination="oFf-i6-dje" kind="presentation" identifier="fromPostMap" id="GjT-Rn-vyF"/>
+                        <segue destination="oFf-i6-dje" kind="presentation" identifier="fromPostMapForFlagBond" id="qx2-Hh-HRV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6M-w9-2bE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="uSI-7y-nJp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-4.5" y="284"/>
+            <point key="canvasLocation" x="-85.5" y="209"/>
+        </scene>
+        <!--AutoCompleteTextField-->
+        <scene sceneID="JID-1t-xJD">
+            <objects>
+                <viewController id="7Ii-8h-OIH" customClass="ViewController" customModule="GeoRecipe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DOP-RU-PNe"/>
+                        <viewControllerLayoutGuide type="bottom" id="qNi-zi-z2V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bm4-Bs-fOq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hBW-AF-iIf">
+                                <rect key="frame" x="10" y="79" width="580" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="sn4-16-1Tn"/>
+                                </constraints>
+                            </mapView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xiS-F6-kWk">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Edit Location" id="a3N-df-xbJ">
+                                        <barButtonItem key="leftBarButtonItem" image="Back" id="W1p-ma-eWv">
+                                            <connections>
+                                                <segue destination="uqa-oC-wvG" kind="presentation" identifier="unwindToPostDisplayFromEditLoc" id="fum-Js-GcS"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="E96-ig-oIk">
+                                            <connections>
+                                                <segue destination="uqa-oC-wvG" kind="presentation" identifier="toPostDisplayWithInfo" id="pEh-A1-KOi"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ara-Kz-eEf" customClass="AutoCompleteTextField" customModule="GeoRecipe" customModuleProvider="target">
+                                <rect key="frame" x="10" y="200" width="580" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xiS-F6-kWk" firstAttribute="leading" secondItem="bm4-Bs-fOq" secondAttribute="leadingMargin" constant="-16" id="0co-sQ-jmD"/>
+                            <constraint firstAttribute="trailing" secondItem="ara-Kz-eEf" secondAttribute="trailing" constant="10" id="1XQ-t3-3Oz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xiS-F6-kWk" secondAttribute="trailing" constant="-16" id="I0x-gM-HH4"/>
+                            <constraint firstItem="ara-Kz-eEf" firstAttribute="top" secondItem="hBW-AF-iIf" secondAttribute="bottom" constant="1" id="NUw-iq-Zgt"/>
+                            <constraint firstItem="hBW-AF-iIf" firstAttribute="top" secondItem="bm4-Bs-fOq" secondAttribute="top" constant="79" id="QJs-aY-ayg"/>
+                            <constraint firstItem="ara-Kz-eEf" firstAttribute="leading" secondItem="bm4-Bs-fOq" secondAttribute="leading" constant="10" id="aOn-71-2yd"/>
+                            <constraint firstItem="hBW-AF-iIf" firstAttribute="leading" secondItem="bm4-Bs-fOq" secondAttribute="leading" constant="10" id="bjm-7C-qkw"/>
+                            <constraint firstAttribute="trailing" secondItem="hBW-AF-iIf" secondAttribute="trailing" constant="10" id="eDe-fC-afk"/>
+                            <constraint firstItem="xiS-F6-kWk" firstAttribute="top" secondItem="DOP-RU-PNe" secondAttribute="bottom" id="iqN-gI-2ns"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="AutoCompleteTextField" id="XMW-N7-01P"/>
+                    <connections>
+                        <outlet property="autocompleteTextfield" destination="ara-Kz-eEf" id="sbV-kF-kLC"/>
+                        <outlet property="mapView" destination="hBW-AF-iIf" id="eE6-yw-v0l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U35-zx-DdQ" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079" y="251"/>
         </scene>
     </scenes>
     <resources>
@@ -918,7 +998,7 @@
         <image name="line" width="395" height="3"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QAm-Ub-4xh"/>
-        <segue reference="mXG-pM-Xcc"/>
+        <segue reference="3KD-0q-bak"/>
+        <segue reference="fum-Js-GcS"/>
     </inferredMetricsTieBreakers>
 </document>
