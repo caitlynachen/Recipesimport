@@ -146,10 +146,10 @@ class ViewController: UIViewController, NSURLConnectionDataDelegate{
             svc.pfgeopoint = coordinateToPostDisplay
             svc.locationLabelFromPostDisplay = autocompleteTextfield.text
             svc.annotation = anno
-            
         } else if (segue.identifier == "unwindToPostDisplayFromEditLoc"){
             var svc = segue.destinationViewController as! PostDisplayViewController;
             svc.annotation = anno
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
         
     }
