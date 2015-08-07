@@ -133,6 +133,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     let logoView = UIImageView(image: logo)
                     loginViewController.logInView?.logo = logoView
                     
+//                    loginViewController.signUpController?.signUpView?.logo = logoView
                     
                     
                     
