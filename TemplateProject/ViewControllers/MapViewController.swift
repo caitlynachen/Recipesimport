@@ -126,7 +126,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     mixpanel.track("Launch Login Screen", properties: ["From which screen": "from MapView(Add button)"])
 
                     
-                    loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten
+                    loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
                     
                     loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
                     let logo = UIImage(named: "logoforparse")
@@ -238,13 +238,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             
             mapView.setRegion(region, animated: true)
             
+            
         } else if ann != nil {
             ann?.post.delete()
             
             self.mapView.removeAnnotation(ann)
-            
-        } else if annForFlagPost != nil{
-            self.mapView.removeAnnotation(annForFlagPost)
             
         } else if updatedPost != nil {
             var latt = updatedPost?.post.location?.latitude
@@ -369,8 +367,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 println("posts from parse")
                 
                 var postcurrent = post as! Post
-                
-                
+
+//                if  <PFUser.currentUser()> == postcurrent.flags {
+//                    
+//                }
                 
                 
                 if postcurrent.imageFile != nil && postcurrent.RecipeTitle != nil && postcurrent.location != nil && postcurrent.caption != nil && postcurrent.country != nil && postcurrent.Instructions != nil && postcurrent.user != nil && postcurrent.date != nil && postcurrent.prep != nil && postcurrent.cook != nil && postcurrent.servings != nil {
