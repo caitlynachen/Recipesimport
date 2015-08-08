@@ -201,7 +201,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
        flagBond = Bond<[PFUser]?>() { [unowned self] flagList in
             
             if let flagList = flagList {
-                if flagList.count > 4 {
+                if flagList.count > 1 {
                     self.performSegueWithIdentifier("fromPostMap", sender: nil)
                 } else {
                     self.performSegueWithIdentifier("fromPostMapForFlagBond", sender: nil)
@@ -279,7 +279,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                         self.anno?.post.flagPost(PFUser.currentUser()!)
                         
                         self.mixpanel.track("Segue", properties: ["from Post to Map View": "Flag"])
-                        
+                        self.dismissViewControllerAnimated(true, completion: nil)
+
                         self.flagBondz()
                         
                         
@@ -307,8 +308,10 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 self.anno?.post.flagPost(PFUser.currentUser()!)
                                 
                                 self.mixpanel.track("Segue", properties: ["from Post to Map View": "Flag"])
+                                self.dismissViewControllerAnimated(true, completion: nil)
                                 
                                 self.flagBondz()
+                                
                                 
                                 
                                 
