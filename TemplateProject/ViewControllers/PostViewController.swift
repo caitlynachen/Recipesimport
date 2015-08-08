@@ -64,6 +64,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             mixpanel.track("Like process", properties: ["action": "already logged in"])
             
             anno?.post.toggleLikePost(PFUser.currentUser()!)
+            
+            // Create our Installation query
+            
         } else{
             //login parse viewcontroller
             mixpanel.track("Like process", properties: ["action": "launch login screen"])
@@ -75,7 +78,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             loginViewController.logInView?.logo = logoView
             
             
-            
+            loginViewController.signUpController?.signUpView?.logo = logoView
+
             
             parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
                 // Initialize the ParseLogiseguenHelper with a callback
@@ -149,6 +153,17 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                 // 4
                 if PFUser.currentUser() != nil{
                     self.likeButton.selected = contains(likeList, PFUser.currentUser()!)
+                    
+                    let pushQuery: PFQuery = PFInstallation.query()!
+                    pushQuery.whereKey("deviceType", equalTo: "ios")
+                    
+                    
+                    let push = PFPush()
+                    push.setQuery(pushQuery)
+                    push.setMessage("Hello, World!")
+                    
+                    push.sendPushInBackgroundWithBlock(nil)
+
                 }
                 // 5
             } else {
@@ -277,8 +292,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                         let logoView = UIImageView(image: logo)
                         self.loginViewController.logInView?.logo = logoView
                         
-                        
-                        
+                        self.loginViewController.signUpController?.signUpView?.logo = logoView
+
+                         
                         
                         self.parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
                             // Initialize the ParseLogiseguenHelper with a callback

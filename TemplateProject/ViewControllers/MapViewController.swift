@@ -133,7 +133,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     let logoView = UIImageView(image: logo)
                     loginViewController.logInView?.logo = logoView
                     
-//                    loginViewController.signUpController?.signUpView?.logo = logoView
+                    loginViewController.signUpController?.signUpView?.logo = logoView
                     
                     
                     
@@ -370,6 +370,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
 
 //                if  <PFUser.currentUser()> == postcurrent.flags {
 //                    
+
 //                }
                 
                 

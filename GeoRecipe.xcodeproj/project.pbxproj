@@ -20,6 +20,7 @@
 		1CAE6F3F1B635ACC00FC8E76 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAE6F3E1B635ACC00FC8E76 /* Location.swift */; };
 		1CC0CF501B6A94700022C0A5 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC0CF4F1B6A94700022C0A5 /* AnnotationView.swift */; };
 		1CCF95281B75140E00915C0B /* LocationEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCF95271B75140E00915C0B /* LocationEditViewController.swift */; };
+		1CCF953C1B75D6BC00915C0B /* PushNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCF953B1B75D6BC00915C0B /* PushNotificationController.swift */; };
 		1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */; };
 		1CD9DFF31B4DC61600DF28E3 /* PhotoTakingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */; };
 		1CD9DFF51B4DC64100DF28E3 /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */; };
@@ -153,6 +154,7 @@
 		1CAE6F3E1B635ACC00FC8E76 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		1CC0CF4F1B6A94700022C0A5 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		1CCF95271B75140E00915C0B /* LocationEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditViewController.swift; sourceTree = "<group>"; };
+		1CCF953B1B75D6BC00915C0B /* PushNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationController.swift; sourceTree = "<group>"; };
 		1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = "TemplateProject/untitled folder/Post.swift"; sourceTree = SOURCE_ROOT; };
 		1CD9DFF21B4DC61600DF28E3 /* PhotoTakingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTakingHelper.swift; sourceTree = "<group>"; };
 		1CD9DFF41B4DC64100DF28E3 /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				1CD9DFEE1B4DBFF200DF28E3 /* Post.swift */,
 				1CAE6F3C1B635A8200FC8E76 /* AutocompleteTextField.swift */,
+				1CCF953B1B75D6BC00915C0B /* PushNotificationController.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */,
 				1CAE6F3F1B635ACC00FC8E76 /* Location.swift in Sources */,
 				1C13E57F1B4C485900FA5F39 /* IngredientsTableViewCell.swift in Sources */,
+				1CCF953C1B75D6BC00915C0B /* PushNotificationController.swift in Sources */,
 				1C13E5851B4C486800FA5F39 /* PostViewController.swift in Sources */,
 				624262C01B4460CB00005CE3 /* AppDelegate.swift in Sources */,
 				1CADAED21B597E0700F341A6 /* PinAnnotation.swift in Sources */,
@@ -653,6 +657,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "a0342092-9f78-4edc-a737-2d9be541456a";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -691,6 +696,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -718,7 +724,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = GeoRecipe;
-				PROVISIONING_PROFILE = "17749e7b-8c42-4f59-826e-3c78a0149da1";
+				PROVISIONING_PROFILE = "a0342092-9f78-4edc-a737-2d9be541456a";
 				SWIFT_OBJC_BRIDGING_HEADER = "TemplateProject/TemplateProject-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -732,7 +738,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -745,7 +751,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = GeoRecipe;
-				PROVISIONING_PROFILE = "17749e7b-8c42-4f59-826e-3c78a0149da1";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TemplateProject/TemplateProject-Bridging-Header.h";
 			};
 			name = Release;
