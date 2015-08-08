@@ -372,7 +372,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         }
         
         
-        if (annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.country != nil && annotation?.servings != nil && annotation?.prep != nil && annotation?.cook != nil) {
+        if (annotation?.ingredients != nil && annotation?.instructions != nil && annotation?.title != nil && annotation?.Description != nil && annotation?.image != nil && annotation?.subtitle != nil && annotation?.servings != nil && annotation?.prep != nil && annotation?.cook != nil) {
             
             navbar.topItem?.title = "Edit Post"
             
@@ -403,7 +403,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                 autocompleteTextfield.text = "Using buton instead"
 
 
-                editLocButton.setTitle(annotation?.country, forState: .Normal)
+                editLocButton.setTitle(annotation?.subtitle, forState: .Normal)
             }
             
             
@@ -632,7 +632,7 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             coordinateh = CLLocationCoordinate2DMake(latitu!, longit!)
         }
         
-        var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh!, Description: post.caption!, country: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
+        var annotationToAdd = PinAnnotation(title: post.RecipeTitle!, coordinate: coordinateh!, Description: post.caption!, subtitle: post.country!, instructions: post.Instructions!, ingredients: post.Ingredients!, image: post.imageFile!, user: post.user!, date: post.date!, prep: post.prep!, cook: post.cook!, servings: post.servings!, post: post)
         
         currentAnnotation = annotationToAdd
         //        mapViewController.mapView.addAnnotation(annotationToAdd)

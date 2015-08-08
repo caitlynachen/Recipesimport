@@ -382,7 +382,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     var annotationParseQuery = PinAnnotation?()
                     
                     
-                    annotationParseQuery = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, country: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, prep: postcurrent.prep!, cook: postcurrent.cook!, servings: postcurrent.servings!, post: postcurrent)
+                    annotationParseQuery = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, subtitle: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, prep: postcurrent.prep!, cook: postcurrent.cook!, servings: postcurrent.servings!, post: postcurrent)
                     
                     
                     //self.mapAnnoations.append(annotationcurrent!)
@@ -396,6 +396,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         }
         
     }
+    
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         var view: MKAnnotationView?
@@ -423,6 +424,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 anView!.annotation = annotation
                 
             }
+           
+
+           
             
             let pinanno = annotation as! PinAnnotation
             if (pinanno.image.getData() != nil){
@@ -435,15 +439,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 anView?.layer.borderColor = UIColor.whiteColor().CGColor
                 anView?.layer.borderWidth = 1
                 
-                let button = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-//                let float = CGFloat(count(pinanno.title))
-//                let newFloat = float * 12
-                button.frame.size.width = 44
-                button.frame.size.height = 44
-                button.setImage(scaledImage, forState: .Normal)
                 
-                anView!.leftCalloutAccessoryView = button
-                
+                anView!.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as! UIView
                 
             }
             
@@ -453,8 +450,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         
         return anView
     }
-    
-    
+
     
     func imageResize (imageObj:UIImage, sizeChange:CGSize)-> UIImage{
         

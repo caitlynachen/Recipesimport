@@ -380,7 +380,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.instructionsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "instruccell")
         
         
-        geoButton.setTitle(anno?.country, forState: .Normal)
+        geoButton.setTitle(anno?.subtitle, forState: .Normal)
         //post = anno?.post
         cook.text = anno?.cook
         prep.text = anno?.prep
@@ -490,7 +490,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.mixpanel.track("Segue", properties: ["from Post to Map View": "Geo Button"])
             var dest = segue.destinationViewController as! MapViewController;
             dest.fromGeoButton = true
-            dest.geoButtonTitle = anno?.country
+            dest.geoButtonTitle = anno?.subtitle
             let mapViewController = storyboard!.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
             
             
