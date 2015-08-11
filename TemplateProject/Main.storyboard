@@ -575,7 +575,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="likes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIA-it-pSr">
-                                                <rect key="frame" x="43" y="531.5" width="25.5" height="14.5"/>
+                                                <rect key="frame" x="43" y="531" width="25.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1009,7 +1009,7 @@
         <image name="line" width="395" height="3"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3KD-0q-bak"/>
-        <segue reference="fum-Js-GcS"/>
+        <segue reference="QAm-Ub-4xh"/>
+        <segue reference="mXG-pM-Xcc"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -344,6 +344,8 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let ident = identifier {
             if ident == "toRecipeView" {
                 return true
+            } else if ident == "toCommentView" {
+                return true
             }
             
         }

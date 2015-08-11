@@ -34,6 +34,7 @@ class ParseHelper {
     // User Relation
     static let ParseUserUsername      = "username"
     
+    
     // MARK: Following
     
     /**
@@ -175,6 +176,8 @@ class ParseHelper {
         
         likeObject.saveInBackgroundWithBlock(nil)
     }
+    
+
     
     static func unlikePost(user: PFUser, post: Post) {
         // 1

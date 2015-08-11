@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		1C1105491B5EB10C0081D073 /* PostDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5821B4C486800FA5F39 /* PostDisplayViewController.swift */; };
 		1C13E57B1B4C46EC00FA5F39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C13E57A1B4C46EC00FA5F39 /* Main.storyboard */; };
-		1C13E57F1B4C485900FA5F39 /* IngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E57D1B4C485900FA5F39 /* IngredientsTableViewCell.swift */; };
-		1C13E5801B4C485900FA5F39 /* InstructionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E57E1B4C485900FA5F39 /* InstructionsTableViewCell.swift */; };
 		1C13E5851B4C486800FA5F39 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C13E5811B4C486800FA5F39 /* PostViewController.swift */; };
 		1C52FFDB1B55C1BE00ADBE8B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */; };
 		1C5B38361B746C300086BF2C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C5B38351B746C300086BF2C /* Images.xcassets */; };
@@ -142,8 +140,6 @@
 
 /* Begin PBXFileReference section */
 		1C13E57A1B4C46EC00FA5F39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		1C13E57D1B4C485900FA5F39 /* IngredientsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsTableViewCell.swift; sourceTree = "<group>"; };
-		1C13E57E1B4C485900FA5F39 /* InstructionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsTableViewCell.swift; sourceTree = "<group>"; };
 		1C13E5811B4C486800FA5F39 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		1C13E5821B4C486800FA5F39 /* PostDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDisplayViewController.swift; sourceTree = "<group>"; };
 		1C52FFDA1B55C1BE00ADBE8B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -224,8 +220,6 @@
 		1C13E57C1B4C484400FA5F39 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1C13E57D1B4C485900FA5F39 /* IngredientsTableViewCell.swift */,
-				1C13E57E1B4C485900FA5F39 /* InstructionsTableViewCell.swift */,
 				1CADAED11B597E0700F341A6 /* PinAnnotation.swift */,
 				1CC0CF4F1B6A94700022C0A5 /* AnnotationView.swift */,
 			);
@@ -573,10 +567,8 @@
 				1C1105491B5EB10C0081D073 /* PostDisplayViewController.swift in Sources */,
 				1CC0CF501B6A94700022C0A5 /* AnnotationView.swift in Sources */,
 				1CADAEDA1B599DB600F341A6 /* to delete.swift in Sources */,
-				1C13E5801B4C485900FA5F39 /* InstructionsTableViewCell.swift in Sources */,
 				1CD9DFEF1B4DBFF200DF28E3 /* Post.swift in Sources */,
 				1CAE6F3F1B635ACC00FC8E76 /* Location.swift in Sources */,
-				1C13E57F1B4C485900FA5F39 /* IngredientsTableViewCell.swift in Sources */,
 				1CCF953C1B75D6BC00915C0B /* PushNotificationController.swift in Sources */,
 				1C13E5851B4C486800FA5F39 /* PostViewController.swift in Sources */,
 				624262C01B4460CB00005CE3 /* AppDelegate.swift in Sources */,

@@ -375,23 +375,47 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                 
                 if flags?.count > 3 {
                     postcurrent.delete()
-                }
-                
-                
-                
-                if PFUser.currentUser() != nil{
-                    
-                    let flagQueryForSpecificUser = PFQuery(className: "FlaggedContent")
+                } else{
                     
                     
-                    flagQueryForSpecificUser.whereKey("fromUser", equalTo: PFUser.currentUser()!)
-                    flagQueryForSpecificUser.whereKey("toPost", equalTo: postcurrent)
                     
-                    var flagForSpecificUser = flagQueryForSpecificUser.findObjects()
-                    
-                    if flagForSpecificUser?.count > 0 {
+                    if PFUser.currentUser() != nil{
+                        
+                        let flagQueryForSpecificUser = PFQuery(className: "FlaggedContent")
+                        
+                        
+                        flagQueryForSpecificUser.whereKey("fromUser", equalTo: PFUser.currentUser()!)
+                        flagQueryForSpecificUser.whereKey("toPost", equalTo: postcurrent)
+                        
+                        var flagForSpecificUser = flagQueryForSpecificUser.findObjects()
+                        
+                        if flagForSpecificUser?.count > 0 {
+                            
+                        } else {
+                            if postcurrent.imageFile != nil && postcurrent.RecipeTitle != nil && postcurrent.location != nil && postcurrent.caption != nil && postcurrent.country != nil && postcurrent.Instructions != nil && postcurrent.user != nil && postcurrent.date != nil && postcurrent.prep != nil && postcurrent.cook != nil && postcurrent.servings != nil {
+                                println(" make stuff")
+                                let lati = postcurrent.location!.latitude
+                                let longi = postcurrent.location!.longitude
+                                let coor = CLLocationCoordinate2D(latitude: lati, longitude: longi)
+                                
+                                var annotationParseQuery = PinAnnotation?()
+                                
+                                
+                                annotationParseQuery = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, subtitle: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, prep: postcurrent.prep!, cook: postcurrent.cook!, servings: postcurrent.servings!, post: postcurrent)
+                                
+                                
+                                //self.mapAnnoations.append(annotationcurrent!)
+                                //println("append")
+                                //for anno in mapAnnoations {
+                                self.mapView.addAnnotation(annotationParseQuery)
+                                println("addanno")
+                                
+                            }
+                            
+                        }
                         
                     } else {
+                        
                         if postcurrent.imageFile != nil && postcurrent.RecipeTitle != nil && postcurrent.location != nil && postcurrent.caption != nil && postcurrent.country != nil && postcurrent.Instructions != nil && postcurrent.user != nil && postcurrent.date != nil && postcurrent.prep != nil && postcurrent.cook != nil && postcurrent.servings != nil {
                             println(" make stuff")
                             let lati = postcurrent.location!.latitude
@@ -411,30 +435,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                             println("addanno")
                             
                         }
-                        
                     }
                     
-                } else {
-                    
-                    if postcurrent.imageFile != nil && postcurrent.RecipeTitle != nil && postcurrent.location != nil && postcurrent.caption != nil && postcurrent.country != nil && postcurrent.Instructions != nil && postcurrent.user != nil && postcurrent.date != nil && postcurrent.prep != nil && postcurrent.cook != nil && postcurrent.servings != nil {
-                        println(" make stuff")
-                        let lati = postcurrent.location!.latitude
-                        let longi = postcurrent.location!.longitude
-                        let coor = CLLocationCoordinate2D(latitude: lati, longitude: longi)
-                        
-                        var annotationParseQuery = PinAnnotation?()
-                        
-                        
-                        annotationParseQuery = PinAnnotation(title: postcurrent.RecipeTitle!, coordinate: coor, Description: postcurrent.caption!, subtitle: postcurrent.country!, instructions: postcurrent.Instructions!, ingredients: postcurrent.Ingredients!, image: postcurrent.imageFile!, user: postcurrent.user!, date: postcurrent.date!, prep: postcurrent.prep!, cook: postcurrent.cook!, servings: postcurrent.servings!, post: postcurrent)
-                        
-                        
-                        //self.mapAnnoations.append(annotationcurrent!)
-                        //println("append")
-                        //for anno in mapAnnoations {
-                        self.mapView.addAnnotation(annotationParseQuery)
-                        println("addanno")
-                        
-                    }
                 }
             }
         }
