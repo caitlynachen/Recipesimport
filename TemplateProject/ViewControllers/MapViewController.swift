@@ -23,7 +23,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     
     let mixpanel = Mixpanel.sharedInstance()
     
-    
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var cancel: UIButton!
     var annotationCurrent: PinAnnotation?
@@ -92,7 +91,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
             //Do some other stuff
             PFUser.logOut()
             let logoutNotification: UIAlertController = UIAlertController(title: "Logout", message: "Successfully Logged Out!", preferredStyle: .Alert)
-            
+        
             
             self.presentViewController(logoutNotification, animated: true, completion: nil)
             logoutNotification.dismissViewControllerAnimated(true, completion: nil)
@@ -125,7 +124,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     
                     mixpanel.track("Launch Login Screen", properties: ["From which screen": "from MapView(Add button)"])
                     
-                    
                     loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
                     
                     loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
@@ -153,7 +151,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                             self.loginViewController.dismissViewControllerAnimated(true, completion: nil)
                             
                             self.mixpanel.track("Segue", properties: ["from Login to Post Display": "Add Button"])
-                            
                             self.performSegueWithIdentifier("segueToPostDisplay", sender: self)
                             
                             //****

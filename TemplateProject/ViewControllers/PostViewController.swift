@@ -192,6 +192,31 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func flagBondz (){
+        anno?.post.fetchFlags()
+        
+        var flags = anno?.post.flags
+        
+        
+       flagBond = Bond<[PFUser]?>() { [unowned self] flagList in
+            
+            if let flagList = flagList {
+                if flagList.count > 4 {
+                    self.performSegueWithIdentifier("fromPostMap", sender: nil)
+                } else {
+                    self.performSegueWithIdentifier("fromPostMapForFlagBond", sender: nil)
+                }
+                
+            }
+        }
+        
+        flags! ->> flagBond
+
+        
+        
+        
+    }
+    
     
     @IBAction func moreButtonTapped(sender: AnyObject) {
         if(PFUser.currentUser()?.username == usernameLabel.text){
@@ -259,8 +284,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                         self.dismissViewControllerAnimated(false, completion: nil)
                         self.presentViewController(mapViewController, animated: true, completion: nil)
 
-                        
-                        
                     } else{
                         //login parse viewcontroller
                         self.loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
@@ -272,7 +295,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                         
                         self.loginViewController.signUpController?.signUpView?.logo = logoView
 
-                         
                         
                         self.parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
                             // Initialize the ParseLogiseguenHelper with a callback
@@ -290,10 +312,6 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
                                 self.dismissViewControllerAnimated(false, completion: nil)
                                 self.presentViewController(mapViewController, animated: true, completion: nil)
 
-                                
-                                
-                                
-                                
                             }
                         }
                         
@@ -494,6 +512,9 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
             let mapViewController = storyboard!.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
             
             
+        } else if (segue.identifier == "fromPostMapForFlagBond"){
+            var dest = segue.destinationViewController as! MapViewController;
+            dest.annForFlagPost = anno
         }
     }
     
