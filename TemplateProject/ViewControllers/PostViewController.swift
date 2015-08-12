@@ -59,14 +59,14 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func likeButtonTapped(sender: AnyObject) {
-        let pushQuery: PFQuery = PFInstallation.query()!
-        pushQuery.whereKey("deviceType", equalTo: "ios")
-        
-        let push = PFPush()
-        push.setQuery(pushQuery)
-        push.setMessage("Hello, World!")
-        
-        push.sendPushInBackgroundWithBlock(nil)
+//        let pushQuery: PFQuery = PFInstallation.query()!
+//        pushQuery.whereKey("deviceType", equalTo: "ios")
+//        
+//        let push = PFPush()
+//        push.setQuery(pushQuery)
+//        push.setMessage("Hello, World!")
+//        
+//        push.sendPushInBackgroundWithBlock(nil)
         
         mixpanel.track("Like process", properties: ["action": "like tapped"])
         if PFUser.currentUser() != nil{
