@@ -79,7 +79,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else{
             //login parse viewcontroller
             mixpanel.track("Like process", properties: ["action": "launch login screen"])
-            loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
+            loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten
             
             loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
             let logo = UIImage(named: "logoforparse")
@@ -286,7 +286,7 @@ class PostViewController: UIViewController, UITableViewDelegate, UITableViewData
 
                     } else{
                         //login parse viewcontroller
-                        self.loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
+                        self.loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten
                         
                         self.loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
                         let logo = UIImage(named: "logoforparse")

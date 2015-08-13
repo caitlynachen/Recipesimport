@@ -124,7 +124,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     
                     mixpanel.track("Launch Login Screen", properties: ["From which screen": "from MapView(Add button)"])
                     
-                    loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten | .Facebook
+                    loginViewController.fields = .UsernameAndPassword | .LogInButton | .SignUpButton | .PasswordForgotten
                     
                     loginViewController.logInView?.backgroundColor = UIColor.whiteColor()
                     let logo = UIImage(named: "logoforparse")
