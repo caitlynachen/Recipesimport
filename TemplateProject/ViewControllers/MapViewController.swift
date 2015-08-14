@@ -112,6 +112,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         if let ident = identifier {
             if ident == "segueToPostDisplay" {
                 if let user = PFUser.currentUser(){
+                    self.dismissViewControllerAnimated(true, completion: nil)
                     self.mixpanel.track("Segue", properties: ["from Map View to Post Display": "Add Button"])
                     println("Should show post display View Controller")
                     return true
@@ -151,8 +152,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                             self.loginViewController.dismissViewControllerAnimated(true, completion: nil)
                             
                             self.mixpanel.track("Segue", properties: ["from Login to Post Display": "Add Button"])
+                             self.dismissViewControllerAnimated(true, completion: nil)
                             self.performSegueWithIdentifier("segueToPostDisplay", sender: self)
-                            
+                           
                             //****
                             
                             
