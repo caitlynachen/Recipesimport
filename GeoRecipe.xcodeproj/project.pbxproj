@@ -721,6 +721,7 @@
 				PROVISIONING_PROFILE = "b9c01deb-63b6-47d9-918f-cc2fc3a52f6a";
 				SWIFT_OBJC_BRIDGING_HEADER = "TemplateProject/TemplateProject-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -747,6 +748,7 @@
 				PRODUCT_NAME = GeoRecipe;
 				PROVISIONING_PROFILE = "b9c01deb-63b6-47d9-918f-cc2fc3a52f6a";
 				SWIFT_OBJC_BRIDGING_HEADER = "TemplateProject/TemplateProject-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
