@@ -30,6 +30,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     var fromGeoButton: Bool?
     var geoButtonTitle: String?
     
+    var fromLoginViewController: Bool = false
+    
     var searchController:UISearchController!
     var annotation:MKAnnotation!
     var localSearchRequest:MKLocalSearchRequest!
@@ -145,22 +147,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                         } else  if let user = user {
                             // if login was successful, display the TabBarController
                             // 2
+                            self.fromLoginViewController = true
                             
                             self.mixpanel.track("Login in successful", properties: ["From which screen": "from MapView(Add button)"])
                             println("show post  view controller")
-                            
-                            self.loginViewController.dismissViewControllerAnimated(true, completion: nil)
-                            
+
+//
                             self.mixpanel.track("Segue", properties: ["from Login to Post Display": "Add Button"])
                              self.dismissViewControllerAnimated(true, completion: nil)
-                            self.performSegueWithIdentifier("segueToPostDisplay", sender: self)
+                            
+                            self.fromLoginViewController = true
                            
+                            self.performSegueWithIdentifier("segueToPostDisplay", sender: self)
                             //****
                             
                             
                         }
+                        
                     }
                     
+                   
+                   
                     loginViewController.delegate = parseLoginHelper
                     loginViewController.signUpController?.delegate = parseLoginHelper
                     
@@ -168,7 +175,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
                     
                     
                     self.presentViewController(loginViewController, animated: true, completion: nil)
+                
                     return false
+                    
                     
                 }
             }
@@ -208,11 +217,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
         println("in MapViewController")
         
         
-        autocompleteTextfield.delegate = self
         
-        configureTextField()
-        handleTextFieldInterfaces()
+//        if fromLoginViewController != true {
         
+            autocompleteTextfield.delegate = self
+
+            configureTextField()
+            handleTextFieldInterfaces()
+//        }
+        
+        fromLoginViewController = false
         
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
@@ -512,7 +526,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, UISearchBa
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
         if let annotation = view.annotation as? PinAnnotation {
             self.mixpanel.track("Segue", properties: ["from Map View to Post": "Annotation callout"])
-            
             performSegueWithIdentifier("toPostView", sender: annotation)
         }
     }

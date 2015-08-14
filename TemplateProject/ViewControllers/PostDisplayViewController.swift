@@ -268,7 +268,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        editLocButton.hidden = true
         
         titleTextField.delegate = self
         autocompleteTextfield.delegate = self
@@ -296,6 +295,9 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         
         //picker = UIPickerView(2
+        
+        editLocButton.hidden = true
+
         
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds

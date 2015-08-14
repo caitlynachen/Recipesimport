@@ -123,7 +123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1J-vM-S2V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-957" y="-501"/>
+            <point key="canvasLocation" x="-1549" y="-609"/>
         </scene>
         <!--Post Display View Controller-->
         <scene sceneID="E5d-YF-Pi6">
@@ -499,7 +499,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-798.5" y="758"/>
+            <point key="canvasLocation" x="-1678.5" y="926"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="Kp1-G8-VH3">
@@ -933,7 +933,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g6M-w9-2bE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="uSI-7y-nJp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-85.5" y="209"/>
+            <point key="canvasLocation" x="-97.5" y="-1014"/>
         </scene>
         <!--AutoCompleteTextField-->
         <scene sceneID="JID-1t-xJD">
@@ -1009,7 +1009,7 @@
         <image name="line" width="395" height="3"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="mXG-pM-Xcc"/>
         <segue reference="qx2-Hh-HRV"/>
-        <segue reference="BcL-5s-AUO"/>
     </inferredMetricsTieBreakers>
 </document>
