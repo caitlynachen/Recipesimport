@@ -114,6 +114,12 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
     }
     
     func clearEverything(){
+        
+        navbar.topItem?.title = "Create a Recipe"
+        autocompleteTextfield.hidden = false
+        editLocButton.hidden = true
+        placeholderLabel.hidden = false
+
         titleTextField.text = ""
         autocompleteTextfield.text = ""
         descriptionText.text = ""
@@ -197,10 +203,11 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             
             
             svc.annotationCurrent = currentAnnotation
-        } else if (segue.identifier == "PresentEditLocationScene") {
-             var svc = segue.destinationViewController as! ViewController;
-            svc.anno = annotation
         }
+//        } else if (segue.identifier == "PresentEditLocationScene") {
+//             var svc = segue.destinationViewController as! ViewController;
+//            svc.anno = annotation
+//        }
     }
     
     @IBAction func cameraButtonTapped(sender: AnyObject) {
@@ -410,20 +417,17 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
             
             if locationLabelFromPostDisplay != nil{
                 autocompleteTextfield.text = "Using buton instead"
-                editLocButton.setTitle(locationLabelFromPostDisplay, forState: .Normal)
-                println(annotation?.post.country = editLocButton.currentTitle)
-                annotation?.post.country = editLocButton.currentTitle
+                var loc = locationLabelFromPostDisplay
+                
+                annotation?.post.country = loc!
                 annotation?.post.location = pfgeopoint
                 
-                locationLabelFromPostDisplay = nil
-
-            } else{
-            
-                autocompleteTextfield.text = "Using buton instead"
-
-
-                editLocButton.setTitle(annotation?.subtitle, forState: .Normal)
+                
             }
+            
+            autocompleteTextfield.text = "Using buton instead"
+            
+            editLocButton.setTitle(annotation?.subtitle, forState: .Normal)
             
             
             let ingredientsArrayFromMap = annotation?.ingredients
@@ -574,7 +578,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         
         clearEverything()
-
         
     }
     
