@@ -573,7 +573,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         annotation?.post.saveInBackgroundWithBlock(nil)
         
         
-        
+        clearEverything()
+
         
     }
     
