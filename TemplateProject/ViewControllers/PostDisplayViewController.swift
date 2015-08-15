@@ -113,6 +113,24 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
     }
     
+    func clearEverything(){
+        titleTextField.text = ""
+        autocompleteTextfield.text = ""
+        descriptionText.text = ""
+        imageView?.image = nil
+        prepTime.text = ""
+        cookTime.text = ""
+        numOfServings.text = ""
+        ingTextView.text = ""
+        instructionsTextView.text = ""
+        cameraButton.hidden = false
+        placeholderIngredientsLabel.hidden = false
+        placeholderIngredientsLabelExample.hidden = false
+        placeholderInstructionsLabel.hidden = false
+        placeholderInstructionsLabelExample.hidden = false
+        var point = CGPoint(x: 0, y: self.scrollView.contentInset.top)
+        self.scrollView.setContentOffset(point, animated: true)
+    }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if let ident = identifier {
@@ -150,7 +168,6 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
                     emptyLabel.hidden = false
                     
                 } else {
-                    
                     return true
                 }
             } else if ident == "PresentEditLocationScene" {
@@ -638,7 +655,8 @@ class PostDisplayViewController: UIViewController, UINavigationControllerDelegat
         
         currentAnnotation = annotationToAdd
         //        mapViewController.mapView.addAnnotation(annotationToAdd)
-        
+        clearEverything()
+
         
     }
     
